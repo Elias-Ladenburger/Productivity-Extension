@@ -1,0 +1,48 @@
+{
+
+  "description": "An extension for Firefox (potentially Chromium-based browsers as well) to enhance productivity ",
+  "manifest_version": 2,
+  "name": "Productivity Booster",
+  "version": "1.0",
+  "homepage_url": "https://github.com/Elias-Ladenburger/Productivity-Extension",
+  "icons": {
+    "48": "icons/bolt-solid.svg",
+    "96": "icons/bolt-solid.svg"
+  },
+
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "prod-booster@eliasladenburger.com"
+    }
+  },
+
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'none'",
+
+  "permissions": [
+    "activeTab",
+    "storage",
+    "unlimitedStorage"
+  ],
+
+  "content_scripts": [
+    {
+        "matches": ["<all_urls>"],
+        "js": ["content-scripts/productivity.js"]
+    }
+  ],
+
+  "options_ui": {
+    "page": "ui/options.html",
+    "open_in_tab": true
+  }, 
+
+  "browser_action": {
+    "default_icon": "icons/bolt-solid.svg",
+    "default_title": "Productivity Booster",
+    "default_popup": "popup/prod_booster.html"
+  },
+
+  "web_accessible_resources": [
+    "public/*"
+  ]
+}
