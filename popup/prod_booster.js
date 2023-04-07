@@ -15,6 +15,12 @@
 function reportExecuteScriptError(error) {
     document.querySelector("#popup-content").classList.add("hidden");
     document.querySelector("#error-content").classList.remove("hidden");
-    console.error(`Failed to execute beastify content script: ${error.message}`);
+    console.error(`Failed to execute prod_booster content script: ${error.message}`);
   }
   
+
+var openSettingsButton = document.getElementById("settingsButton");
+  button.addEventListener("click", function(e){
+    browser.runtime.openOptionsPage();
+  },
+  false);
