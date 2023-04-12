@@ -20,7 +20,7 @@ function reportExecuteScriptError(error) {
   
 
 var openSettingsButton = document.getElementById("settingsButton");
-  button.addEventListener("click", function(e){
+openSettingsButton.addEventListener("click", function(e){
     browser.runtime.openOptionsPage();
   },
   false);
