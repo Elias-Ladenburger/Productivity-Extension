@@ -9,28 +9,23 @@ prepareTable();
 
 function prepareTable() {
     let settingsTable = document.getElementById("settingsTable");
-    getAllBlacklisted().then(
-        (allBlacklisted) => {
-            console.log(allBlacklisted)
-            if(typeof(allBlacklisted) == "object") {
-                Object.keys(allBlacklisted).foreach(function (badSite) {
-                    addToTable(badSite, allBlacklisted[badSite]);
-                });
-            }
-        });
+    getAllBlacklisted().then((allBlacklisted) => {
+      allBlacklisted.forEach((blacklisted) => {
+        addToTable(blacklisted["bad"], blacklisted["good"]);
+      });
+    });
   }
 
 function addEntry(){
     let badSite = document.getElementById("badSiteInput");
     let goodAction = document.getElementById("goodActionInput");
     addToTable(badSite.value, goodAction.value);
+    addBlacklist(badSite.value, goodAction.value);
     badSite.value="";
     goodAction.value="";
 }
 
 function addToTable(badSite, goodAction) {
-    addBlacklist(badSite, goodAction);
-
     let newRow = settingsTable.insertRow(-1);
     let blacklistedCell = newRow.insertCell(0);
     let redirectCell = newRow.insertCell(1);
@@ -51,7 +46,7 @@ function addBlacklist(toBlacklistURL, toRedirectURL) {
     getAllBlacklisted().then(
         (blacklistedStorage) => {
             let blacklist = typeof(blacklistedStorage) == "undefined" ? [] : blacklistedStorage;
-            blacklist[toBlacklistURL] = toRedirectURL;
+            blacklist.push({"bad":toBlacklistURL, "good": toRedirectURL});
             browser.storage.local.set({"blacklist": blacklist});
         }
     )
@@ -61,7 +56,7 @@ function getAllBlacklisted() {
     return browser.storage.local.get("blacklist").then(
       (allBlacklisted) => {
         if (typeof(allBlacklisted) == "undefined") {
-          return {};
+          return [];
         } else {
           return allBlacklisted["blacklist"];
         }
