@@ -17,8 +17,9 @@ function applyBlacklist() {
     if (isSiteBlacklisted) {
       getAction(currentURL).then((newURL) => {
         console.log(currentURL + " is blacklisted! Redirecting to " + newURL);
+        document.body.style.border = "2px solid red";
         window.location.href = newURL;
-      }) 
+      });
     }
   });
 }
@@ -44,5 +45,15 @@ function getAction(originURL) {
       }
     });
     return action;
+  });
+}
+
+function getAllBlacklisted() {
+  return browser.storage.local.get("blacklist").then((allBlacklisted) => {
+    if (typeof allBlacklisted == "undefined") {
+      return {};
+    } else {
+      return allBlacklisted["blacklist"];
+    }
   });
 }
