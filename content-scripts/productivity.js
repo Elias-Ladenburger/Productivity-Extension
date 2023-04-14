@@ -1,7 +1,6 @@
 /*
 Just draw a border round the document.body.
 */
-document.body.style.border = "2px solid red";
 applyBlacklist();
 
 // Simulate an HTTP redirect:
