@@ -1,5 +1,4 @@
 {
-
   "description": "An extension for Firefox (potentially Chromium-based browsers as well) to enhance productivity ",
   "manifest_version": 2,
   "name": "Productivity Booster",
@@ -18,16 +17,12 @@
 
   "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'none'",
 
-  "permissions": [
-    "activeTab",
-    "storage",
-    "unlimitedStorage"
-  ],
+  "permissions": ["activeTab", "storage", "unlimitedStorage"],
 
   "content_scripts": [
     {
-        "matches": ["<all_urls>"],
-        "js": ["content-scripts/productivity.js"]
+      "matches": ["<all_urls>"],
+      "js": ["ui/options.js", "content-scripts/productivity.js"]
     }
   ],
 
@@ -36,7 +31,7 @@
     "browser_style": true,
     "chrome_style": true,
     "open_in_tab": true
-  }, 
+  },
 
   "browser_action": {
     "default_icon": "icons/bolt-solid.svg",
@@ -44,7 +39,5 @@
     "default_popup": "popup/prod_booster.html"
   },
 
-  "web_accessible_resources": [
-    "public/*"
-  ]
+  "web_accessible_resources": ["public/*"]
 }
