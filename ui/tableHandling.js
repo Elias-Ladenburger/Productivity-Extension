@@ -1,4 +1,3 @@
-// import {getAllBlacklisted, addBlacklist} from "./options.js";
 
 let addButton = document.getElementById("blacklistButton");
 addButton.addEventListener(

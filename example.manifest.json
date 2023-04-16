@@ -1,0 +1,86 @@
+{
+    "manifest_version": 3,
+    "name": "My Extension",
+    "version": "1.0.0",
+    "description": "This is a description of my extension.",
+    "icons": {
+      "128": "icon.png"
+    },
+    "action": {
+      "default_popup": "popup.html"
+    },
+    "background": {
+      "service_worker": "background.js",
+      "fetch": ["https://example.com/*"]
+    },
+    "content_scripts": [
+      {
+        "matches": ["https://*.example.com/*"],
+        "js": ["content.js"],
+        "css": ["style.css"]
+      }
+    ],
+    "web_accessible_resources": [
+      {
+        "resources": ["image.jpg"],
+        "matches": ["https://*.example.com/*"]
+      }
+    ],
+    "permissions": [
+      "storage",
+      "tabs",
+      "activeTab",
+      "scripting"
+    ],
+    "host_permissions": [
+      "https://example.com/"
+    ],
+    "optional_permissions": [
+      "https://example.com/*"
+    ],
+    "incognito": "spanning",
+    "minimum_chrome_version": "91",
+    "offline_enabled": true,
+    "default_locale": "en",
+    "commands": {
+      "toggle-feature": {
+        "suggested_key": {
+          "default": "Ctrl+Shift+Y",
+          "mac": "Command+Shift+Y"
+        },
+        "description": "Toggle the feature on and off"
+      }
+    },
+    "omnibox": {
+      "keyword": "myext",
+      "suggestion_url": "https://suggest.example.com/?q={searchTerms}",
+      "description": "Search my extension"
+    },
+    "action_handlers": [
+      {
+        "id": "myaction",
+        "default_title": "My Action",
+        "default_icon": {
+          "16": "icon16.png",
+          "32": "icon32.png"
+        },
+        "action": {
+          "type": "background"
+        }
+      }
+    ],
+    "declarative_net_request": {
+      "rule_resources": [
+        {
+          "id": "block_ads",
+          "enabled": true,
+          "path": "rules/block_ads.json"
+        }
+      ],
+      "global_rules": {
+        "excluded_domains": ["https://example.com/*"],
+        "excluded_urls": ["https://example.com/*"]
+      }
+    }
+  }
+  

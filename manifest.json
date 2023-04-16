@@ -22,7 +22,8 @@
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
-      "js": ["ui/options.js", "content-scripts/productivity.js"]
+      "run_at": "document_start",
+      "js": ["common/storageHandling.js", "content-scripts/productivity.js"]
     }
   ],
 
@@ -39,5 +40,5 @@
     "default_popup": "popup/prod_booster.html"
   },
 
-  "web_accessible_resources": ["public/*"]
+  "web_accessible_resources": ["public/*", "common/*"]
 }

@@ -3,27 +3,44 @@
   <head>
     <title>Productivity Booster - Browser Extension</title>
     <meta charset="utf-8" />
-    <link rel="stylesheet" href="prod_booster.css" />
-    <script src="options.js"></script>
+    <link rel="stylesheet" href="main.css" />
+    <script src="../common/storageHandling.js"></script>
   </head>
 
-  <body>
-    <div id="popup-content">
-      <p>This extension will redirect you from "productivity killers" to more harmless, maybe even productivity-friendly sites.
-        In the <a href="options.html">settings</a> you can toggle at what times this applies, what sites are affected and where you want to be redirected to.
-    </div>
-    <input id="badSiteInput" type="text" placeholder="Bad website to blacklist"/>
-    <input id="goodActionInput" type="text" placeholder="Good website to redirect to"/>
-    <button id="blacklistButton">Blacklist site</button>
+  <body class="pt-5 px-5 bg-white text-navy">
+    <div id="popup-content" class="px-5 text-base">
+      <p class="pb-4 mx-48">
+        This extension will redirect you from "productivity killers" to more
+        harmless, maybe even productivity-friendly sites. In the
+        <a href="options.html">settings</a> you can toggle at what times this
+        applies, what sites are affected and where you want to be redirected to.
+      </p>
 
-    <table id="settingsTable">
-        <tr>
+      <div class="py-5">
+        <input
+          id="badSiteInput"
+          type="text"
+          placeholder="Bad website to blacklist" />
+        <input
+          id="goodActionInput"
+          type="text"
+          placeholder="Good website to redirect to"
+          class="" />
+
+        <button id="blacklistButton" class="rounded-lg border-white bg-navy">
+          Blacklist site
+        </button>
+      </div>
+
+      <table id="settingsTable" class="text-base space-y-3">
+        <tr class="text-lg">
           <th>Domain to Blacklist</th>
           <th>Redirect to</th>
           <th>Action</th>
         </tr>
-    </table>
-    <script src="tableHandling.js"></script>
+      </table>
+    </div>
 
+    <script src="tableHandling.js"></script>
   </body>
 </html>

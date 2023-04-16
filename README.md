@@ -7,7 +7,7 @@ The productivity extension allows you to create rules that will help you combat 
 
 ## Installation
 Clone this repository or download the source through some other means.
-The next steps depend on the browser that you are using.
+The next steps depend on the browser you are using.
 
 ### Firefox
 At the moment, the productivity extension only supports Firefox.
