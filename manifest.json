@@ -17,7 +17,16 @@
 
   "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'none'",
 
-  "permissions": ["activeTab", "storage", "unlimitedStorage"],
+  "permissions": [
+    "activeTab",
+    "storage",
+    "unlimitedStorage",
+    "tabs",
+    "contextMenus",
+    "webNavigation",
+    "webRequest",
+    "webRequestBlocking"
+  ],
 
   "content_scripts": [
     {
@@ -37,7 +46,7 @@
   "browser_action": {
     "default_icon": "icons/bolt-solid.svg",
     "default_title": "Productivity Booster",
-    "default_popup": "ui/options.html"
+    "default_popup": "popup/prod_booster.html"
   },
 
   "web_accessible_resources": ["public/*", "common/*"]
