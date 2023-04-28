@@ -662,6 +662,16 @@ video {
   margin-right: 12rem;
 }
 
+.mx-3 {
+  margin-left: 0.75rem;
+  margin-right: 0.75rem;
+}
+
+.mx-2 {
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+}
+
 .mt-2 {
   margin-top: 0.5rem;
 }
@@ -763,10 +773,6 @@ video {
 
 .hidden {
   display: none;
-}
-
-.w-10 {
-  width: 2.5rem;
 }
 
 .flex-shrink {
@@ -1725,36 +1731,14 @@ video {
   background-color: rgb(255 0 0 / var(--tw-bg-opacity));
 }
 
-.bg-primary {
-  --tw-bg-opacity: 1;
-  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
-}
-
-.bg-white {
-  --tw-bg-opacity: 1;
-  background-color: rgb(245 245 245 / var(--tw-bg-opacity));
-}
-
 .bg-navy {
   --tw-bg-opacity: 1;
   background-color: rgb(10 28 61 / var(--tw-bg-opacity));
 }
 
-.bg-gradient-to-r {
-  background-image: linear-gradient(to right, var(--tw-gradient-stops));
-}
-
-.from-navy {
-  --tw-gradient-from: #0A1C3D var(--tw-gradient-from-position);
-  --tw-gradient-from-position:  ;
-  --tw-gradient-to: rgb(10 28 61 / 0)  var(--tw-gradient-from-position);
-  --tw-gradient-to-position:  ;
-  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
-}
-
-.to-blueMidnight {
-  --tw-gradient-to: #191970 var(--tw-gradient-to-position);
-  --tw-gradient-to-position:  ;
+.bg-white {
+  --tw-bg-opacity: 1;
+  background-color: rgb(245 245 245 / var(--tw-bg-opacity));
 }
 
 .decoration-slice {
@@ -1842,10 +1826,6 @@ video {
   background-origin: content-box;
 }
 
-.fill-navy {
-  fill: #0A1C3D;
-}
-
 .object-contain {
   -o-object-fit: contain;
      object-fit: contain;
@@ -1881,12 +1861,35 @@ video {
   padding-bottom: 1.25rem;
 }
 
+.px-3 {
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+}
+
+.px-1 {
+  padding-left: 0.25rem;
+  padding-right: 0.25rem;
+}
+
+.px-2 {
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+
 .pb-4 {
   padding-bottom: 1rem;
 }
 
 .pt-5 {
   padding-top: 1.25rem;
+}
+
+.pr-3 {
+  padding-right: 0.75rem;
+}
+
+.pl-3 {
+  padding-left: 0.75rem;
 }
 
 .text-left {
@@ -2399,6 +2402,11 @@ video {
   }
 }
 
+.hover\:bg-blueRoyal:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(65 105 225 / var(--tw-bg-opacity));
+}
+
 .hover\:font-bold:hover {
   font-weight: 700;
 }
@@ -2411,6 +2419,16 @@ video {
 .hover\:before\:text-center:hover::before {
   content: var(--tw-content);
   text-align: center;
+}
+
+.focus\:placeholder-navy:focus::-moz-placeholder {
+  --tw-placeholder-opacity: 1;
+  color: rgb(10 28 61 / var(--tw-placeholder-opacity));
+}
+
+.focus\:placeholder-navy:focus::placeholder {
+  --tw-placeholder-opacity: 1;
+  color: rgb(10 28 61 / var(--tw-placeholder-opacity));
 }
 
 .focus\:hover\:text-center:hover:focus {

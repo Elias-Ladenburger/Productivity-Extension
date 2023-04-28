@@ -1,7 +1,7 @@
 {
   "description": "An extension for Firefox (potentially Chromium-based browsers as well) to enhance productivity ",
   "manifest_version": 2,
-  "name": "Productivity Booster",
+  "name": "ProdBoost",
   "version": "1.0",
   "homepage_url": "https://github.com/Elias-Ladenburger/Productivity-Extension",
   "icons": {
@@ -37,7 +37,7 @@
   "browser_action": {
     "default_icon": "icons/bolt-solid.svg",
     "default_title": "Productivity Booster",
-    "default_popup": "popup/prod_booster.html"
+    "default_popup": "ui/options.html"
   },
 
   "web_accessible_resources": ["public/*", "common/*"]

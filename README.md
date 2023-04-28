@@ -66,3 +66,4 @@ The roadmap for this project is growing. In the future, the following functional
     - requesting payment to visit one of the distracting websites during work-time
     - rewards for staying on productive websites
     - integration with other services to track "productivity points"
+- Chatbots: hold yourself accountable by talking to us via chat

@@ -1,4 +1,3 @@
-
 let addButton = document.getElementById("blacklistButton");
 addButton.addEventListener(
   "click",
@@ -21,10 +20,12 @@ function prepareTable() {
 function addEntry() {
   let badSite = document.getElementById("badSiteInput");
   let goodAction = document.getElementById("goodActionInput");
-  addToTable(badSite.value, goodAction.value);
-  addBlacklist(badSite.value, goodAction.value);
-  badSite.value = "";
-  goodAction.value = "";
+  if (badSite && goodAction) {
+    addToTable(badSite.value, goodAction.value);
+    addBlacklist(badSite.value, goodAction.value);
+    badSite.value = "";
+    goodAction.value = "";
+  }
 }
 
 function addToTable(badSite, goodAction) {
@@ -36,7 +37,8 @@ function addToTable(badSite, goodAction) {
   newRow.id = badSite;
   blacklistedCell.innerHTML = badSite;
   redirectCell.innerHTML = goodAction;
-  actionsCell.innerHTML = `<button id="edit_${badSite}">edit</button><button id="delete_${badSite}">delete</button>`;
+  actionsCell.innerHTML = `<button id="edit_${badSite}" class="rounded-lg border-white bg-navy text-white hover:bg-blueRoyal px-2 text-center">edit</button>
+  <button id="delete_${badSite}" class="rounded-lg border-white bg-navy text-white hover:bg-blueRoyal px-2 text-center">delete</button>`;
   addButton = document.getElementById(`delete_${badSite}`);
   addButton.addEventListener(
     "click",
@@ -52,5 +54,5 @@ function removeFromTable(badSite) {
   let toDelete = document.getElementById(badSite);
   toDelete.remove();
   console.log(`Removing rule for ${badSite}!`);
-  prepareTable();
+  //prepareTable();
 }

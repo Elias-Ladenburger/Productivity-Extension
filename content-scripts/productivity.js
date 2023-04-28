@@ -16,8 +16,8 @@ function applyBlacklist() {
     if (isSiteBlacklisted) {
       getAction(currentURL).then((newURL) => {
         console.log(currentURL + " is blacklisted! Redirecting to " + newURL);
-        document.body.style.border = "2px solid red";
         window.location.href = newURL;
+        //document.body.style.border = "2px solid red";
       });
     }
   });
@@ -27,7 +27,7 @@ function isBlacklisted(siteToCheck) {
   return getAllBlacklisted().then((blacklist) => {
     let isSiteBlacklisted = false;
     blacklist.forEach((blacklisted) => {
-      if (blacklisted["bad"] == siteToCheck) {
+      if (siteToCheck.includes(blacklisted["bad"])) {
         isSiteBlacklisted = true;
       }
     });
@@ -39,8 +39,8 @@ function getAction(originURL) {
   return getAllBlacklisted().then((blacklist) => {
     let action = originURL;
     blacklist.forEach((blacklisted) => {
-      if (blacklisted["bad"] == originURL) {
-        action = blacklisted["good"];
+      if (originURL.includes(blacklisted["bad"])) {
+        action = parseAction(blacklisted["good"]);
       }
     });
     return action;
@@ -55,4 +55,13 @@ function getAllBlacklisted() {
       return allBlacklisted["blacklist"];
     }
   });
+}
+
+function parseAction(actionString) {
+  if (actionString.startsWith("http")) {
+    return actionString;
+  } else {
+    newString = "https://" + actionString;
+    return newString;
+  }
 }
