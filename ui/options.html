@@ -3,43 +3,76 @@
   <head>
     <title>Productivity Booster - Browser Extension</title>
     <meta charset="utf-8" />
-    <link rel="stylesheet" href="main.css" />
+    <link rel="stylesheet" href="../public/css/main.css" />
     <script src="../common/storageHandling.js"></script>
   </head>
 
-  <body class="pt-5 px-5 bg-white text-navy">
-    <div id="popup-content" class="px-5 text-base">
-      <p class="pb-4">
-        This extension will redirect you from "productivity killers" to more
-        harmless, maybe even productivity-friendly sites. In the
-        <a href="options.html">settings</a> you can toggle at what times this
-        applies, what sites are affected and where you want to be redirected to.
-      </p>
+  <body class="pt-5 px-5 bg-white text-navy bg-abstractBG bg-cover">
+    <div id="settingsBody" class="px-5 text-base grid grid-cols-2 space-x-4">
+      <div id="leftBody">
+        <h1 class="text-2xl font-bold pb-4">Productivity Booster</h1>
+        <p class="pb-4">
+          Re-take control of your productivity! This extension will redirect you
+          from sites that kill you motivation and productivity and instead
+          redirect you to more productive places. Apply proven methods taken
+          from “Atomic Habits” by James Clear. Become more focused with the
+          Pomodoro-technique. Finish what you started and feel good about it.
+        </p>
 
-      <div class="py-5 focus:placeholder-navy">
-        <input
-          id="badSiteInput"
-          type="text"
-          placeholder="Bad website to blacklist" 
-          class="mx-3"/>
-        <input
-          id="goodActionInput"
-          type="text"
-          placeholder="Good website to redirect to"
-          class="mx-3" />
+        <h2 class="text-2xl font-bold pb-4">Add a Rule</h2>
+        <form class="py-5 focus:placeholder-navy">
+          <div class="grid grid-cols-2">
+            <label for="badSiteInput" class=""
+              >When I visit...</label
+            >
+            <input
+              id="badSiteInput"
+              type="text"
+              placeholder="*.facebook.com"
+              class="w-full bg-lightRed mt-2" />
 
-        <button id="blacklistButton" class="rounded-lg border-white bg-navy text-white hover:bg-blueRoyal">
-          Blacklist site
-        </button>
+            <label for="during" class="">During</label>
+            <select name="during" class="bg-lightRed w-full mt-2">
+              <option value="workdays">Workdays</option>
+              <option value="freetime">Freetime</option>
+              <option value="focustime">Focus Time</option>
+            </select>
+
+            <label for="goodAction" class="">Then</label>
+            <div>
+              <select name="actionType" class="bg-lightRed w-full mt-2">
+                <option value="redirect">Redirect To</option>
+                <option value="frame">Frame Background</option>
+                <option value="popup">Show Popup</option>
+              </select>
+
+              <input
+                id="goodActionInput"
+                type="text"
+                placeholder="jamesclear.com/atomic-habits"
+                class="bg-lightRed w-full" />
+            </div>
+          </div>
+          <div class="flex justify-center pt-3">
+            <button
+              id="blacklistButton"
+              class="text-center rounded-lg bg-navy text-white hover:bg-blueRoyal px-2">
+              Add Rule
+            </button>
+          </div>
+        </form>
       </div>
 
-      <table id="settingsTable" class="text-base space-y-3">
-        <tr class="text-lg text-center">
-          <th class="pr-3">Domain to Blacklist</th>
-          <th class="px-3">Redirect to</th>
-          <th class="pl-3">Action</th>
-        </tr>
-      </table>
+      <div id="rightBody" class="">
+        <h2 class="text-2xl font-bold pb-4">My Productivity Rules</h2>
+        <table id="settingsTable" class="text-base space-y-3 pb-3">
+          <tr class="text-lg text-center bg-grey text-primary mx-3">
+            <th class="pr-3">Domain to Blacklist</th>
+            <th class="px-3">Redirect to</th>
+            <th class="pl-3">Action</th>
+          </tr>
+        </table>
+      </div>
     </div>
 
     <script src="tableHandling.js"></script>

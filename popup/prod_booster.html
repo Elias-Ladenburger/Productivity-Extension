@@ -3,21 +3,28 @@
   <head>
     <title>Productivity Booster - Browser Extension</title>
     <meta charset="utf-8" />
-    <link rel="stylesheet" href="../ui/main.css" />
+    <link rel="stylesheet" href="../public/css/main.css" />
     <script src="prod_booster.js"></script>
   </head>
 
   <body>
-    <div id="popup-content" class="text-navy px-5">
-      <p>This extension will redirect you from "productivity killers" to more harmless, maybe even productivity-friendly sites.<br>
-        In the settings you can toggle at what times this applies, what sites are affected and where you want to be redirected to.
-        <a href="../ui/options.html" class="underline text-navy">Settings</a>
-      </div>
+    <div id="popup-content" class="text-navy px-5 py-5">
+      <p class="py-2">
+        This extension will redirect you from "productivity killers" to more
+        harmless, maybe even productivity-friendly sites.<br />
+        In the settings you can toggle at what times this applies, what sites
+        are affected and where you want to be redirected to.
+      </p>
+      <button
+        id="settingsButton"
+        class="text-white bg-navy rounded-full px-3 hover:bg-primaryGradient2">
+        Settings
+    </button>
+    </div>
 
     <div id="error-content" class="hidden">
       <p>Some error occured.</p>
       <p>Please try opening this popup on a different page.</p>
     </div>
-    
   </body>
 </html>

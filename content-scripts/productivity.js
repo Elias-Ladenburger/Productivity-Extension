@@ -26,11 +26,14 @@ function applyBlacklist() {
 function isBlacklisted(siteToCheck) {
   return getAllBlacklisted().then((blacklist) => {
     let isSiteBlacklisted = false;
-    blacklist.forEach((blacklisted) => {
-      if (siteToCheck.includes(blacklisted["bad"])) {
-        isSiteBlacklisted = true;
-      }
-    });
+
+    if (blacklist) {
+      blacklist.forEach((blacklisted) => {
+        if (siteToCheck.includes(blacklisted["bad"])) {
+          isSiteBlacklisted = true;
+        }
+      });
+    }
     return isSiteBlacklisted;
   });
 }

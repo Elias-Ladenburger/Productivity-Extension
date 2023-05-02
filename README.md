@@ -60,7 +60,7 @@ Whenever you visit one of the sites for which you have previously created a rule
 The roadmap for this project is growing. In the future, the following functionality may be added (with no guarantee whatsoever):
 - recommendation for breaks and off-screen time
 - visualization of goals
-- popups with tipps for higher productivity
+- popups with hints for higher productivity
 - extension of rules
     - ensuring accountability by sending a mail or posting on twitter when violating one of the rules
     - requesting payment to visit one of the distracting websites during work-time
