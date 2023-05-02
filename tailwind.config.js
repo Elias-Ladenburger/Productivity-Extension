@@ -34,6 +34,7 @@ module.exports = {
       darkGrey: "#3D3D3D",
       yellow: "#FBC02D",
       white: "#F5F5F5",
+      lightRed: "#EABFBF",
 
       emphasis: "#C98D26",
       teal: "#008080",
@@ -49,6 +50,9 @@ module.exports = {
       blueBaby: "#89CFF0",
 		  black: colors.black,
       //white: colors.white,
+    },
+    backgroundImage: {
+      abstractBG: "url('../img/Abstract-mountains-bg.jpg')"
     },
     fontFamily: {
       sans: ["Helvetica"],
