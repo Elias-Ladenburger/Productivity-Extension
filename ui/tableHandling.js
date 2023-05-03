@@ -9,7 +9,6 @@ addButton.addEventListener(
 prepareTable();
 
 function prepareTable() {
-  let settingsTable = document.getElementById("settingsTable");
   getAllBlacklisted().then((allBlacklisted) => {
     allBlacklisted.forEach((blacklisted) => {
       addToTable(blacklisted["bad"], blacklisted["good"]);
@@ -36,9 +35,11 @@ function addToTable(badSite, goodAction) {
 
   newRow.id = badSite;
   blacklistedCell.innerHTML = badSite;
+  blacklistedCell.setAttribute("class", "px-2");
   redirectCell.innerHTML = goodAction;
-  actionsCell.innerHTML = `<button id="edit_${badSite}" class="rounded-lg border-white bg-navy text-white hover:bg-blueRoyal px-2 text-center">edit</button>
-  <button id="delete_${badSite}" class="rounded-lg border-white bg-navy text-white hover:bg-blueRoyal px-2 text-center">delete</button>`;
+  redirectCell.setAttribute("class", "px-2");
+  actionsCell.innerHTML = `<button id="edit_${badSite}" class="rounded-lg border-white bg-navy text-white hover:bg-blueRoyal px-2 mx-1 text-center">edit</button>
+  <button id="delete_${badSite}" class="rounded-lg border-white bg-navy text-white hover:bg-blueRoyal px-2 mx-1 text-center">delete</button>`;
   addButton = document.getElementById(`delete_${badSite}`);
   addButton.addEventListener(
     "click",
