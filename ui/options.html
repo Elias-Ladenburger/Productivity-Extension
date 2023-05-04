@@ -20,27 +20,27 @@
         </p>
 
         <h2 class="text-2xl font-bold pb-4">Add a Rule</h2>
-        <form class="py-5 focus:placeholder-navy">
-          <div class="grid grid-cols-2">
-            <label for="badSiteInput" class=""
+        <form class="py-5 focus:placeholder-navy bg-primary bg-opacity-70 px-5">
+          <div class="grid grid-cols-5">
+            <label for="badSiteInput" class="col-span-1 mt-2"
               >When I visit...</label
             >
             <input
               id="badSiteInput"
               type="text"
               placeholder="*.facebook.com"
-              class="w-full bg-lightRed mt-2" />
+              class="bg-lightRed mt-2 col-span-4 px-1" />
 
-            <label for="during" class="">During</label>
-            <select name="during" class="bg-lightRed w-full mt-2">
+            <label for="during" class="col-span-1 mt-2">During</label>
+            <select name="during" class="bg-lightRed px-1 mt-2 col-span-4">
               <option value="workdays">Workdays</option>
               <option value="freetime">Freetime</option>
               <option value="focustime">Focus Time</option>
             </select>
 
-            <label for="goodAction" class="">Then</label>
-            <div>
-              <select name="actionType" class="bg-lightRed w-full mt-2">
+            <label for="goodAction" class="col-span-1 mt-2">Then</label>
+            <div class="col-span-4 justify-between mt-2">
+              <select name="actionType" class="bg-lightRed w-2/5 px-1">
                 <option value="redirect">Redirect To</option>
                 <option value="frame">Frame Background</option>
                 <option value="popup">Show Popup</option>
@@ -50,7 +50,7 @@
                 id="goodActionInput"
                 type="text"
                 placeholder="jamesclear.com/atomic-habits"
-                class="bg-lightRed w-full" />
+                class="bg-lightRed w-1/2 px-1" />
             </div>
           </div>
           <div class="flex justify-center pt-3">
@@ -67,8 +67,9 @@
         <h2 class="text-2xl font-bold pb-4">My Productivity Rules</h2>
         <table id="settingsTable" class="text-base space-y-3 pb-3">
           <tr class="text-lg text-left bg-grey text-primary mx-3">
-            <th class="px-3 w-2/5">Domain to Blacklist</th>
-            <th class="px-3 w-2/5">Target</th>
+            <th class="px-3 w-2/5">When I visit</th>
+            <th class="px-3 w-2/5">During</th>
+            <th class="px-3 w-2/5">Then</th>
             <th class="px-3 w-1/5">Edit Rule</th>
           </tr>
         </table>

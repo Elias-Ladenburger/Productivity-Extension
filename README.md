@@ -53,11 +53,12 @@ Where
 	- send regular notifications (e.g. give me a popup every x minutes).
 
 ### Browse productively
-Whenever you visit one of the sites for which you have previously created a rule, the rule will be exectued, forcing you to be more conscious in your browsing habits.
-  
+Whenever you visit one of the sites for which you have previously created a rule, the rule will be executed, forcing you to be more conscious in your browsing habits.
 
 ### Other functionality
-The roadmap for this project is growing. In the future, the following functionality may be added (with no guarantee whatsoever):
+The roadmap for this project is growing. The current state of ideas can be found in the wireframes [here](https://www.figma.com/file/EEJ6kSS1m5xACAo1oPl2kU/Productivity-Booster?type=design&node-id=0%3A1&t=k9YagoVDnUPXN3TQ-1).
+
+In the future, the following functionality may be added (with no guarantee whatsoever):
 - recommendation for breaks and off-screen time
 - visualization of goals
 - popups with hints for higher productivity
