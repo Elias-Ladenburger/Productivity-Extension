@@ -1,12 +1,17 @@
-let addButton = document.getElementById("blacklistButton");
-addButton.addEventListener(
-  "click",
-  function (e) {
-    addEntry();
-  },
-  false
-);
-prepareTable();
+prepareAll();
+
+function prepareAll() {
+  // prepareTable();
+
+  let addButton = document.getElementById("blacklistButton");
+  addButton.addEventListener(
+    "click",
+    function (e) {
+      addEntry();
+    },
+    false
+  );
+}
 
 function prepareTable() {
   getAllBlacklisted().then((allBlacklisted) => {
@@ -20,8 +25,8 @@ function addEntry() {
   let badSite = document.getElementById("badSiteInput");
   let goodAction = document.getElementById("goodActionInput");
   if (badSite && goodAction) {
-    addToTable(badSite.value, goodAction.value);
     addBlacklist(badSite.value, goodAction.value);
+    addToTable(badSite.value, goodAction.value);
     badSite.value = "";
     goodAction.value = "";
   }
