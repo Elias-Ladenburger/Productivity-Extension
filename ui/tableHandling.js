@@ -22,13 +22,21 @@ function prepareTable() {
 }
 
 function addEntry() {
-  let badSite = document.getElementById("badSiteInput");
-  let goodAction = document.getElementById("goodActionInput");
-  if (badSite && goodAction) {
-    addBlacklist(badSite.value, goodAction.value);
-    addToTable(badSite.value, goodAction.value);
-    badSite.value = "";
-    goodAction.value = "";
+  let source = document.getElementById("badSiteInput");
+  let actiontype = document.getElementById("actiontype");
+  let targetval = document.getElementById("targetvalue");
+  let actioncondition = document.getElementById("actioncondition");
+  let actionfrequency = document.getElementById("actionfrequency");
+
+  let action = Action(source.value, actiontype.value, targetval.value, )
+
+  if (source && actiontype && targetvalue) {
+    addBlacklist(action);
+    addToTable(source.value, targetval.value);
+    source.value = "";
+    targetval.value = "";
+    actioncondition = "";
+    actiontype = "";
   }
 }
 

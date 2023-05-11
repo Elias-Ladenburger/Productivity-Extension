@@ -4,7 +4,7 @@ prepareForm();
 
 function prepareForm() {
   const multipleChoiceFields = [
-    { name: "condition", myDict: ActionCondition },
+    { name: "actioncondition", myDict: ActionCondition },
     {
       name: "actiontype",
       myDict: ActionType,
