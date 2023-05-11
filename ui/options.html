@@ -21,37 +21,43 @@
 
         <h2 class="text-2xl font-bold pb-4">Add a Rule</h2>
         <form class="py-5 focus:placeholder-navy bg-primary bg-opacity-70 px-5">
-          <div class="grid grid-cols-5">
-            <label for="badSiteInput" class="col-span-1 mt-2"
+          <div class="grid grid-cols-4">
+            <label for="actionsource" class="col-span-1 mt-2"
               >When I visit...</label
             >
             <input
-              id="badSiteInput"
+              id="actionsource"
               type="text"
               placeholder="*.facebook.com"
-              class="bg-lightRed mt-2 col-span-4 px-1" />
+              class="bg-lightRed mt-2 col-span-3 px-1" />
+            <label for="actiontype" class="col-span-1 mt-1">then</label>
+            <select
+              id="actiontype"
+              name="actiontype"
+              class="bg-lightRed col-span-3 px-1 mt-1"></select>
+            <input
+              id="targetvalue"
+              type="text"
+              placeholder="jamesclear.com/atomic-habits"
+              class="bg-lightRed w-full col-span-4 px-1" />
 
-            <label for="during" class="col-span-1 mt-2">During</label>
-            <select name="during" class="bg-lightRed px-1 mt-2 col-span-4">
-              <option value="workdays">Workdays</option>
-              <option value="freetime">Freetime</option>
-              <option value="focustime">Focus Time</option>
-            </select>
+            <details class="col-span-4">
+              <summary>Advanced Settings</summary>
+              <div class="grid grid-cols-4">
+                <label for="condition" class="col-span-1 mt-2">do this</label>
+                <select
+                  id="actioncondition"
+                  class="col-span-3 bg-lightRed px-1 mt-2"></select>
 
-            <label for="goodAction" class="col-span-1 mt-2">Then</label>
-            <div class="col-span-4 justify-between mt-2">
-              <select name="actionType" class="bg-lightRed w-2/5 px-1">
-                <option value="redirect">Redirect To</option>
-                <option value="frame">Frame Background</option>
-                <option value="popup">Show Popup</option>
-              </select>
-
-              <input
-                id="goodActionInput"
-                type="text"
-                placeholder="jamesclear.com/atomic-habits"
-                class="bg-lightRed w-1/2 px-1" />
-            </div>
+                <label for="frequency" class="col-span-1 mt-2"
+                  >repeat this</label
+                >
+                <select
+                  id="actionfrequency"
+                  name="frequency"
+                  class="bg-lightRed px-1 mt-2 col-span-3"></select>
+              </div>
+            </details>
           </div>
           <div class="flex justify-center pt-3">
             <button
@@ -77,5 +83,6 @@
     </div>
 
     <script src="tableHandling.js"></script>
+    <script type="module" src="formHandling.js"></script>
   </body>
 </html>

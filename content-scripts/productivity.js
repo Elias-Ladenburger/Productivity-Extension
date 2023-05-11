@@ -15,8 +15,7 @@ function applyBlacklist() {
   isBlacklisted(currentURL).then((isSiteBlacklisted) => {
     if (isSiteBlacklisted) {
       getAction(currentURL).then((newURL) => {
-        console.log(currentURL + " is blacklisted! Redirecting to " + newURL);
-        window.location.href = newURL;
+        performAction(newURL);
         //document.body.style.border = "2px solid red";
       });
     }
@@ -50,16 +49,6 @@ function getAction(originURL) {
   });
 }
 
-function getAllBlacklisted() {
-  return browser.storage.local.get("blacklist").then((allBlacklisted) => {
-    if (typeof allBlacklisted == "undefined") {
-      return {};
-    } else {
-      return allBlacklisted["blacklist"];
-    }
-  });
-}
-
 function parseAction(actionString) {
   if (actionString.startsWith("http")) {
     return actionString;
@@ -67,4 +56,18 @@ function parseAction(actionString) {
     newString = "https://" + actionString;
     return newString;
   }
+}
+
+function performAction(newURL) {
+  window.addEventListener("load", function () {
+    // Wait 5 minutes (300000 milliseconds) before showing the popup
+    setTimeout(function () {
+      // Show the popup
+      alert("Do you truly want to spend more time on this site?");
+    }, 3000);
+    this.setTimeout(function () {
+      alert("This site is blacklisted! Redirecting to " + newURL);
+      window.location.href = newURL;
+    }, 3000);
+  });
 }

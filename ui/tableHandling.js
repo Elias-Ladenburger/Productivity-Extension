@@ -1,12 +1,17 @@
-let addButton = document.getElementById("blacklistButton");
-addButton.addEventListener(
-  "click",
-  function (e) {
-    addEntry();
-  },
-  false
-);
-prepareTable();
+prepareAll();
+
+function prepareAll() {
+  // prepareTable();
+
+  let addButton = document.getElementById("blacklistButton");
+  addButton.addEventListener(
+    "click",
+    function (e) {
+      addEntry();
+    },
+    false
+  );
+}
 
 function prepareTable() {
   getAllBlacklisted().then((allBlacklisted) => {
@@ -17,13 +22,21 @@ function prepareTable() {
 }
 
 function addEntry() {
-  let badSite = document.getElementById("badSiteInput");
-  let goodAction = document.getElementById("goodActionInput");
-  if (badSite && goodAction) {
-    addToTable(badSite.value, goodAction.value);
-    addBlacklist(badSite.value, goodAction.value);
-    badSite.value = "";
-    goodAction.value = "";
+  let source = document.getElementById("badSiteInput");
+  let actiontype = document.getElementById("actiontype");
+  let targetval = document.getElementById("targetvalue");
+  let actioncondition = document.getElementById("actioncondition");
+  let actionfrequency = document.getElementById("actionfrequency");
+
+  let action = Action(source.value, actiontype.value, targetval.value, )
+
+  if (source && actiontype && targetvalue) {
+    addBlacklist(action);
+    addToTable(source.value, targetval.value);
+    source.value = "";
+    targetval.value = "";
+    actioncondition = "";
+    actiontype = "";
   }
 }
 
