@@ -1,5 +1,5 @@
 function getAllBlacklisted() {
-  return browser.storage.local.get("blacklist").then((allBlacklisted) => {
+  return chrome.storage.local.get("blacklist").then((allBlacklisted) => {
     if (typeof allBlacklisted == "undefined") {
       return [];
     } else {
@@ -27,5 +27,5 @@ function getAllBlacklisted() {
 }
 
 function setBlacklist(blacklist) {
-  browser.storage.local.set({ blacklist: blacklist });
+  chrome.storage.local.set({ blacklist: blacklist });
 }
