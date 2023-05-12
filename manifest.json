@@ -42,8 +42,8 @@
     "open_in_tab": true
   },
 
-  "browser_action": {
-    "default_icon": "icons/bolt-solid.svg",
+  "action": {
+    "default_icon": "icons/bolt-solid.png",
     "default_title": "Productivity Booster",
     "default_popup": "popup/prod_booster.html"
   },

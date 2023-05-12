@@ -10,7 +10,7 @@ function (e) {
   document.getElementById("settingsButton").addEventListener(
     "click",
     function (e) {
-      browser.runtime.openOptionsPage();
+      chrome.runtime.openOptionsPage();
       close();
     },
     false
