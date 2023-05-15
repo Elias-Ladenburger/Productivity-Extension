@@ -1,7 +1,7 @@
 prepareAll();
 
 function prepareAll() {
-  // prepareTable();
+  prepareTable();
 
   let addButton = document.getElementById("blacklistButton");
   addButton.addEventListener(
@@ -15,9 +15,14 @@ function prepareAll() {
 
 function prepareTable() {
   getAllBlacklisted().then((allBlacklisted) => {
-    allBlacklisted.forEach((blacklisted) => {
-      addToTable(blacklisted["bad"], blacklisted["good"]);
-    });
+    console.log(allBlacklisted);
+    if (!allBlacklisted || (allBlacklisted && !allBlacklisted.length)) {
+      addToTable("*.facebook.com", "jamesclear.com/atomic-habits");
+    } else {
+      allBlacklisted.forEach((blacklisted) => {
+        addToTable(blacklisted["bad"], blacklisted["good"]);
+      });
+    }
   });
 }
 
@@ -28,7 +33,7 @@ function addEntry() {
   let actioncondition = document.getElementById("actioncondition");
   let actionfrequency = document.getElementById("actionfrequency");
 
-  let action = Action(source.value, actiontype.value, targetval.value, )
+  let action = Action(source.value, actiontype.value, targetval.value);
 
   if (source && actiontype && targetvalue) {
     addBlacklist(action);
@@ -41,6 +46,7 @@ function addEntry() {
 }
 
 function addToTable(badSite, goodAction) {
+  let settingsTable = document.getElementById("settingsTable");
   let newRow = settingsTable.insertRow(-1);
   let blacklistedCell = newRow.insertCell(0);
   let redirectCell = newRow.insertCell(1);

@@ -1,14 +1,15 @@
 function getAllBlacklisted() {
   return chrome.storage.local.get("blacklist").then((allBlacklisted) => {
-    if (typeof allBlacklisted == "undefined") {
-      return [];
-    } else {
+    console.log(allBlacklisted);
+    if ("blacklist" in allBlacklisted) {
       return allBlacklisted["blacklist"];
+    } else {
+      return [];
     }
   });
 }
 
- function addBlacklist(entry) {
+function addBlacklist(entry) {
   getAllBlacklisted().then((blacklistedStorage) => {
     let blacklist =
       typeof blacklistedStorage == "undefined" ? [] : blacklistedStorage;
@@ -17,7 +18,7 @@ function getAllBlacklisted() {
   });
 }
 
- function deleteBlacklist(toRemove) {
+function deleteBlacklist(toRemove) {
   getAllBlacklisted().then((blacklistedStorage) => {
     let newBlacklisted = blacklistedStorage.filter((myURL) => {
       return myURL["bad"] != toRemove;
