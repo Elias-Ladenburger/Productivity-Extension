@@ -1,6 +1,5 @@
 function getAllBlacklisted() {
   return chrome.storage.local.get("blacklist").then((allBlacklisted) => {
-    console.log(allBlacklisted);
     if ("blacklist" in allBlacklisted) {
       return allBlacklisted["blacklist"];
     } else {

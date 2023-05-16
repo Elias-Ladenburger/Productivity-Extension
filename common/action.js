@@ -80,5 +80,3 @@ const ActionCondition = {
   WORK: "While working",
   GOAL: "While my daily goal is not reached",
 };
-
-export { Action, ActionCondition, ActionFrequency, ActionType, ProdEntry };

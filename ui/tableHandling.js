@@ -59,7 +59,7 @@ function addToTable(badSite, goodAction) {
   redirectCell.setAttribute("class", "px-2");
   actionsCell.innerHTML = `<button id="edit_${badSite}" class="rounded-lg border-white bg-navy text-white hover:bg-blueRoyal px-2 mx-1 text-center">edit</button>
   <button id="delete_${badSite}" class="rounded-lg border-white bg-navy text-white hover:bg-blueRoyal px-2 mx-1 text-center">delete</button>`;
-  addButton = document.getElementById(`delete_${badSite}`);
+  let addButton = document.getElementById(`delete_${badSite}`);
   addButton.addEventListener(
     "click",
     function (e) {

@@ -1,5 +1,3 @@
-import { ActionCondition, ActionType } from "../common/action.js";
-
 prepareForm();
 
 function prepareForm() {
