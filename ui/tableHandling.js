@@ -27,21 +27,43 @@ function prepareTable() {
 }
 
 function addEntry() {
-  let source = document.getElementById("badSiteInput");
-  let actiontype = document.getElementById("actiontype");
-  let targetval = document.getElementById("targetvalue");
-  let actioncondition = document.getElementById("actioncondition");
-  let actionfrequency = document.getElementById("actionfrequency");
+  let actionSource = document.getElementById("actionsource");
+  let selectedType = document.getElementById("actiontype");
+  let targetVal = document.getElementById("targetvalue");
+  let selectedCondition = document.getElementById("actioncondition");
+  let selectedFrequency = document.getElementById("actionfrequency");
 
-  let action = Action(source.value, actiontype.value, targetval.value);
+  console.log("adding action!");
 
-  if (source && actiontype && targetvalue) {
-    addBlacklist(action);
-    addToTable(source.value, targetval.value);
-    source.value = "";
-    targetval.value = "";
-    actioncondition = "";
-    actiontype = "";
+  let actionFrequency = ActionFrequency[selectedFrequency.value];
+  let actionCondition = ActionCondition[selectedCondition.value];
+  let actionType = ActionType[selectedType.value];
+
+  let newEntry = new ProdEntry(
+    actionSource.value,
+    new Action(actionType, targetVal.value),
+    actionCondition,
+    actionFrequency
+  );
+
+  console.log(
+    `
+  source value: ${actionSource.value};
+  selected type: ${actionType};
+  target value: ${targetVal.value};
+  condition: ${actionCondition};
+  frequency: ${actionFrequency};
+  ${newEntry.stringify()}
+  `
+  );
+
+  if (actionSource && actionType && targetVal.value) {
+    addBlacklist(newEntry);
+    addToTable(actionSource.value, targetVal.value);
+    actionSource.value = "";
+    targetVal.value = "";
+    selectedCondition = "";
+    selectedType = "";
   }
 }
 

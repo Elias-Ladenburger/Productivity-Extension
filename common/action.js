@@ -2,12 +2,11 @@ class ProdEntry {
   constructor(
     badWebsite,
     action = Action((type = ActionType.FRAME), (targetValue = "red")),
-    frequency = ActionFrequency.MINUTE,
-    condition = ActionCondition.ALWAYS
+    condition = ActionCondition.ALWAYS,
+    frequency = ActionFrequency.MINUTE
   ) {
     this.source = badWebsite;
     this.action = action;
-    this.target = target;
     this.frequency = frequency;
     this.condition = condition;
   }
@@ -21,7 +20,7 @@ class ProdEntry {
   }
 
   stringify() {
-    return `${this.condition} when I visit ${this.source} then `;
+    return `${this.condition} when I visit ${this.source} then ${this.frequency} ${this.action.stringify()}`;
   }
 }
 
