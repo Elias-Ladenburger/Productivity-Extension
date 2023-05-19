@@ -12,7 +12,7 @@ function addBlacklist(entry) {
   getAllBlacklisted().then((blacklistedStorage) => {
     let blacklist =
       typeof blacklistedStorage == "undefined" ? [] : blacklistedStorage;
-    blacklist.push({ bad: entry.source, entry: JSON.stringify(entry) });
+    blacklist.push({ bad: entry.source, entry: entry });
     setBlacklist(blacklist);
   });
 }

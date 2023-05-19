@@ -60,8 +60,8 @@ class Action {
 }
 
 const ActionType = {
-  POPUP: "show a popup",
   REDIRECT: "redirect to",
+  POPUP: "show a popup",
   FRAME: "frame this site",
   LOG: "simply log this visit (WIP)",
 };
