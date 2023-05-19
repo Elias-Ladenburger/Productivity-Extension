@@ -17,10 +17,11 @@ function prepareTable() {
   getAllBlacklisted().then((allBlacklisted) => {
     console.log(allBlacklisted);
     if (!allBlacklisted || (allBlacklisted && !allBlacklisted.length)) {
-      addToTable("*.facebook.com", "jamesclear.com/atomic-habits");
+      let demoRule = new ProdRule("*.facebook.com", new Action(ActionType.REDIRECT, "jamesclear.com/atomic-habits"));
+      addToTable(demoRule);
     } else {
       allBlacklisted.forEach((blacklisted) => {
-        addToTable(blacklisted["bad"], blacklisted["good"]);
+        addToTable(blacklisted["bad"], blacklisted["entry"]);
       });
     }
   });
@@ -33,13 +34,11 @@ function addEntry() {
   let selectedCondition = document.getElementById("actioncondition");
   let selectedFrequency = document.getElementById("actionfrequency");
 
-  console.log("adding action!");
-
   let actionFrequency = ActionFrequency[selectedFrequency.value];
   let actionCondition = ActionCondition[selectedCondition.value];
   let actionType = ActionType[selectedType.value];
 
-  let newEntry = new ProdEntry(
+  let newEntry = new ProdRule(
     actionSource.value,
     new Action(actionType, targetVal.value),
     actionCondition,
@@ -67,34 +66,31 @@ function addEntry() {
   }
 }
 
-function addToTable(badSite, goodAction) {
+function addToTable(prodRule) {
   let settingsTable = document.getElementById("settingsTable");
   let newRow = settingsTable.insertRow(-1);
-  let blacklistedCell = newRow.insertCell(0);
-  let redirectCell = newRow.insertCell(1);
-  let actionsCell = newRow.insertCell(2);
+  let ruleCell = newRow.insertCell(0);
+  let actionsCell = newRow.insertCell(1);
 
-  newRow.id = badSite;
-  blacklistedCell.innerHTML = badSite;
-  blacklistedCell.setAttribute("class", "px-2");
-  redirectCell.innerHTML = goodAction;
-  redirectCell.setAttribute("class", "px-2");
-  actionsCell.innerHTML = `<button id="edit_${badSite}" class="rounded-lg border-white bg-navy text-white hover:bg-blueRoyal px-2 mx-1 text-center">edit</button>
-  <button id="delete_${badSite}" class="rounded-lg border-white bg-navy text-white hover:bg-blueRoyal px-2 mx-1 text-center">delete</button>`;
-  let addButton = document.getElementById(`delete_${badSite}`);
+  let prodID = prodRule.source
+  newRow.id = prodID;
+  ruleCell.innerHTML = prodRule.toString();
+  ruleCell.setAttribute("class", "px-2");
+  actionsCell.innerHTML = `<button id="edit_${prodID}" class="rounded-lg border-white bg-navy text-white hover:bg-blueRoyal px-2 mx-1 text-center">edit</button>
+  <button id="delete_${prodID}" class="rounded-lg border-white bg-navy text-white hover:bg-blueRoyal px-2 mx-1 text-center">delete</button>`;
+  let addButton = document.getElementById(`delete_${prodID}`);
   addButton.addEventListener(
     "click",
     function (e) {
-      removeFromTable(badSite);
+      removeFromTable(prodID);
     },
     false
   );
 }
 
-function removeFromTable(badSite) {
-  deleteBlacklist(badSite);
-  let toDelete = document.getElementById(badSite);
+function removeFromTable(prodID) {
+  deleteBlacklist(prodID);
+  let toDelete = document.getElementById(prodID);
   toDelete.remove();
-  console.log(`Removing rule for ${badSite}!`);
-  //prepareTable();
+  console.log(`Removing rule for ${prodID}!`);
 }

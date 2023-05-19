@@ -1,4 +1,4 @@
-class ProdEntry {
+class ProdRule {
   constructor(
     badWebsite,
     action = Action((type = ActionType.FRAME), (targetValue = "red")),
@@ -19,8 +19,8 @@ class ProdEntry {
     });
   }
 
-  stringify() {
-    return `${this.condition} when I visit ${this.source} then ${this.frequency} ${this.action.stringify()}`;
+  toString() {
+    return `${this.condition} when I visit ${this.source} then ${this.frequency.name} ${this.action.toString()}`;
   }
 }
 
@@ -54,7 +54,7 @@ class Action {
     }
   }
 
-  stringify() {
+  toString() {
     return `${this.type} ${this.targetValue}`;
   }
 }
