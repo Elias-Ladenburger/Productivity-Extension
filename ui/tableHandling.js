@@ -19,9 +19,10 @@ function prepareTable() {
     if (!allBlacklisted || (allBlacklisted && !allBlacklisted.length)) {
       let demoRule = new ProdRule("*.facebook.com", new Action(ActionType.REDIRECT, "jamesclear.com/atomic-habits"));
       addToTable(demoRule);
+      let demoRow = document.getElementById("*.facebook.com")
     } else {
       allBlacklisted.forEach((blacklisted) => {
-        addToTable(blacklisted["bad"], blacklisted["entry"]);
+        addToTable(blacklisted["entry"]);
       });
     }
   });
@@ -52,13 +53,13 @@ function addEntry() {
   target value: ${targetVal.value};
   condition: ${actionCondition};
   frequency: ${actionFrequency};
-  ${newEntry.stringify()}
+  ${newEntry.toString()}
   `
   );
 
   if (actionSource && actionType && targetVal.value) {
     addBlacklist(newEntry);
-    addToTable(actionSource.value, targetVal.value);
+    addToTable(newEntry);
     actionSource.value = "";
     targetVal.value = "";
     selectedCondition = "";
@@ -74,7 +75,7 @@ function addToTable(prodRule) {
 
   let prodID = prodRule.source
   newRow.id = prodID;
-  ruleCell.innerHTML = prodRule.toString();
+  ruleCell.innerHTML = formatString(prodRule);
   ruleCell.setAttribute("class", "px-2");
   actionsCell.innerHTML = `<button id="edit_${prodID}" class="rounded-lg border-white bg-navy text-white hover:bg-blueRoyal px-2 mx-1 text-center">edit</button>
   <button id="delete_${prodID}" class="rounded-lg border-white bg-navy text-white hover:bg-blueRoyal px-2 mx-1 text-center">delete</button>`;
@@ -86,6 +87,12 @@ function addToTable(prodRule) {
     },
     false
   );
+}
+
+function formatString(entry) {
+  const myAction = new Action(entry.action.type, entry.action.targetValue);
+  const prodRule = new ProdRule(entry.source, myAction, entry.condition, entry.frequency)
+  return `<em class="text-lg">${prodRule.source}</em> <br><b>${prodRule.condition}</b> when I visit <b>${prodRule.source}</b> then <b>${prodRule.frequency.name} ${myAction.type} ${myAction.targetValue}</b>`;
 }
 
 function removeFromTable(prodID) {
