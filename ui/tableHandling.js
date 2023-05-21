@@ -17,15 +17,22 @@ function prepareTable() {
   getAllBlacklisted().then((allBlacklisted) => {
     console.log(allBlacklisted);
     if (!allBlacklisted || (allBlacklisted && !allBlacklisted.length)) {
-      let demoRule = new ProdRule("*.facebook.com", new Action(ActionType.REDIRECT, "jamesclear.com/atomic-habits"));
-      addToTable(demoRule);
-      let demoRow = document.getElementById("*.facebook.com")
+      addDemoRule();
     } else {
       allBlacklisted.forEach((blacklisted) => {
         addToTable(blacklisted["entry"]);
       });
     }
   });
+}
+
+function addDemoRule(){
+        let demoRule = new ProdRule("UnproductiveSite.com", new Action(ActionType.REDIRECT, "productiveurl.com"));
+      addToTable(demoRule);
+      let demoRow = document.getElementById("UnproductiveSite.com")
+      let demoAttrs = demoRow.getAttribute("class");
+      demoAttrs = demoAttrs + " text-darkGrey";
+      demoRow.setAttribute("class", demoAttrs);
 }
 
 function addEntry() {
