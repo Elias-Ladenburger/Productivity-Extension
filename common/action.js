@@ -1,14 +1,30 @@
+function getRuleFromJSON(entry) {
+  let myRule = new ProdRule(
+    entry.source,
+    entry.action,
+    entry.condition,
+    entry.frequency
+  );
+  return myRule;
+}
+
 class ProdRule {
   constructor(
     badWebsite,
-    action = Action((type = ActionType.FRAME), (targetValue = "red")),
+    action = { type: ActionType.FRAME, targetValue: "red" },
     condition = ActionCondition.ALWAYS,
     frequency = ActionFrequency.MINUTE
   ) {
     this.source = badWebsite;
-    this.action = action;
     this.frequency = frequency;
     this.condition = condition;
+    if (action instanceof Action) {
+      this.action = action;
+    } else {
+      let tmpType = action.type;
+      let tmpVal = action.targetValue;
+      this.action = new Action(tmpType, tmpVal);
+    }
   }
 
   enhanceProductivity() {
@@ -20,7 +36,9 @@ class ProdRule {
   }
 
   toString() {
-    return `${this.condition} when I visit ${this.source} then ${this.frequency.name} ${this.action.toString()}`;
+    return `${this.condition} when I visit ${this.source} then ${
+      this.frequency.name
+    } ${this.action.toString()}`;
   }
 }
 
@@ -31,13 +49,19 @@ class Action {
   }
 
   performAction() {
-    switch (type) {
+    switch (this.type) {
       case ActionType.FRAME:
-        document.body.style.border = `5px solid ${targetValue}`;
+        alert(
+          `This site is unproductive! Framing this site in ${this.targetValue}.`
+        );
+        document.body.style.border = `5px solid ${this.targetValue}`;
         break;
       case ActionType.REDIRECT:
-        alert(`This site is unproductive! Redirecting to ${targetValue}.`);
-        window.location.href = value;
+        alert(`This site is unproductive! Redirecting to ${this.targetValue}.`);
+        let targetValue = this.targetValue.startsWith("http")
+          ? this.targetValue
+          : `https://${this.targetValue}`;
+        window.location.href = targetValue;
         break;
       case ActionType.POPUP:
         alert("Do you truly want to spend more time on this site?");

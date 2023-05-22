@@ -26,13 +26,16 @@ function prepareTable() {
   });
 }
 
-function addDemoRule(){
-        let demoRule = new ProdRule("UnproductiveSite.com", new Action(ActionType.REDIRECT, "productiveurl.com"));
-      addToTable(demoRule);
-      let demoRow = document.getElementById("UnproductiveSite.com")
-      let demoAttrs = demoRow.getAttribute("class");
-      demoAttrs = demoAttrs + " text-darkGrey";
-      demoRow.setAttribute("class", demoAttrs);
+function addDemoRule() {
+  let demoRule = new ProdRule(
+    "UnproductiveSite.com",
+    new Action(ActionType.REDIRECT, "productiveurl.com")
+  );
+  addToTable(demoRule);
+  let demoRow = document.getElementById("UnproductiveSite.com");
+  let demoAttrs = demoRow.getAttribute("class");
+  demoAttrs = demoAttrs + " text-darkGrey";
+  demoRow.setAttribute("class", demoAttrs);
 }
 
 function addEntry() {
@@ -53,17 +56,6 @@ function addEntry() {
     actionFrequency
   );
 
-  console.log(
-    `
-  source value: ${actionSource.value};
-  selected type: ${actionType};
-  target value: ${targetVal.value};
-  condition: ${actionCondition};
-  frequency: ${actionFrequency};
-  ${newEntry.toString()}
-  `
-  );
-
   if (actionSource && actionType && targetVal.value) {
     addBlacklist(newEntry);
     addToTable(newEntry);
@@ -80,7 +72,7 @@ function addToTable(prodRule) {
   let ruleCell = newRow.insertCell(0);
   let actionsCell = newRow.insertCell(1);
 
-  let prodID = prodRule.source
+  let prodID = prodRule.source;
   newRow.id = prodID;
   ruleCell.innerHTML = formatString(prodRule);
   ruleCell.setAttribute("class", "px-2");
@@ -98,7 +90,12 @@ function addToTable(prodRule) {
 
 function formatString(entry) {
   const myAction = new Action(entry.action.type, entry.action.targetValue);
-  const prodRule = new ProdRule(entry.source, myAction, entry.condition, entry.frequency)
+  const prodRule = new ProdRule(
+    entry.source,
+    myAction,
+    entry.condition,
+    entry.frequency
+  );
   return `<em class="text-lg">${prodRule.source}</em> <br><b>${prodRule.condition}</b> when I visit <b>${prodRule.source}</b> then <b>${prodRule.frequency.name} ${myAction.type} ${myAction.targetValue}</b>`;
 }
 

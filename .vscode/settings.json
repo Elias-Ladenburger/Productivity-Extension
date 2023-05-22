@@ -1,0 +1,7 @@
+{
+    "editor.formatOnPaste": true,
+    "editor.formatOnSave": true,
+    "editor.formatOnType": true,
+    "html.format.contentUnformatted": "",
+    "editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
+}

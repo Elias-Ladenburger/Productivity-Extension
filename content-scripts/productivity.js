@@ -1,22 +1,14 @@
-/*
-Just draw a border round the document.body.
-*/
 applyBlacklist();
-
-// Simulate an HTTP redirect:
-//window.location.replace("http://www.w3schools.com");
-
-// Simulate a mouse click:
-//window.location.href = "http://www.w3schools.com";
 
 function applyBlacklist() {
   let currentURL = window.location.href;
 
   isBlacklisted(currentURL).then((isSiteBlacklisted) => {
     if (isSiteBlacklisted) {
-      getAction(currentURL).then((newURL) => {
-        performAction(newURL);
-        //document.body.style.border = "2px solid red";
+      getRule(currentURL).then((myRule) => {
+        console.log(`executing rule: "${myRule}"`);
+        console.log(myRule);
+        myRule.action.performAction();
       });
     }
   });
@@ -37,37 +29,16 @@ function isBlacklisted(siteToCheck) {
   });
 }
 
-function getAction(originURL) {
+function getRule(originURL) {
   return getAllBlacklisted().then((blacklist) => {
-    let action = originURL;
+    let myRule = new ProdRule("undefined");
     blacklist.forEach((blacklisted) => {
       if (originURL.includes(blacklisted["bad"])) {
-        action = parseAction(blacklisted["good"]);
+        let entry = blacklisted["entry"];
+        myRule = getRuleFromJSON(entry);
+        return myRule;
       }
     });
-    return action;
-  });
-}
-
-function parseAction(actionString) {
-  if (actionString.startsWith("http")) {
-    return actionString;
-  } else {
-    newString = "https://" + actionString;
-    return newString;
-  }
-}
-
-function performAction(newURL) {
-  window.addEventListener("load", function () {
-    // Wait 5 minutes (300000 milliseconds) before showing the popup
-    setTimeout(function () {
-      // Show the popup
-      alert("Do you truly want to spend more time on this site?");
-    }, 3000);
-    this.setTimeout(function () {
-      alert("This site is blacklisted! Redirecting to " + newURL);
-      window.location.href = newURL;
-    }, 3000);
+    return myRule;
   });
 }
