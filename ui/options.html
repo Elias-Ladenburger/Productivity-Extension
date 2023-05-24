@@ -8,19 +8,18 @@
     <script src="../common/action.js"></script>
   </head>
 
-  <body class="pt-5 px-5 bg-white text-navy bg-abstractBG bg-cover">
-    <div id="settingsBody" class="px-5 text-base grid grid-cols-2 space-x-4">
+  <body class="pt-5 px-5 text-base bg-white text-navy bg-abstractBG bg-cover">
+    <h1 class="text-2xl font-bold pb-4">Productivity Booster</h1>
+    <p class="pb-4">
+      Re-take control of your productivity! This extension will redirect you
+      from sites that kill your motivation and productivity and instead redirect
+      you to more productive places. <br />
+      Apply proven methods taken from “Atomic Habits” by James Clear. Become
+      more focused with the Pomodoro-technique. Finish what you started and feel
+      good about it.
+    </p>
+    <div id="settingsBody" class="grid grid-cols-2 space-x-4">
       <div id="leftBody">
-        <h1 class="text-2xl font-bold pb-4">Productivity Booster</h1>
-        <p class="pb-4">
-          Re-take control of your productivity! This extension will redirect you
-          from sites that kill your motivation and productivity and instead
-          redirect you to more productive places. <br />
-          Apply proven methods taken from “Atomic Habits” by James Clear. Become
-          more focused with the Pomodoro-technique. Finish what you started and
-          feel good about it.
-        </p>
-
         <h2 class="text-2xl font-bold pb-4">Add a Rule</h2>
         <form class="py-5 focus:placeholder-navy bg-primary bg-opacity-70 px-5">
           <div class="grid grid-cols-4">
@@ -31,19 +30,22 @@
               id="actionsource"
               type="text"
               placeholder="*.facebook.com"
-              class="bg-lightRed mt-2 col-span-3 px-1" />
+              class="bg-lightRed mt-2 col-span-3 px-1"
+            />
 
             <label for="actiontype" class="col-span-1 mt-2">then</label>
             <select
               id="actiontype"
               name="actiontype"
-              class="bg-lightRed col-span-3 px-1 mt-2"></select>
+              class="bg-lightRed col-span-3 px-1 mt-2"
+            ></select>
 
             <input
               id="targetvalue"
               type="text"
               placeholder="jamesclear.com/atomic-habits"
-              class="bg-lightRed w-full col-span-4 px-1 mt-2" />
+              class="bg-lightRed w-full col-span-4 px-1 mt-2"
+            />
 
             <details class="col-span-4">
               <summary>Advanced Settings</summary>
@@ -51,7 +53,8 @@
                 <label for="condition" class="col-span-1 mt-2">do this</label>
                 <select
                   id="actioncondition"
-                  class="col-span-3 bg-lightRed px-1 mt-2"></select>
+                  class="col-span-3 bg-lightRed px-1 mt-2"
+                ></select>
 
                 <label for="frequency" class="col-span-1 mt-2"
                   >repeat this</label
@@ -59,14 +62,16 @@
                 <select
                   id="actionfrequency"
                   name="frequency"
-                  class="bg-lightRed px-1 mt-2 col-span-3"></select>
+                  class="bg-lightRed px-1 mt-2 col-span-3"
+                ></select>
               </div>
             </details>
           </div>
           <div class="flex justify-center pt-3">
             <button
               id="blacklistButton"
-              class="text-center rounded-lg bg-navy text-white hover:bg-blueRoyal px-2">
+              class="text-center rounded-lg bg-navy text-white hover:bg-blueRoyal px-2"
+            >
               Add Rule
             </button>
           </div>
@@ -74,6 +79,77 @@
       </div>
 
       <div id="rightBody" class="">
+        <h2 class="text-2xl font-bold pb-4">My Productivity Rules</h2>
+        <table id="settingsTable" class="text-base space-y-3 pb-3">
+          <tr class="text-lg text-left bg-grey text-primary mx-3">
+            <th class="px-3 w-4/5">Rule</th>
+            <th class="px-3 w-1/5">Actions</th>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+    <div id="workinghours" class="pt-5 grid grid-cols-2 space-x-4">
+      <div>
+        <h2 class="text-2xl font-bold pb-4">My productive times</h2>
+        <form class="py-5 focus:placeholder-navy bg-primary bg-opacity-70 px-5">
+          <div class="grid grid-cols-4">
+            <label for="workingday" class="col-span-1 mt-2">On this day</label>
+            <select
+              id="workingday"
+              name="workingday"
+              class="bg-lightRed col-span-3 px-1 mt-2"
+            >
+              <option value="monday">Monday</option>
+              <option value="tuesday">Tuesday</option>
+              <option value="wednesday">Wednesday</option>
+              <option value="thursday">Thursday</option>
+              <option value="friday">Friday</option>
+              <option value="saturday">Saturday</option>
+              <option value="sunday">Sunday</option>
+            </select>
+            <label for="workingtimes" class="col-span-1 mt-2"
+              >from</label
+            >
+            <input
+              id="targetvalue"
+              type="text"
+              placeholder="jamesclear.com/atomic-habits"
+              class="bg-lightRed w-full col-span-4 px-1 mt-2"
+            />
+
+            <details class="col-span-4">
+              <summary>Advanced Settings</summary>
+              <div class="grid grid-cols-4">
+                <label for="condition" class="col-span-1 mt-2">do this</label>
+                <select
+                  id="actioncondition"
+                  class="col-span-3 bg-lightRed px-1 mt-2"
+                ></select>
+
+                <label for="frequency" class="col-span-1 mt-2"
+                  >repeat this</label
+                >
+                <select
+                  id="actionfrequency"
+                  name="frequency"
+                  class="bg-lightRed px-1 mt-2 col-span-3"
+                ></select>
+              </div>
+            </details>
+          </div>
+          <div class="flex justify-center pt-3">
+            <button
+              id="blacklistButton"
+              class="text-center rounded-lg bg-navy text-white hover:bg-blueRoyal px-2"
+            >
+              Add Rule
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <div>
         <h2 class="text-2xl font-bold pb-4">My Productivity Rules</h2>
         <table id="settingsTable" class="text-base space-y-3 pb-3">
           <tr class="text-lg text-left bg-grey text-primary mx-3">

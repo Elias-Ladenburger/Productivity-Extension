@@ -54,7 +54,7 @@ class Action {
         alert(
           `This site is unproductive! Framing this site in ${this.targetValue}.`
         );
-        document.body.style.border = `5px solid ${this.targetValue}`;
+        document.body.style.border = `10px solid ${this.targetValue}`;
         break;
       case ActionType.REDIRECT:
         alert(`This site is unproductive! Redirecting to ${this.targetValue}.`);
