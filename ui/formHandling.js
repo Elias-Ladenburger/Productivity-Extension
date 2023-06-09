@@ -6,13 +6,7 @@ function prepareForm() {
     { name: "actiontype", myDict: ActionType },
     {
       name: "actiondelay",
-      myDict: {
-        0: "immediately",
-        30000: "after 30 seconds",
-        MINUTE: "after one minute",
-        HALFHOUR: "every 30 minutes",
-        HOUR: "every hour",
-      },
+      myDict: DelayEnum,
     },
   ];
   let selectElement;

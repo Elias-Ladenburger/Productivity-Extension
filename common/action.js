@@ -3,7 +3,7 @@ function getRuleFromJSON(entry) {
     entry.source,
     entry.action,
     entry.condition,
-    entry.frequency
+    entry.delay
   );
   return myRule;
 }
@@ -13,10 +13,10 @@ class ProdRule {
     badWebsite,
     action = { type: ActionType.FRAME, targetValue: "red" },
     condition = ActionCondition.ALWAYS,
-    frequency = ActionFrequency.MINUTE
+    delay = 0
   ) {
     this.source = badWebsite;
-    this.frequency = frequency;
+    this.delay = delay;
     this.condition = condition;
     if (action instanceof Action) {
       this.action = action;
@@ -27,59 +27,80 @@ class ProdRule {
     }
   }
 
-  enhanceProductivity() {
+  applyRule() {
     window.addEventListener("load", function () {
       setTimeout(function () {
         this.action.performAction();
-      }, this.frequency.duration);
+      }, this.delay);
     });
   }
 
   toString() {
-    return `${this.condition} when I visit ${this.source} then ${
-      this.frequency.name
-    } ${this.action.toString()}`;
+    const delayStr = DelayEnum[delay] || `after ${this.delay} miliseconds`;
+    return `${this.condition} when I visit ${
+      this.source
+    } then ${delayStr} ${this.action.toString()}`;
   }
 }
 
 class Action {
-  constructor(type = ActionType.FRAME, targetValue = "") {
-    this.type = type;
+  constructor(targetValue = "") {
     this.targetValue = targetValue;
   }
 
   performAction() {
-    switch (this.type) {
-      case ActionType.FRAME:
-        alert(
-          `This site is unproductive! Framing this site in ${this.targetValue}.`
-        );
-        document.body.style.border = `10px solid ${this.targetValue}`;
-        break;
-      case ActionType.REDIRECT:
-        alert(`This site is unproductive! Redirecting to ${this.targetValue}.`);
-        let targetValue = this.targetValue.startsWith("http")
-          ? this.targetValue
-          : `https://${this.targetValue}`;
-        window.location.href = targetValue;
-        break;
-      case ActionType.POPUP:
-        alert("Do you truly want to spend more time on this site?");
-        break;
-      case ActionType.LOG:
-        console.log(
-          "not logging any productivity data at the moment. This feature is WIP."
-        );
-        break;
-      default:
-        console.log(
-          "Unknown or invalid action type. Will not perform any productivity enahancing action."
-        );
-    }
+    return;
+  }
+  toString() {
+    return `apply a rule!`;
+  }
+}
+
+class FrameAction extends Action {
+  constructor(frameColor) {
+    super(frameColor);
+  }
+
+  performAction() {
+    alert(
+      `This site is unproductive! Framing this site in ${this.targetValue}.`
+    );
+    document.body.style.border = `10px solid ${this.targetValue}`;
   }
 
   toString() {
-    return `${this.type} ${this.targetValue}`;
+    return `frame the site in ${this.targetValue}`;
+  }
+}
+
+class PopupAction extends Action {
+  constructor(popupText) {
+    super(popupText);
+  }
+  performAction() {
+    if (!this.targetValue) {
+      this.targetValue = "Do you truly want to spend more time on this site?";
+    }
+    alert(this.targetValue);
+  }
+  toString() {
+    return `show a popup that says: \n '${this.targetValue}'`;
+  }
+}
+
+class RedirectAction extends Action {
+  constructor(redirectTo) {
+    super(redirectTo);
+  }
+  performAction() {
+    alert(`This site is unproductive! Redirecting to ${this.targetValue}.`);
+    let targetValue = this.targetValue.startsWith("http")
+      ? this.targetValue
+      : `https://${this.targetValue}`;
+    window.location.href = targetValue;
+  }
+  toString() {
+    return `redirect to ${this.targetValue}`;
   }
 }
 
@@ -90,16 +111,15 @@ const ActionType = {
   LOG: "simply log this visit (WIP)",
 };
 
-const ActionFrequency = {
-  IMMEDIATE: { name: "immediately", duration: 0 },
-  SECONDS: { name: "after 5 seconds", duration: 5000 },
-  MINUTE: { name: "after one minute", duration: 6000 },
-  HALFHOUR: { name: "every 30 minutes", duration: 180000 },
-  HOUR: { name: "every hour", duration: 360000 },
-};
-
 const ActionCondition = {
   ALWAYS: "Always",
   WORK: "While working",
   GOAL: "While my daily goal is not reached",
+};
+
+const DelayEnum = {
+  0: "immediately",
+  30000: "after 30 seconds",
+  300000: "after 5 minutes",
+  1200000: "after 20 minutes",
 };

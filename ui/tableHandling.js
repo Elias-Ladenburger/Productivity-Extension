@@ -43,9 +43,9 @@ function addEntry() {
   let selectedType = document.getElementById("actiontype");
   let targetVal = document.getElementById("targetvalue");
   let selectedCondition = document.getElementById("actioncondition");
-  let selectedFrequency = document.getElementById("actionfrequency");
+  let selectedDelay = document.getElementById("actiondelay");
 
-  let actionFrequency = ActionFrequency[selectedFrequency.value];
+  let actionDelay = actionDelay[selectedDelay.value];
   let actionCondition = ActionCondition[selectedCondition.value];
   let actionType = ActionType[selectedType.value];
 
@@ -53,7 +53,7 @@ function addEntry() {
     actionSource.value,
     new Action(actionType, targetVal.value),
     actionCondition,
-    actionFrequency
+    actionDelay
   );
 
   if (actionSource && actionType && targetVal.value) {
@@ -94,9 +94,9 @@ function formatString(entry) {
     entry.source,
     myAction,
     entry.condition,
-    entry.frequency
+    entry.delay
   );
-  return `<em class="text-lg">${prodRule.source}</em> <br><b>${prodRule.condition}</b> when I visit <b>${prodRule.source}</b> then <b>${prodRule.frequency.name} ${myAction.type} ${myAction.targetValue}</b>`;
+  return `<em class="text-lg">${prodRule.source}</em> <br><b>${prodRule.condition}</b> when I visit <b>${prodRule.source}</b> then <b>${prodRule.delay} ${myAction.type} ${myAction.targetValue}</b>`;
 }
 
 function removeFromTable(prodID) {
