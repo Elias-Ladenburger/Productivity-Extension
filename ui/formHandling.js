@@ -4,7 +4,16 @@ function prepareForm() {
   const multipleChoiceFields = [
     { name: "actioncondition", myDict: ActionCondition },
     { name: "actiontype", myDict: ActionType },
-    { name: "actionfrequency", myDict: {IMMEDIATE: "immediately", SECONDS: "after 5 seconds", MINUTE: "after one minute", HALFHOUR: "every 30 minutes", HOUR: "every hour" } }
+    {
+      name: "actiondelay",
+      myDict: {
+        0: "immediately",
+        30000: "after 30 seconds",
+        MINUTE: "after one minute",
+        HALFHOUR: "every 30 minutes",
+        HOUR: "every hour",
+      },
+    },
   ];
   let selectElement;
   let myDict;

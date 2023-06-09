@@ -13,11 +13,6 @@
     "128": "icons/bolt-solid.png"
   },
 
-  "browser_specific_settings": {
-    "gecko": {
-      "id": "prod-booster@eliasladenburger.com"
-    }
-  },
   "permissions": [
     "activeTab",
     "storage",
@@ -25,8 +20,7 @@
     "tabs",
     "contextMenus",
     "webNavigation",
-    "webRequest",
-    "webRequestBlocking"
+    "webRequest"
   ],
   "content_scripts": [
     {
