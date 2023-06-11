@@ -29,7 +29,7 @@ function prepareTable() {
 function addDemoRule() {
   let demoRule = new ProdRule(
     "UnproductiveSite.com",
-    new Action(ActionType.REDIRECT, "productiveurl.com")
+    new Action(ActionType.REDIRECT, "productiveURL.com")
   );
   addToTable(demoRule);
   let demoRow = document.getElementById("UnproductiveSite.com");
@@ -45,7 +45,7 @@ function addEntry() {
   let selectedCondition = document.getElementById("actioncondition");
   let selectedDelay = document.getElementById("actiondelay");
 
-  let actionDelay = actionDelay[selectedDelay.value];
+  let actionDelay = ActionDelay[selectedDelay.value];
   let actionCondition = ActionCondition[selectedCondition.value];
   let actionType = ActionType[selectedType.value];
 
