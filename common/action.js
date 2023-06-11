@@ -36,7 +36,7 @@ class ProdRule {
   }
 
   toString() {
-    const delayStr = DelayEnum[delay] || `after ${this.delay} miliseconds`;
+    const delayStr = ActionDelay[this.delay] || `after ${this.delay} miliseconds`;
     return `${this.condition} when I visit ${
       this.source
     } then ${delayStr} ${this.action.toString()}`;
@@ -117,7 +117,7 @@ const ActionCondition = {
   GOAL: "While my daily goal is not reached",
 };
 
-const DelayEnum = {
+const ActionDelay = {
   0: "immediately",
   30000: "after 30 seconds",
   300000: "after 5 minutes",

@@ -19,7 +19,7 @@ At the moment, the productivity extension only supports Firefox.
 - select "load temporary add-on"
 - Voilá, this plugin will now remain installed until you close your Firefox window.
 
-#### Permanent instalation  
+#### Permanent installation  
 - Open Firefox
 - In the address bar, type ```about:addons```
 - click on the gear icon next to "manage extensions"
@@ -62,9 +62,11 @@ In the future, the following functionality may be added (with no guarantee whats
 - recommendation for breaks and off-screen time
 - visualization of goals
 - popups with hints for higher productivity
-- extension of rules
-    - ensuring accountability by sending a mail or posting on twitter when violating one of the rules
-    - requesting payment to visit one of the distracting websites during work-time
-    - rewards for staying on productive websites
-    - integration with other services to track "productivity points"
 - Chatbots: hold yourself accountable by talking to us via chat
+
+#### Extension of Rules
+- extension of rules
+- ensuring accountability by sending a mail or posting on twitter when violating one of the rules
+- requesting payment to visit one of the distracting websites during work-time
+- rewards for staying on productive websites
+- integration with other services to track "productivity points"
