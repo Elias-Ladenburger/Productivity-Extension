@@ -349,3 +349,8 @@ MigrationBackup/
 
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
+
+# temporary files of drawio
+*.drawio.*
+
+.gitignore
