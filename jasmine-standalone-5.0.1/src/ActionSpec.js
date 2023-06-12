@@ -124,6 +124,22 @@ it('should be creatable', function () {
   });
   });
   
-  
-  
 });
+
+describe('Action Factory', function () {
+  it('should create Popup Actions', function () {
+    let action = createAction(ActionType.POPUP, "some text!")
+    expect(action).toBeInstanceOf(PopupAction)
+    console.log(action.toString())
+  })
+  it('should create Redirect Actions', function () {
+    let action = createAction(ActionType.REDIRECT, "some text!")
+    expect(action).toBeInstanceOf(RedirectAction)
+    console.log(action.toString())
+  })
+  it('should create Frame Actions', function () {
+    let action = createAction(ActionType.FRAME, "red")
+    expect(action).toBeInstanceOf(FrameAction)
+    console.log(action.toString())
+  })
+})
