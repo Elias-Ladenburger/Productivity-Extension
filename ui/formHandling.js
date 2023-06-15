@@ -1,12 +1,33 @@
 prepareForm();
 
 function prepareForm() {
+  const condition = {
+    ALWAYS: "always",
+    WORK: "during my work times",
+    GOALS: "while my goals are not reached (WIP)"
+  }
+
+  const types = {
+    REDIRECT: "redirect me to",
+    POPUP: "show a popup with the following text",
+    FRAME: "frame the unproductive page in the following color",
+    LOG: "log my visit only (WIP)"
+  }
+
+  const delays = {
+    IMMEDIATE: "immediately",
+    HALFMINUTE: "30 seconds",
+    MINUTES: "5 minutes",
+    HALFHOUR: "20 minutes"
+    }
+
+
   const multipleChoiceFields = [
-    { name: "actioncondition", myDict: ActionCondition },
-    { name: "actiontype", myDict: ActionType },
+    { name: "actioncondition", myDict: condition },
+    { name: "actiontype", myDict: types },
     {
       name: "actiondelay",
-      myDict: DelayEnum,
+      myDict: delays,
     },
   ];
   let selectElement;

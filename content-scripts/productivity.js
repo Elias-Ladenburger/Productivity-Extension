@@ -1,40 +1,40 @@
-applyBlacklist();
+applyRule();
 
-function applyBlacklist() {
+function applyRule() {
   let currentURL = window.location.href;
 
-  isBlacklisted(currentURL).then((isSiteBlacklisted) => {
-    if (isSiteBlacklisted) {
+  checkIfRule(currentURL).then((siteHasRule) => {
+    if (siteHasRule) {
       getRule(currentURL).then((myRule) => {
         console.log(`executing rule: "${myRule}"`);
         console.log(myRule);
-        myRule.action.performAction();
+        myRule.applyRule();
       });
     }
   });
 }
 
-function isBlacklisted(siteToCheck) {
-  return getAllBlacklisted().then((blacklist) => {
-    let isSiteBlacklisted = false;
+function checkIfRule(siteToCheck) {
+  return PersistanceHandler.getAllRules().then((ruleList) => {
+    let siteHasRule = false;
 
-    if (blacklist) {
-      blacklist.forEach((blacklisted) => {
-        if (siteToCheck.includes(blacklisted["bad"])) {
-          isSiteBlacklisted = true;
+    if (ruleList) {
+      ruleList.forEach((ruleListed) => {
+        if (siteToCheck.includes(ruleListed["bad"])) {
+          siteHasRule = true;
         }
       });
     }
-    return isSiteBlacklisted;
+    return siteHasRule;
   });
 }
 
 function getRule(originURL) {
-  return getAllBlacklisted().then((blacklist) => {
+  return PersistanceHandler.getAllRules().then((ruleList) => {
     let myRule = new ProdRule("undefined");
-    blacklist.forEach((blacklisted) => {
-      if (originURL.includes(blacklisted["bad"])) {
-        let entry = blacklisted["entry"];
+    ruleList.forEach((ruleListed) => {
+      if (originURL.includes(ruleListed["bad"])) {
+        let entry = ruleListed["entry"];
         myRule = getRuleFromJSON(entry);
         return myRule;
       }

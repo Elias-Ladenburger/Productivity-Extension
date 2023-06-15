@@ -1,10 +1,28 @@
 prepareAll();
 
 function prepareAll() {
-  prepareTable();
+  prepareTable()
+  prepareAddRuleButton()
+}
 
-  let addButton = document.getElementById("blacklistButton");
-  addButton.addEventListener(
+function prepareTable() {
+  PersistanceHandler.getAllRules().then((allProdRules) => {
+    console.log(allProdRules);
+    if (!allProdRules || allProdRules.length == 0) {
+      addDemoRule();
+    } else {
+      allProdRules.forEach((targetDomain) => {
+        targetDomain.forEach((rule) => {
+          addToTable(rule);
+        })
+      });
+    }
+  });
+}
+
+function prepareAddRuleButton() {
+    let addButton = document.getElementById("addRuleButton");
+    addButton.addEventListener(
     "click",
     function (e) {
       addEntry();
@@ -13,26 +31,14 @@ function prepareAll() {
   );
 }
 
-function prepareTable() {
-  getAllBlacklisted().then((allBlacklisted) => {
-    console.log(allBlacklisted);
-    if (!allBlacklisted || (allBlacklisted && !allBlacklisted.length)) {
-      addDemoRule();
-    } else {
-      allBlacklisted.forEach((blacklisted) => {
-        addToTable(blacklisted["entry"]);
-      });
-    }
-  });
-}
-
 function addDemoRule() {
+  const demoURL = "demoUnproductiveSite.com"
   let demoRule = new ProdRule(
-    "UnproductiveSite.com",
-    new Action(ActionType.REDIRECT, "productiveURL.com")
+    demoURL,
+    new RedirectAction("productiveURL.com")
   );
   addToTable(demoRule);
-  let demoRow = document.getElementById("UnproductiveSite.com");
+  let demoRow = document.getElementById(demoURL);
   let demoAttrs = demoRow.getAttribute("class");
   demoAttrs = demoAttrs + " text-darkGrey";
   demoRow.setAttribute("class", demoAttrs);
@@ -51,13 +57,13 @@ function addEntry() {
 
   let newEntry = new ProdRule(
     actionSource.value,
-    new Action(actionType, targetVal.value),
+    ActionFactory.createAction(actionType, targetVal.value),
     actionCondition,
     actionDelay
   );
 
   if (actionSource && actionType && targetVal.value) {
-    addBlacklist(newEntry);
+    PersistanceHandler.addRule(newEntry);
     addToTable(newEntry);
     actionSource.value = "";
     targetVal.value = "";
@@ -89,14 +95,14 @@ function addToTable(prodRule) {
 }
 
 function formatString(entry) {
-  const myAction = new Action(entry.action.type, entry.action.targetValue);
+  const myAction = ActionFactory.createAction(entry.action.type, entry.action.targetValue);
   const prodRule = new ProdRule(
     entry.source,
     myAction,
     entry.condition,
     entry.delay
   );
-  return `<em class="text-lg">${prodRule.source}</em> <br><b>${prodRule.condition}</b> when I visit <b>${prodRule.source}</b> then <b>${prodRule.delay} ${myAction.type} ${myAction.targetValue}</b>`;
+  return `<em class="text-lg">${prodRule.source}</em> <br><b>${prodRule.condition}</b> when I visit <b>${prodRule.source}</b> then <b>${prodRule.delay} ${myAction.toString()}</b>`;
 }
 
 function removeFromTable(prodID) {

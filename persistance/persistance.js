@@ -1,39 +1,45 @@
-const PersistanceHandler = {
-  getAllRules() {
-    return chrome.storage.local.get("productivityRules").then((allRules) => {
-      if ("ruleList" in allRules) {
-        return allRules["ruleList"];
-      } else {
-        return [];
-      }
-    });
-  },
+const ruleDBName = "productivityRules";
 
-  addRule(entry) {
-    getAllRules().then((prodRules) => {
-      let ruleList =
-        typeof prodRules == "undefined" ? [] : prodRules;
-      ruleList.push({ bad: entry.source, entry: entry });
-      setRuleList(ruleList);
-    });
-  },
-
-  deleteRule(toRemove) {
-    getAllRules().then((prodRules) => {
-      let newruleList = prodRules.filter((myURL) => {
-        return myURL["bad"] != toRemove;
-      });
-      setRuleList(newruleList);
-    });
-  },
-
-  updateRule(updatedRule) {
-
-  },
-
-  setRuleList(ruleList) {
-    chrome.storage.local.set({ ruleList: ruleList });
-  }
+function getAllRules() {
+  return chrome.storage.local.get(ruleDBName).then((allRules) => {
+    if (!allRules | (typeof allRules == "undefined") | (allRules == {})) {
+      return [];
+    } else {
+      return allRules[ruleDBName];
+    }
+  });
 }
 
+function addRule(myNewRule) {
+  return getAllRules().then((prodRules) => {
+    let ruleList = typeof prodRules === "undefined" ? [] : prodRules;
+    const targetWebsite = myNewRule.source;
+    if (targetWebsite in ruleList) {
+      ruleList[targetWebsite].push(myNewRule);
+    } else {
+      ruleList[targetWebsite] = [myNewRule];
+    }
+    return setRuleList(ruleList);
+  });
+}
 
+function deleteRule(ruleToRemove) {
+  getAllRules().then((prodRules) => {
+    let newruleList = prodRules.filter((myURL) => {
+      return myURL["bad"] != ruleToRemove;
+    });
+    setRuleList(newruleList);
+  });
+}
+
+function setRuleList(ruleList) {
+  let allRules = {};
+  allRules[ruleDBName] = ruleList;
+  return chrome.storage.local.set(allRules);
+}
+
+const PersistanceHandler = {
+  getAllRules: getAllRules,
+  addRule: addRule,
+  deleteRule: deleteRule,
+};
