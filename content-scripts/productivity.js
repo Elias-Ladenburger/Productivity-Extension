@@ -1,45 +1,43 @@
 applyRule();
 
-function applyRule() {
+async function applyRule() {
   let currentURL = window.location.href;
 
-  checkIfRule(currentURL).then((siteHasRule) => {
-    if (siteHasRule) {
-      getRule(currentURL).then((myRule) => {
-        console.log(`executing rule: "${myRule}"`);
-        console.log(myRule);
-        myRule.applyRule();
-      });
-    }
-  });
+  if (await checkIfRule(currentURL)) {
+    const rulesForThisSite = await getRules(currentURL);
+    rulesForThisSite.forEach((myRule) => {
+      console.log(`executing rule: "${myRule}"`);
+      console.log(myRule);
+      myRule.applyRule();
+    });
+  }
 }
 
-function checkIfRule(siteToCheck) {
-  return PersistanceHandler.getAllRules().then((ruleList) => {
-    let siteHasRule = false;
+async function checkIfRule(siteToCheck) {
+  const ruleList = await PersistanceHandler.getAllRules();
+  let siteHasRule = false;
 
-    if (ruleList) {
-      Object.keys(ruleList).forEach(function(badSite) {
-        if (siteToCheck.includes(badSite)) {
-          siteHasRule = true;
-        }
-      });
-    }
+  if (ruleList) {
+    Object.keys(ruleList).forEach((badSite) => {
+      if (siteToCheck.includes(badSite)) {
+        siteHasRule = true;
+      }
+    });
     return siteHasRule;
-  });
+  }
 }
 
-function getRule(originURL) {
-  return PersistanceHandler.getAllRules().then((ruleList) => {
+async function getRules(originURL) {
+  const ruleList = await PersistanceHandler.getAllRules();
+  let applicableRules = Object.keys(ruleList).forEach((badSite) => {
     let applicableRules = [];
-      Object.keys(ruleList).forEach((badSite) => {
-        if (originURL.includes(ruleList[badSite])) {
-          ruleList[badSite].forEach((myRule) => {
-            applicableRules.push(myRule);
-          })          
-        }
-        return applicableRules;
+    if (originURL.includes(ruleList[badSite])) {
+      ruleList[badSite].forEach((myRule) => {
+        applicableRules.push(myRule);
       });
-    return myRule;
+    }
+    return applicableRules;
   });
+  let rulesForThisSite = typeof applicableRules == "undefined" ? [] : applicableRules;
+  return rulesForThisSite;
 }

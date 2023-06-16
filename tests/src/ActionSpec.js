@@ -1,4 +1,4 @@
-describe('Action Factory', function () {
+describe('The Action Factory', function () {
   it('should create Popup Actions', function () {
     let action = ActionFactory.createAction(ActionType.POPUP, "some text!")
     expect(action).toBeInstanceOf(PopupAction)

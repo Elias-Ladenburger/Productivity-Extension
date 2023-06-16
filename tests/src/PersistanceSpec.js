@@ -10,7 +10,7 @@ function createMockRule() {
   return rule;
 }
 
-describe("The PersistanceHandler", function () {
+describe("The Persistance Handler", function () {
   beforeEach(function () {
     chrome.storage.local.clear();
     console.log("Running test...");
@@ -24,20 +24,31 @@ describe("The PersistanceHandler", function () {
     console.log(persistedRules);
     expect(persistedRules[ruleDBName][badWebsite].length).toBe(1);
   });
+
   it("should allow editing an existing rule", async function () {
-  const newRule = await PersistanceHandler.addRule(rule);
-  const persistedRules = await chrome.storage.local.get(ruleDBName);
-  console.log(persistedRules);
-  expect(persistedRules[ruleDBName][badWebsite].length).toBe(1);
-});
+    const newRule = await PersistanceHandler.addRule(rule);
 
-it("should allow deleting an existing rule", async function () {
-  const newRule = await PersistanceHandler.addRule(rule);
-  const persistedRules = await chrome.storage.local.get(ruleDBName);
-  console.log(persistedRules);
-  expect(persistedRules[ruleDBName][badWebsite].length).toBe(1);
-});
+    const changedRule = new ProdRule(
+      "changed Site",
+      ActionFactory.createAction("frame", "blue")
+    );
+    await PersistanceHandler.updateRule(badWebsite, 0, changedRule);
 
+    const persistedRules = await chrome.storage.local.get(ruleDBName);
+
+    console.log(persistedRules);
+    expect(persistedRules[ruleDBName]["changed Site"][0].source).toBe(
+      "changed Site"
+    );
+  });
+
+  it("should allow deleting an existing rule", async function () {
+    const newRule = await PersistanceHandler.addRule(rule);
+    await PersistanceHandler.deleteRule(badWebsite, 0)
+    const persistedRules = await chrome.storage.local.get(ruleDBName);
+    console.log(persistedRules);
+    expect(typeof persistedRules[ruleDBName][badWebsite]).toBe("undefined");
+  });
 });
 
 /*
