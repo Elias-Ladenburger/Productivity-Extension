@@ -29,7 +29,7 @@ class ProdRule {
 
   applyRule() {
     window.addEventListener("load", function () {
-      setTimeout(function () {
+      setTimeout(() => {
         this.action.performAction();
       }, this.delay);
     });

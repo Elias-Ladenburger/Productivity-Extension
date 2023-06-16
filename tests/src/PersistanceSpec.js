@@ -13,7 +13,6 @@ function createMockRule() {
 describe("The Persistance Handler", function () {
   beforeEach(function () {
     chrome.storage.local.clear();
-    console.log("Running test...");
     rule = createMockRule();
     badWebsite = "unproductiveURL.com";
   });
@@ -21,7 +20,6 @@ describe("The Persistance Handler", function () {
   it("should allow adding a new rule", async function () {
     const newRule = await PersistanceHandler.addRule(rule);
     const persistedRules = await chrome.storage.local.get(ruleDBName);
-    console.log(persistedRules);
     expect(persistedRules[ruleDBName][badWebsite].length).toBe(1);
   });
 
@@ -36,7 +34,6 @@ describe("The Persistance Handler", function () {
 
     const persistedRules = await chrome.storage.local.get(ruleDBName);
 
-    console.log(persistedRules);
     expect(persistedRules[ruleDBName]["changed Site"][0].source).toBe(
       "changed Site"
     );
@@ -46,7 +43,6 @@ describe("The Persistance Handler", function () {
     const newRule = await PersistanceHandler.addRule(rule);
     await PersistanceHandler.deleteRule(badWebsite, 0)
     const persistedRules = await chrome.storage.local.get(ruleDBName);
-    console.log(persistedRules);
     expect(typeof persistedRules[ruleDBName][badWebsite]).toBe("undefined");
   });
 });
