@@ -1,26 +1,24 @@
 const ruleDBName = "productivityRules";
 
-function getAllRules() {
-  return chrome.storage.local.get(ruleDBName).then((allRules) => {
-    if (!allRules | (typeof allRules == "undefined") | (allRules == {})) {
-      return [];
-    } else {
-      return allRules[ruleDBName];
-    }
-  });
+async function getAllRules() {
+  let ruleList = await chrome.storage.local.get(ruleDBName);
+  let resultList = typeof ruleList === "undefined" ? [] : ruleList;
+  if(ruleDBName in ruleList){
+    return ruleList[ruleDBName]
+  }
+  return resultList;
 }
 
-function addRule(myNewRule) {
-  return getAllRules().then((prodRules) => {
-    let ruleList = typeof prodRules === "undefined" ? [] : prodRules;
-    const targetWebsite = myNewRule.source;
-    if (targetWebsite in ruleList) {
-      ruleList[targetWebsite].push(myNewRule);
-    } else {
-      ruleList[targetWebsite] = [myNewRule];
-    }
-    return setRuleList(ruleList);
-  });
+async function addRule(myNewRule) {
+  const ruleList = await getAllRules();
+  const targetWebsite = myNewRule.source;
+
+  if (targetWebsite in ruleList) {
+    ruleList[targetWebsite].push(myNewRule);
+  } else {
+    ruleList[targetWebsite] = [myNewRule];
+  }
+  return setRuleList(ruleList);
 }
 
 function deleteRule(ruleToRemove) {
@@ -33,9 +31,7 @@ function deleteRule(ruleToRemove) {
 }
 
 function setRuleList(ruleList) {
-  let allRules = {};
-  allRules[ruleDBName] = ruleList;
-  return chrome.storage.local.set(allRules);
+  chrome.storage.local.set({ productivityRules: ruleList });
 }
 
 const PersistanceHandler = {

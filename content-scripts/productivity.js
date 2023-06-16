@@ -19,8 +19,8 @@ function checkIfRule(siteToCheck) {
     let siteHasRule = false;
 
     if (ruleList) {
-      ruleList.forEach((ruleListed) => {
-        if (siteToCheck.includes(ruleListed["bad"])) {
+      Object.keys(ruleList).forEach(function(badSite) {
+        if (siteToCheck.includes(badSite)) {
           siteHasRule = true;
         }
       });
@@ -31,14 +31,15 @@ function checkIfRule(siteToCheck) {
 
 function getRule(originURL) {
   return PersistanceHandler.getAllRules().then((ruleList) => {
-    let myRule = new ProdRule("undefined");
-    ruleList.forEach((ruleListed) => {
-      if (originURL.includes(ruleListed["bad"])) {
-        let entry = ruleListed["entry"];
-        myRule = getRuleFromJSON(entry);
-        return myRule;
-      }
-    });
+    let applicableRules = [];
+      Object.keys(ruleList).forEach((badSite) => {
+        if (originURL.includes(ruleList[badSite])) {
+          ruleList[badSite].forEach((myRule) => {
+            applicableRules.push(myRule);
+          })          
+        }
+        return applicableRules;
+      });
     return myRule;
   });
 }

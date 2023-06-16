@@ -1,8 +1,8 @@
 {
-    "editor.formatOnPaste": true,
-    "editor.formatOnSave": true,
-    "editor.formatOnType": true,
-    "html.format.contentUnformatted": "",
-    "editor.defaultFormatter": "rvest.vs-code-prettier-eslint",
-    "notebook.formatOnSave.enabled": true
+  "editor.formatOnPaste": true,
+  "editor.formatOnSave": true,
+  "editor.formatOnType": false,
+  "html.format.contentUnformatted": "",
+  "editor.defaultFormatter": "rvest.vs-code-prettier-eslint",
+  "notebook.formatOnSave.enabled": true
 }

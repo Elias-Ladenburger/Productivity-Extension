@@ -1,28 +1,27 @@
 prepareAll();
 
 function prepareAll() {
-  prepareTable()
-  prepareAddRuleButton()
+  prepareTable();
+  prepareAddRuleButton();
 }
 
-function prepareTable() {
-  PersistanceHandler.getAllRules().then((allProdRules) => {
-    console.log(allProdRules);
-    if (!allProdRules || allProdRules.length == 0) {
-      addDemoRule();
-    } else {
-      allProdRules.forEach((targetDomain) => {
-        targetDomain.forEach((rule) => {
-          addToTable(rule);
-        })
+async function prepareTable() {
+  const ruleList = await PersistanceHandler.getAllRules();
+  console.log(ruleList);
+  if (!ruleList || ruleList.length == 0) {
+    addDemoRule();
+  } else {
+    Object.keys(ruleList).forEach((badSite) => {
+      ruleList[badSite].forEach((rule) => {
+        addToTable(rule);
       });
-    }
-  });
+    });
+  }
 }
 
 function prepareAddRuleButton() {
-    let addButton = document.getElementById("addRuleButton");
-    addButton.addEventListener(
+  let addButton = document.getElementById("addRuleButton");
+  addButton.addEventListener(
     "click",
     function (e) {
       addEntry();
@@ -32,11 +31,8 @@ function prepareAddRuleButton() {
 }
 
 function addDemoRule() {
-  const demoURL = "demoUnproductiveSite.com"
-  let demoRule = new ProdRule(
-    demoURL,
-    new RedirectAction("productiveURL.com")
-  );
+  const demoURL = "demoUnproductiveSite.com";
+  let demoRule = new ProdRule(demoURL, new RedirectAction("productiveURL.com"));
   addToTable(demoRule);
   let demoRow = document.getElementById(demoURL);
   let demoAttrs = demoRow.getAttribute("class");
@@ -95,14 +91,21 @@ function addToTable(prodRule) {
 }
 
 function formatString(entry) {
-  const myAction = ActionFactory.createAction(entry.action.type, entry.action.targetValue);
+  const myAction = ActionFactory.createAction(
+    entry.action.type,
+    entry.action.targetValue
+  );
   const prodRule = new ProdRule(
     entry.source,
     myAction,
     entry.condition,
     entry.delay
   );
-  return `<em class="text-lg">${prodRule.source}</em> <br><b>${prodRule.condition}</b> when I visit <b>${prodRule.source}</b> then <b>${prodRule.delay} ${myAction.toString()}</b>`;
+  return `<em class="text-lg">${prodRule.source}</em> <br><b>${
+    prodRule.condition
+  }</b> when I visit <b>${prodRule.source}</b> then <b>${
+    prodRule.delay
+  } ${myAction.toString()}</b>`;
 }
 
 function removeFromTable(prodID) {
