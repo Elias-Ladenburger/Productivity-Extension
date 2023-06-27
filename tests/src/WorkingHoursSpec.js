@@ -1,15 +1,21 @@
-describe("Working Times", function () {
+describe("A Working Time on Thursday from 09:00 to 12:00", function () {
   beforeEach(function () {
-    badWebsite = "*.unproductive.com";
-    condition = ActionCondition.ALWAYS;
-    delay = 0;
+    starttime = "2020-01-03T09:00:00";
+    endtime = "2020-01-03T12:00:00";
+    weekday = 4;
   });
 
-    it("should be creatable", function () {
-      let work = new WorkTime("2020-01-03T01:12:12", "2020-01-03T08:12:12", 4);
+  it("should be creatable", function () {
+    let work = new WorkTime(starttime, endtime, weekday);
+    console.log(work)
 
-      expect(work.starttime).toEqual("1:12");
-      expect(work.endtime).toEqual("8:12");
-      expect(work.weekday).toEqual(4);
-    });
+    expect(work.startTime).toEqual("9:0");
+    expect(work.endTime).toEqual("12:0");
+    expect(work.weekday).toEqual(4);
+  });
+  it("should contain the time on 'Thursday, 22. June 2023 on 9:30 a.m.'", function () {
+    const work = new WorkTime(starttime, endtime, weekday);
+    const isWorkTime = work.isWorkTime("2023-06-22T09:30:00");
+    expect(isWorkTime).toBe(true);
+  });
 });
