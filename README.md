@@ -10,7 +10,7 @@ Clone this repository or download the source through some other means.
 The next steps depend on the browser you are using.
 
 ### Firefox
-At the moment, the productivity extension only supports Firefox.
+At the moment, the productivity extension is sporadically tested with Firefox.
 
 #### Temporary installation
 - Open Firefox
@@ -27,10 +27,26 @@ At the moment, the productivity extension only supports Firefox.
 - Voilá, this plugin will now remain installed until you choose to remove it.
 
 ### Chromium-based browsers
-Compatibility with Chromium-based browsers (Google Chrome, Opera, Edge) is planned for mid 2023.
+This plugin **should** be compatible with all with Chromium-based browsers (Google Chrome, Opera, Edge) and Firefox.
+
+#### Installation in development mode
+- Open your browser
+- In the address bar, type ```about:extensions```
+- in the top right corner, activate the toggle for "developer mode"
+- in the developer ribbon, select ```load unpacked extension```
+- select the folder with this code.
+- Voilá, this plugin will now remain installed until you choose to remove it. This plugin will mirror any changes to the code you make.
+
+#### Permanent installation
+- Open your browser
+- In the address bar, type `about:extensions`
+- click in the search bar ("search extensions")
+- look for "productivity booster"
+- hit "install"
+- Voilá!
 
 ### Safari
-Compatibility with Safari is planned for mid 2023.
+Compatibility with Safari is planned for August 2023.
 
 ## How to use this extension
 This extension is mostly very passive. You configure rules for your personal productivity. Once the rules are in place, lean back and watch your habits improve.
@@ -41,7 +57,7 @@ In the settings for this extension, configure your rules.
 A rule has the following format:
 ``When I visit [website] [* and condition] then [action].
 Where 
-- ***website*** can be any regular expression that can be evaluated to a domain, subdomain or page (e.g. https://facebook.com/ and http*://facebook.\* and https://*.facebook.com are all valid expressions).
+- ***website*** is any string of characters that is contained by the website you want to block (*e.g. "LinkedIn", "facebook.com", "https://some-unproductive-website"*).
 - ***condition*** can be either one of the following:
 	- *empty* (condition is optional).
 	- *immediately*.
@@ -51,6 +67,10 @@ Where
 	- redirect to another ***website***.
 	- format the original website (e.g. create a red border as a visible warning).
 	- send regular notifications (e.g. give me a popup every x minutes).
+
+### Configure working times
+You can choose to trigger a rule only when you are working. This is especially helpful if you use your device for work and leisure.
+
 
 ### Browse productively
 Whenever you visit one of the sites for which you have previously created a rule, the rule will be executed, forcing you to be more conscious in your browsing habits.
