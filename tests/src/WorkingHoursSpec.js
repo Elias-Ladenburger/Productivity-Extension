@@ -7,7 +7,7 @@ describe("A Working Time on Thursday from 09:00 to 12:00", function () {
 
   it("should be creatable", function () {
     let work = new WorkTime(starttime, endtime, weekday);
-    console.log(work)
+    console.log(work);
 
     expect(work.startTime).toEqual("9:0");
     expect(work.endTime).toEqual("12:0");
@@ -17,5 +17,15 @@ describe("A Working Time on Thursday from 09:00 to 12:00", function () {
     const work = new WorkTime(starttime, endtime, weekday);
     const isWorkTime = work.isWorkTime("2023-06-22T09:30:00");
     expect(isWorkTime).toBe(true);
+  });
+  it("should contain be creatable with only hours", function () {
+    starttime = "09:00:00";
+    endtime = "12:00:00";
+    starttime = new Date()
+
+    const work = new WorkTime(starttime, endtime, weekday);
+    expect(work.startTime).toEqual("9:0");
+    expect(work.endTime).toEqual("12:0");
+    expect(work.weekday).toEqual(4);
   });
 });

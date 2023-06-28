@@ -4,18 +4,13 @@
     <title>Productivity Booster - Browser Extension</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../public/css/main.css" />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css"
-    />
 
     <script src="../persistance/persistance.js"></script>
     <script src="../domain/action.js"></script>
-    <script src="flatpickr.min.js"></script>
   </head>
 
   <body class="pt-5 px-5 text-base bg-white text-navy bg-abstractBG bg-cover">
-    <h1 class="text-2xl font-bold pb-4">Productivity Booster</h1>
+    <h1 class="text-2xl font-bold pb-4"><em class="bg-blueRoyal font-white">Productivity Booster</em></h1>
     <p class="pb-4">
       Re-take control of your productivity! This extension will redirect you
       from sites that kill your motivation and productivity and instead redirect
@@ -37,6 +32,7 @@
               type="text"
               placeholder="unproductiveSite.com"
               class="bg-lightRed mt-2 col-span-3 px-1"
+              required
             />
 
             <label for="actiontype" class="col-span-1 mt-2">then</label>
@@ -44,6 +40,7 @@
               id="actiontype"
               name="actiontype"
               class="bg-lightRed col-span-3 px-1 mt-2"
+              required
             ></select>
 
             <input
@@ -51,6 +48,7 @@
               type="text"
               placeholder="productiveURL.com"
               class="bg-lightRed w-full col-span-4 px-1 mt-2"
+              required
             />
 
             <details class="col-span-4">
@@ -60,6 +58,7 @@
                 <select
                   id="actioncondition"
                   class="col-span-3 bg-lightRed px-1 mt-2"
+                  required
                 ></select>
 
                 <label for="actiondelay" class="col-span-1 mt-2"
@@ -69,6 +68,7 @@
                   id="actiondelay"
                   name="actiondelay"
                   class="bg-lightRed px-1 mt-2 col-span-3"
+                  required
                 ></select>
               </div>
             </details>
@@ -86,33 +86,56 @@
       <div>
         <h2 class="text-2xl font-bold pb-4">My work schedule</h2>
         <form class="py-5 focus:placeholder-navy bg-primary bg-opacity-70 px-5">
-          <div class="grid grid-cols-4">
-            <label for="workingday" class="col-span-1 mt-2">On this day</label>
+          <div >
+            <label for="workingday" class="col-span-1 mt-2">On</label>
             <select
               id="workingday"
               name="workingday"
               class="bg-lightRed col-span-3 px-1 mt-2"
+              required
             >
-              <option value="1">Monday</option>
-              <option value="2">Tuesday</option>
-              <option value="3">Wednesday</option>
-              <option value="4">Thursday</option>
-              <option value="5">Friday</option>
-              <option value="6">Saturday</option>
-              <option value="7">Sunday</option>
+              <option value="1">Mondays</option>
+              <option value="2">Tuesdays</option>
+              <option value="3">Wednesdays</option>
+              <option value="4">Thursdays</option>
+              <option value="5">Fridays</option>
+              <option value="6">Saturdays</option>
+              <option value="7">Sundays</option>
             </select>
+            <aeon-datepicker>
+              <label for="timepicker_from">I work between</label>
+              <input
+              id="timepicker_from"
+                type="time"
+                value="12:00"
+                class="bg-lightRed col-span-3 px-1 mt-2"
+                required
+              />
+            </aeon-datepicker>
+            <aeon-datepicker>
+              <label for="timepicker_to">and</label>
+              <input
+              id="timepicker_to"
+                type="time"
+                value="12:00"
+                class="bg-lightRed col-span-3 px-1 mt-2"
+                required
+              />
+            </aeon-datepicker>
 
+            <!-- 
             <label for="timepicker_from">From:</label>
             <input type="text" id="timepicker_from" />
             <label for="timepicker_to">To:</label>
             <input type="text" id="timepicker_to" />
+            -->
           </div>
           <div class="flex justify-center pt-3">
             <button
               id="blacklistButton"
               class="text-center rounded-lg bg-navy text-white hover:bg-blueRoyal px-2"
             >
-              Add Rule
+              Schedule Work Time
             </button>
           </div>
         </form>

@@ -1,11 +1,12 @@
 prepareAll();
 
 function prepareAll() {
-  prepareTable();
+  prepareProdRuleTable();
+  prepareWorkHourTable();
   prepareAddRuleButton();
 }
 
-async function prepareTable() {
+async function prepareProdRuleTable() {
   const ruleList = await PersistanceHandler.getAllRules();
   console.log(ruleList);
   if (!ruleList || ruleList.length == 0) {
@@ -13,7 +14,7 @@ async function prepareTable() {
   } else {
     Object.keys(ruleList).forEach((badSite) => {
       ruleList[badSite].forEach((rule) => {
-        addToTable(rule);
+        addToProdTable(rule);
       });
     });
   }
@@ -24,7 +25,7 @@ function prepareAddRuleButton() {
   addButton.addEventListener(
     "click",
     function (e) {
-      addEntry();
+      addProdRule();
     },
     false
   );
@@ -33,14 +34,14 @@ function prepareAddRuleButton() {
 function addDemoRule() {
   const demoURL = "demoUnproductiveSite.com";
   let demoRule = new ProdRule(demoURL, new RedirectAction("productiveURL.com"));
-  addToTable(demoRule);
+  addToProdTable(demoRule);
   let demoRow = document.getElementById(demoURL);
   let demoAttrs = demoRow.getAttribute("class");
   demoAttrs = demoAttrs + " text-darkGrey";
   demoRow.setAttribute("class", demoAttrs);
 }
 
-function addEntry() {
+function addProdRule() {
   let actionSource = document.getElementById("actionsource");
   let selectedType = document.getElementById("actiontype");
   let targetVal = document.getElementById("targetvalue");
@@ -60,7 +61,7 @@ function addEntry() {
 
   if (actionSource && actionType && targetVal.value) {
     PersistanceHandler.addRule(newEntry);
-    addToTable(newEntry);
+    addToProdTable(newEntry);
     actionSource.value = "";
     targetVal.value = "";
     selectedCondition = "";
@@ -68,7 +69,7 @@ function addEntry() {
   }
 }
 
-function addToTable(prodRule) {
+function addToProdTable(prodRule) {
   let settingsTable = document.getElementById("settingsTable");
   let newRow = settingsTable.insertRow(-1);
   let ruleCell = newRow.insertCell(0);
