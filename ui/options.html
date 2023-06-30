@@ -10,7 +10,9 @@
   </head>
 
   <body class="pt-5 px-5 text-base bg-white text-navy bg-abstractBG bg-cover">
-    <h1 class="text-2xl font-bold pb-4"><em class="bg-blueRoyal font-white">Productivity Booster</em></h1>
+    <h1 class="text-2xl font-bold pb-4">
+      <em class="bg-blueRoyal font-white">Productivity Booster</em>
+    </h1>
     <p class="pb-4">
       Re-take control of your productivity! This extension will redirect you
       from sites that kill your motivation and productivity and instead redirect
@@ -22,7 +24,7 @@
     <div id="settingsBody" class="grid grid-cols-2 space-x-4">
       <div id="leftBody">
         <h2 class="text-2xl font-bold pb-4">Add a Rule</h2>
-        <form class="py-5 focus:placeholder-navy bg-primary bg-opacity-70 px-5">
+        <form id="rulesForm" class="py-5 focus:placeholder-navy bg-primary bg-opacity-70 px-5">
           <div class="grid grid-cols-4">
             <label for="actionsource" class="col-span-1 mt-2"
               >When I visit...</label
@@ -86,7 +88,7 @@
       <div>
         <h2 class="text-2xl font-bold pb-4">My work schedule</h2>
         <form class="py-5 focus:placeholder-navy bg-primary bg-opacity-70 px-5">
-          <div >
+          <div>
             <label for="workingday" class="col-span-1 mt-2">On</label>
             <select
               id="workingday"
@@ -105,7 +107,7 @@
             <aeon-datepicker>
               <label for="timepicker_from">I work between</label>
               <input
-              id="timepicker_from"
+                id="timepicker_from"
                 type="time"
                 value="12:00"
                 class="bg-lightRed col-span-3 px-1 mt-2"
@@ -115,7 +117,7 @@
             <aeon-datepicker>
               <label for="timepicker_to">and</label>
               <input
-              id="timepicker_to"
+                id="timepicker_to"
                 type="time"
                 value="12:00"
                 class="bg-lightRed col-span-3 px-1 mt-2"
@@ -145,7 +147,7 @@
     <div id="workinghours" class="pt-5 grid grid-cols-2 space-x-4">
       <div id="rightBody" class="">
         <h2 class="text-2xl font-bold pb-4">My Productivity Rules</h2>
-        <table id="settingsTable" class="text-base space-y-3 pb-3">
+        <table id="productionRuleTable" class="text-base space-y-3 pb-3">
           <tr class="text-lg text-left bg-grey text-primary mx-3">
             <th class="px-3 w-4/5">Rule</th>
             <th class="px-3 w-1/5">Actions</th>
@@ -155,17 +157,18 @@
 
       <div>
         <h2 class="text-2xl font-bold pb-4">My Work Times</h2>
-        <table id="settingsTable" class="text-base space-y-3 pb-3">
+        <table id="worktimeTable" class="text-base space-y-3 pb-3">
           <tr class="text-lg text-left bg-grey text-primary mx-3">
-            <th class="px-3 w-4/5">Rule</th>
+            <th class="px-3 w-4/5">Work Time</th>
             <th class="px-3 w-1/5">Actions</th>
           </tr>
         </table>
       </div>
     </div>
 
-    <script src="ruleTable.js"></script>
-    <script src="ruleForm.js"></script>
+    <script src="prodRulesController.js"></script>
+    <script src="prodRulesView.js"></script>
+    <script src="workTimesUI.js"></script>
     <script src="options.js"></script>
   </body>
 </html>

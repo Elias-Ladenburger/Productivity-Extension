@@ -18,7 +18,8 @@ async function addRule(myNewRule) {
   } else {
     ruleList[targetWebsite] = [myNewRule];
   }
-  return setRuleList(ruleList);
+  setRuleList(ruleList);
+  return (ruleList.targetWebsite.length - 1)
 }
 
 async function updateRule(badSite, index, updatedRule) {
