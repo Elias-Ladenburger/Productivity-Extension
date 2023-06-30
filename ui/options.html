@@ -26,6 +26,7 @@
         <h2 class="text-2xl font-bold pb-4">Add a Rule</h2>
         <form id="rulesForm" class="py-5 focus:placeholder-navy bg-primary bg-opacity-70 px-5">
           <div class="grid grid-cols-4">
+            <input type="hidden" id="ruleID" value="New"/>
             <label for="actionsource" class="col-span-1 mt-2"
               >When I visit...</label
             >
@@ -56,7 +57,7 @@
             <details class="col-span-4">
               <summary>Advanced Settings</summary>
               <div class="grid grid-cols-4">
-                <label for="condition" class="col-span-1 mt-2">do this</label>
+                <label for="condition" class="col-span-1 mt-2">apply this rule</label>
                 <select
                   id="actioncondition"
                   class="col-span-3 bg-lightRed px-1 mt-2"
@@ -64,7 +65,7 @@
                 ></select>
 
                 <label for="actiondelay" class="col-span-1 mt-2"
-                  >repeat this</label
+                  >do this</label
                 >
                 <select
                   id="actiondelay"

@@ -26,8 +26,16 @@ const ProdRulesView = {
     console.log(`Removing rule for ${rowID}!`);
   },
 
+  toggleEditForm: () => {
+    let myFields = _getFormFields();
+    myFields.actionsource = prodRule.source
+    myFields.actiontype = prodRule.action.type
+    myFields.condition = prodRule.condition
+    myFields.delay = prodRule.delay
+  },
+
   getFormData: () => {
-    let myFields = getFormFields();
+    let myFields = _getFormFields();
     let formData = [];
     for (let elemID in myFields) {
       formData[elemID] = myFields[elemID].value;
@@ -35,9 +43,12 @@ const ProdRulesView = {
     return formData;
   },
 
+  getFormFields: _getFormFields,
+
   clearForm: () => {
     document.getElementById("rulesForm").reset();
   },
+
 
 };
 
@@ -57,14 +68,19 @@ function _formatString(entry) {
     entry.condition,
     entry.delay
   );
-  return `<em class="text-lg">${prodRule.source}</em> <br><b>${
-    prodRule.condition
+    const choiceFields = getMultipleChoiceFields()
+    const conditionStr = choiceFields.actioncondition[prodRule.condition]
+    const delayStr = msToTime(prodRule.delay)
+  const resultsStr =  `<em class="text-lg">${prodRule.source}</em> <br><b>${
+    conditionStr
   }</b> when I visit <b>${prodRule.source}</b> then <b>${
-    prodRule.delay
+    delayStr
   } ${myAction.toString()}</b>`;
+
+  return resultsStr
 }
 
-function getFormFields() {
+function _getFormFields() {
   const formFields = {
     actionsource: document.getElementById("actionsource"),
     actiontype: document.getElementById("actiontype"),

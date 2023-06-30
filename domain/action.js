@@ -36,7 +36,7 @@ class ProdRule {
   }
 
   toString() {
-    const delayStr = ActionDelay[this.delay] || `after ${this.delay} miliseconds`;
+    const delayStr = getDelayStr(this.delay);
     return `${this.condition} when I visit ${
       this.source
     } then ${delayStr} ${this.action.toString()}`;
@@ -125,21 +125,29 @@ class RedirectAction extends Action {
 }
 
 const ActionType = {
-  REDIRECT: "redirect",
-  POPUP: "popup",
-  FRAME: "frame",
-  LOG: "log",
+  REDIRECT: "REDIRECT",
+  POPUP: "POPUP",
+  FRAME: "FRAME",
+  LOG: "LOG",
 };
 
 const ActionCondition = {
-  ALWAYS: "Always",
-  WORK: "While working",
-  GOAL: "While my daily goal is not reached",
+  ALWAYS: "ALWAYS",
+  WORK: "WORK",
+  GOAL: "GOAL",
 };
 
-const ActionDelay = {
-  IMMEDIATE: 0,
-  HALFMINUTE: 30000,
-  MINUTES: 300000,
-  THIRDHOUR: 1200000,
-};
+function getDelayStr(miliseconds) {
+if(miliseconds == 0){
+  return "immediately"
+}
+
+  let seconds = (miliseconds / 1000).toFixed(1);
+  let minutes = (miliseconds / (1000 * 60)).toFixed(1);
+  let hours = (miliseconds / (1000 * 60 * 60)).toFixed(1);
+  let days = (miliseconds / (1000 * 60 * 60 * 24)).toFixed(1);
+  if (seconds < 60) return seconds + " seconds";
+  else if (minutes < 60) return minutes + " minutes";
+  else if (hours < 24) return hours + " hours";
+  else return days + " days";
+}

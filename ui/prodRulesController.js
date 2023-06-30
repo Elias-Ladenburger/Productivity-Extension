@@ -38,10 +38,10 @@ function getMultipleChoiceFields() {
     },
 
     actiondelay: {
-      IMMEDIATE: "immediately",
-      HALFMINUTE: "30 seconds",
-      MINUTES: "5 minutes",
-      HALFHOUR: "20 minutes",
+      0: "immediately",
+      30000: "30 seconds",
+      300000: "5 minutes",
+      1200000: "20 minutes",
     },
   };
   return myEnum;
@@ -82,9 +82,9 @@ function prepareAddRuleButton() {
 function addRuleFromForm() {
   const formData = ProdRulesView.getFormData();
 
-  let actionDelay = ActionDelay[formData.delay];
-  let actionCondition = ActionCondition[formData.condition];
-  let actionType = ActionType[formData.actiontype];
+  let actionDelay = formData.delay;
+  let actionCondition = formData.condition;
+  let actionType = formData.actiontype;
 
   let newEntry = new ProdRule(
     formData.actionsource,
@@ -103,7 +103,7 @@ function addRuleFromForm() {
 function addToProdTable(prodRule, ruleIndex) {
   const actionButtons = ProdRulesView.addEntryToTable(prodRule, ruleIndex);
   actionButtons["edit"].addEventListener("click", function (e) {
-    prepareToEdit(prodRule.source, ruleIndex);
+    prepareToEdit(prodRule);
   });
 
   actionButtons["delete"].addEventListener(
@@ -115,7 +115,33 @@ function addToProdTable(prodRule, ruleIndex) {
   );
 }
 
+function prepareToEdit(prodRule) {
+  let myFields = ProdRulesView.getFormFields();
+  const choiceFields = getMultipleChoiceFields();
+  console.log(prodRule.action.type);
+  console.log(prodRule.delay);
+  console.log(prodRule.condition);
+
+  myFields.actionsource.value = prodRule.source;
+  myFields.targetVal.value = prodRule.targetVal;
+  myFields.actiontype.value = prodRule.action.type;
+  myFields.condition.value = prodRule.condition;
+  myFields.delay.value = prodRule.delay || msToTime(prodRule.delay);
+}
+
 function deleteEntry(unproductiveSite, ruleIndex) {
   PersistanceHandler.deleteRule(unproductiveSite, ruleIndex);
   ProdRulesView.removeFromTable(unproductiveSite, ruleIndex);
+}
+
+function msToTime(miliseconds) {
+  if(miliseconds == 0) return "immediately"
+  let seconds = (miliseconds / 1000).toFixed(1);
+  let minutes = (miliseconds / (1000 * 60)).toFixed(1);
+  let hours = (miliseconds / (1000 * 60 * 60)).toFixed(1);
+  let days = (miliseconds / (1000 * 60 * 60 * 24)).toFixed(1);
+  if (seconds < 60) return "after " + seconds + " Sec";
+  else if (minutes < 60) return "after " + minutes + " Min";
+  else if (hours < 24) return "after " + hours + " Hrs";
+  else return "after " + days + " Days";
 }
