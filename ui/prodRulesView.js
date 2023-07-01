@@ -49,6 +49,7 @@ const ProdRulesView = {
     document.getElementById("rulesForm").reset();
   },
 
+  getRowID: _getRowID
 
 };
 
@@ -87,6 +88,7 @@ function _getFormFields() {
     targetVal: document.getElementById("targetvalue"),
     condition: document.getElementById("actioncondition"),
     delay: document.getElementById("actiondelay"),
+    _id: document.getElementById("ruleID"),
   };
   return formFields;
 }

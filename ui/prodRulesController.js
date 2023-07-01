@@ -1,9 +1,12 @@
 prepareAll();
+addButton = document.getElementById("addRuleButton");
+editButton = document.getElementById("editRuleButton")
 
 function prepareAll() {
   prepareForm();
   prepareProdRuleTable();
   prepareAddRuleButton();
+
 }
 
 function prepareForm() {
@@ -69,7 +72,6 @@ function addDemoRule() {
 }
 
 function prepareAddRuleButton() {
-  let addButton = document.getElementById("addRuleButton");
   addButton.addEventListener(
     "click",
     function (e) {
@@ -103,7 +105,7 @@ function addRuleFromForm() {
 function addToProdTable(prodRule, ruleIndex) {
   const actionButtons = ProdRulesView.addEntryToTable(prodRule, ruleIndex);
   actionButtons["edit"].addEventListener("click", function (e) {
-    prepareToEdit(prodRule);
+    prepareToEdit(prodRule, ruleIndex);
   });
 
   actionButtons["delete"].addEventListener(
@@ -115,17 +117,17 @@ function addToProdTable(prodRule, ruleIndex) {
   );
 }
 
-function prepareToEdit(prodRule) {
+function prepareToEdit(prodRule, ruleIndex) {
   let myFields = ProdRulesView.getFormFields();
-  const choiceFields = getMultipleChoiceFields();
-  console.log(prodRule.action.type);
+  console.log(prodRule.action);
   console.log(prodRule.delay);
   console.log(prodRule.condition);
 
   myFields.actionsource.value = prodRule.source;
-  myFields.targetVal.value = prodRule.targetVal;
+  myFields.targetVal.value = prodRule.action.targetValue;
   myFields.actiontype.value = prodRule.action.type;
   myFields.condition.value = prodRule.condition;
+  myFields._id.value = ProdRulesView.getRowID(prodRule.source, ruleIndex)
   myFields.delay.value = prodRule.delay || msToTime(prodRule.delay);
 }
 
