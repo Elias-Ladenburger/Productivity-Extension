@@ -23,7 +23,7 @@ async function addRule(myNewRule) {
 }
 
 async function updateRule(badSite, index, updatedRule) {
-  let ruleList = await getAllRules();
+  // let ruleList = await getAllRules();
 
   await deleteRule(badSite, index);
   return addRule(updatedRule);

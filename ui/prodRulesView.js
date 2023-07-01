@@ -1,5 +1,5 @@
 const ProdRulesView = {
-  addEntryToTable: (prodRule, ruleIndex) => {
+  addEntryToTable: (prodRule, ruleID) => {
     const tableID = "productionRuleTable";
     let settingsTable = document.getElementById(tableID);
 
@@ -7,23 +7,21 @@ const ProdRulesView = {
     let ruleCell = newRow.insertCell(0);
     let actionsCell = newRow.insertCell(1);
 
-    const prodID = _getRowID(prodRule.source, ruleIndex);
-    newRow.id = prodID;
+    newRow.id = ruleID;
     ruleCell.innerHTML = _formatString(prodRule);
     ruleCell.setAttribute("class", "px-2");
-    actionsCell.innerHTML = `<button id="${tableID}_edit_${prodID}" class="rounded-lg border-white bg-navy text-white hover:bg-blueRoyal px-2 mx-1 text-center">edit</button>
-  <button id="${tableID}_delete_${prodID}" class="rounded-lg border-white bg-navy text-white hover:bg-blueRoyal px-2 mx-1 text-center">delete</button>`;
+    actionsCell.innerHTML = `<button id="${tableID}_edit_${ruleID}" class="rounded-lg border-white bg-navy text-white hover:bg-blueRoyal px-2 mx-1 text-center">edit</button>
+  <button id="${tableID}_delete_${ruleID}" class="rounded-lg border-white bg-navy text-white hover:bg-blueRoyal px-2 mx-1 text-center">delete</button>`;
 
-    const deleteButton = document.getElementById(`${tableID}_delete_${prodID}`);
-    const editButton = document.getElementById(`${tableID}_edit_${prodID}`);
+    const deleteButton = document.getElementById(`${tableID}_delete_${ruleID}`);
+    const editButton = document.getElementById(`${tableID}_edit_${ruleID}`);
     return { edit: editButton, delete: deleteButton, entry: ruleCell };
   },
 
-  removeFromTable: (unproductiveSite, ruleIndex) => {
-    const rowID = _getRowID(unproductiveSite, ruleIndex);
-    let toDelete = document.getElementById(rowID);
+  removeFromTable: (ruleID) => {
+    let toDelete = document.getElementById(ruleID)
     toDelete.remove();
-    console.log(`Removing rule for ${rowID}!`);
+    console.log(`Removing rule for ${ruleID}!`);
   },
 
   toggleEditForm: () => {
@@ -47,16 +45,8 @@ const ProdRulesView = {
 
   clearForm: () => {
     document.getElementById("rulesForm").reset();
-  },
-
-  getRowID: _getRowID
-
+  }
 };
-
-function _getRowID(unproductiveSite, ruleIndex) {
-  const rowID = `${unproductiveSite}-${ruleIndex}`;
-  return rowID;
-}
 
 function _formatString(entry) {
   const myAction = ActionFactory.createAction(
@@ -88,7 +78,7 @@ function _getFormFields() {
     targetVal: document.getElementById("targetvalue"),
     condition: document.getElementById("actioncondition"),
     delay: document.getElementById("actiondelay"),
-    _id: document.getElementById("ruleID"),
+    ruleID: document.getElementById("ruleID"),
   };
   return formFields;
 }

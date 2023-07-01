@@ -1,12 +1,11 @@
 prepareAll();
 addButton = document.getElementById("addRuleButton");
-editButton = document.getElementById("editRuleButton")
+editButton = document.getElementById("editRuleButton");
 
 function prepareAll() {
   prepareForm();
   prepareProdRuleTable();
   prepareAddRuleButton();
-
 }
 
 function prepareForm() {
@@ -87,6 +86,7 @@ function addRuleFromForm() {
   let actionDelay = formData.delay;
   let actionCondition = formData.condition;
   let actionType = formData.actiontype;
+  let ruleID = formData.ruleID;
 
   let newEntry = new ProdRule(
     formData.actionsource,
@@ -95,11 +95,20 @@ function addRuleFromForm() {
     actionDelay
   );
 
-  if (formData.actionsource && actionType && formData.targetVal) {
-    const ruleIndex = PersistanceHandler.addRule(newEntry);
-    addToProdTable(newEntry, ruleIndex);
-    ProdRulesView.clearForm();
+  if (ruleID == "NEW") {
+    if (formData.actionsource && actionType && formData.targetVal) {
+      const ruleIndex = PersistanceHandler.addRule(newEntry);
+      addToProdTable(newEntry, ruleIndex);
+    }
+  } else {
+    const id_elems = _deconstructID(ruleID);
+    PersistanceHandler.updateRule(
+      id_elems["badSite"],
+      id_elems["index"],
+      newEntry
+    );
   }
+  ProdRulesView.clearForm();
 }
 
 function addToProdTable(prodRule, ruleIndex) {
@@ -127,17 +136,18 @@ function prepareToEdit(prodRule, ruleIndex) {
   myFields.targetVal.value = prodRule.action.targetValue;
   myFields.actiontype.value = prodRule.action.type;
   myFields.condition.value = prodRule.condition;
-  myFields._id.value = ProdRulesView.getRowID(prodRule.source, ruleIndex)
+  myFields._id.value = _getRowID(prodRule.source, ruleIndex);
   myFields.delay.value = prodRule.delay || msToTime(prodRule.delay);
 }
 
 function deleteEntry(unproductiveSite, ruleIndex) {
+  const ruleID = _getRowID(unproductiveSite, ruleIndex);
   PersistanceHandler.deleteRule(unproductiveSite, ruleIndex);
-  ProdRulesView.removeFromTable(unproductiveSite, ruleIndex);
+  ProdRulesView.removeFromTable(unproductiveSite, ruleID);
 }
 
 function msToTime(miliseconds) {
-  if(miliseconds == 0) return "immediately"
+  if (miliseconds == 0) return "immediately";
   let seconds = (miliseconds / 1000).toFixed(1);
   let minutes = (miliseconds / (1000 * 60)).toFixed(1);
   let hours = (miliseconds / (1000 * 60 * 60)).toFixed(1);
@@ -146,4 +156,17 @@ function msToTime(miliseconds) {
   else if (minutes < 60) return "after " + minutes + " Min";
   else if (hours < 24) return "after " + hours + " Hrs";
   else return "after " + days + " Days";
+}
+
+function _getRowID(unproductiveSite, ruleIndex) {
+  const rowID = `${unproductiveSite}-${ruleIndex}`;
+  return rowID;
+}
+
+function _deconstructID(ruleID) {
+  const id_array = ruleID.split("-");
+  return {
+    badSite: id_array[0],
+    index: id_array[1],
+  };
 }
