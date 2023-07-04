@@ -1,3 +1,5 @@
+import PersistanceHandler from "../persistance/persistance";
+
 prepareAll();
 
 function prepareAll() {
@@ -8,17 +10,17 @@ function prepareAll() {
 
 
 async function prepareWorkHourTable(){
-  const workTimes = await PersistanceHandler.getAllWorkTimes();
+  const workTimes = [""] // await PersistanceHandler.getAllWorkTimes();
   if (!workTimes || workTimes.length == 0) {
     addDemoWorkTime();
   } else {
-      workTimes.forEach((workTime) => {
+      workTimes.forEach((workTime: any) => {
         addToWorkTimeTable(workTime);
       });
   }
 }
 
-function addToWorkTimeTable(entry){
+function addToWorkTimeTable(entry: any){
   const tableName = "worktimeTable"
 }
 

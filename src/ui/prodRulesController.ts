@@ -1,8 +1,13 @@
-prepareAll();
-addButton = document.getElementById("addRuleButton");
-editButton = document.getElementById("editRuleButton");
+import { ActionFactory, ActionType } from "../domain/action";
+import { ProdRule, ProdRuleFactory, RuleCondition } from "../domain/prodRules";
+import PersistanceHandler from "../persistance/persistance";
+import ProdRulesView from "./prodRulesView";
 
-function prepareAll() {
+prepareProdRules();
+const addButton = document.getElementById("addRuleButton");
+const editButton = document.getElementById("editRuleButton");
+
+function prepareProdRules() {
   prepareForm();
   prepareProdRuleTable();
   prepareAddRuleButton();
@@ -24,9 +29,9 @@ function prepareForm() {
   }
 }
 
-function getMultipleChoiceFields() {
-  const myEnum = {
-    actioncondition: {
+function getMultipleChoiceFields(): {[key:string]: {[key:string] : string}} {
+  return {
+    actionCondition: {
       ALWAYS: "always",
       WORK: "during my work times",
       GOALS: "while my goals are not reached (WIP)",
@@ -39,14 +44,13 @@ function getMultipleChoiceFields() {
       LOG: "log my visit only (WIP)",
     },
 
-    actiondelay: {
+    enumactiondelay: {
       0: "immediately",
       30000: "30 seconds",
       300000: "5 minutes",
       1200000: "20 minutes",
     },
   };
-  return myEnum;
 }
 
 async function prepareProdRuleTable() {
@@ -56,7 +60,7 @@ async function prepareProdRuleTable() {
   } else {
     Object.keys(ruleList).forEach((unproductiveSite) => {
       let ruleIndex = 0;
-      ruleList[unproductiveSite].forEach((rule) => {
+      ruleList[unproductiveSite].forEach((rule: ProdRule) => {
         addToProdTable(rule, ruleIndex);
         ruleIndex++;
       });
@@ -66,11 +70,14 @@ async function prepareProdRuleTable() {
 
 function addDemoRule() {
   const demoURL = "demoUnproductiveSite.com";
-  let demoRule = new ProdRule(demoURL, new RedirectAction("productiveURL.com"));
-  ProdRulesView.addEntryToTable(demoRule, 0);
+  const demoAction = ActionFactory.createAction("POPUP", "Do you really want to spend time on this site?")
+  const demoRule = ProdRuleFactory.createRule(demoURL, demoAction)
+
+  ProdRulesView.addEntryToTable(demoRule, "demo");
 }
 
 function prepareAddRuleButton() {
+  let addButton = document.getElementById("addRuleButton");
   addButton.addEventListener(
     "click",
     function (e) {
@@ -80,7 +87,7 @@ function prepareAddRuleButton() {
   );
 }
 
-function addRuleFromForm() {
+async function addRuleFromForm() {
   const formData = ProdRulesView.getFormData();
 
   let actionDelay = formData.delay;
@@ -88,19 +95,14 @@ function addRuleFromForm() {
   let actionType = formData.actiontype;
   let ruleID = formData.ruleID;
 
-  let newEntry = new ProdRule(
-    formData.actionsource,
-    ActionFactory.createAction(actionType, formData.targetVal),
-    actionCondition,
-    actionDelay
-  );
+  let newAction = ActionFactory.createAction(formData.actiontype, formData.targetVal)
+  let newEntry = ProdRuleFactory.createRule(formData.actionsource, newAction, formData.condition, formData.delay)
 
-  if (ruleID == "NEW") {
-    if (formData.actionsource && actionType && formData.targetVal) {
-      const ruleIndex = PersistanceHandler.addRule(newEntry);
+  if (formData.actionsource && actionType && formData.targetVal) {
+      const ruleIndex = await PersistanceHandler.addRule(newEntry);
       addToProdTable(newEntry, ruleIndex);
     }
-  } else {
+  /*} else {
     const id_elems = _deconstructID(ruleID);
     PersistanceHandler.updateRule(
       id_elems["badSite"],
@@ -108,11 +110,13 @@ function addRuleFromForm() {
       newEntry
     );
   }
+  */
   ProdRulesView.clearForm();
 }
 
-function addToProdTable(prodRule, ruleIndex) {
-  const actionButtons = ProdRulesView.addEntryToTable(prodRule, ruleIndex);
+function addToProdTable(prodRule: ProdRule, ruleIndex: number) {
+  const ruleID = _getRowID(prodRule.source, ruleIndex)
+  const actionButtons = ProdRulesView.addEntryToTable(prodRule, ruleID);
   actionButtons["edit"].addEventListener("click", function (e) {
     prepareToEdit(prodRule, ruleIndex);
   });
@@ -126,44 +130,23 @@ function addToProdTable(prodRule, ruleIndex) {
   );
 }
 
-function prepareToEdit(prodRule, ruleIndex) {
-  let myFields = ProdRulesView.getFormFields();
-  console.log(prodRule.action);
-  console.log(prodRule.delay);
-  console.log(prodRule.condition);
-
-  myFields.actionsource.value = prodRule.source;
-  myFields.targetVal.value = prodRule.action.targetValue;
-  myFields.actiontype.value = prodRule.action.type;
-  myFields.condition.value = prodRule.condition;
-  myFields._id.value = _getRowID(prodRule.source, ruleIndex);
-  myFields.delay.value = prodRule.delay || msToTime(prodRule.delay);
+function prepareToEdit(prodRule: ProdRule, ruleIndex: number) {
+  const ruleID = _getRowID(prodRule.source, ruleIndex)
+  ProdRulesView.setFormValues(prodRule, ruleID);
 }
 
-function deleteEntry(unproductiveSite, ruleIndex) {
+function deleteEntry(unproductiveSite: string, ruleIndex: number) {
   const ruleID = _getRowID(unproductiveSite, ruleIndex);
   PersistanceHandler.deleteRule(unproductiveSite, ruleIndex);
-  ProdRulesView.removeFromTable(unproductiveSite, ruleID);
+  ProdRulesView.removeFromTable(ruleID);
 }
 
-function msToTime(miliseconds) {
-  if (miliseconds == 0) return "immediately";
-  let seconds = (miliseconds / 1000).toFixed(1);
-  let minutes = (miliseconds / (1000 * 60)).toFixed(1);
-  let hours = (miliseconds / (1000 * 60 * 60)).toFixed(1);
-  let days = (miliseconds / (1000 * 60 * 60 * 24)).toFixed(1);
-  if (seconds < 60) return "after " + seconds + " Sec";
-  else if (minutes < 60) return "after " + minutes + " Min";
-  else if (hours < 24) return "after " + hours + " Hrs";
-  else return "after " + days + " Days";
-}
-
-function _getRowID(unproductiveSite, ruleIndex) {
+function _getRowID(unproductiveSite: string, ruleIndex: number) {
   const rowID = `${unproductiveSite}-${ruleIndex}`;
   return rowID;
 }
 
-function _deconstructID(ruleID) {
+function _deconstructID(ruleID: string) {
   const id_array = ruleID.split("-");
   return {
     badSite: id_array[0],

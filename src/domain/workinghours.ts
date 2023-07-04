@@ -1,5 +1,11 @@
 class WorkTime {
-  constructor(starttime, endtime, weekday, is_active = true) {
+  weekday: number
+  is_active: boolean
+  startHour: number;
+  startMinutes: number;
+  endHour: number;
+  endMinutes: number;
+  constructor(starttime: Date, endtime: Date, weekday: number, is_active = true) {
     this.startTime = starttime;
     this.endTime = endtime;
     this.weekday = weekday;
@@ -10,42 +16,38 @@ class WorkTime {
     this.is_active = this.is_active == false;
   }
 
-  #parseHour(timeValue) {
+  #parseHour(timeValue: Date): number {
     let normalizedTime = new Date(timeValue);
     let hours = normalizedTime.getHours();
     return hours;
   }
 
-  #parseMinutes(timeValue) {
+  #parseMinutes(timeValue: Date): number {
     let normalizedTime = new Date(timeValue);
     let minutes = normalizedTime.getMinutes();
     return minutes;
   }
 
-  get startTime() {
+  get startTime(): string {
     return this.startHour + ":" + this.startMinutes;
   }
 
-  set startTime(timeValue) {
+  set startTime(timeValue: Date) {
     this.startHour = this.#parseHour(timeValue);
     this.startMinutes = this.#parseMinutes(timeValue);
   }
 
-  get endTime() {
+  get endTime(): string {
     return this.endHour + ":" + this.endMinutes;
   }
 
-  set endTime(timeValue) {
+  set endTime(timeValue: Date) {
     this.endHour = this.#parseHour(timeValue);
     this.endMinutes = this.#parseMinutes(timeValue);
   }
 
-  isWorkTime(currentTime = "") {
-    if (currentTime == "") {
-      currentTime = new Date();
-    } else {
-      currentTime = new Date(currentTime);
-    }
+  isWorkTime(currentTime = new Date()) {
+    currentTime = new Date(currentTime);
     if (currentTime.getDay() == this.weekday) {
       const currentHour = currentTime.getHours();
       const currentMinute = currentTime.getMinutes();

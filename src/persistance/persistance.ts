@@ -1,4 +1,9 @@
+import { ProdRule } from "../domain/prodRules";
+
 const ruleDBName = "productivityRules";
+interface RuleList {
+  [key: string]: ProdRule[]
+}
 
 async function getAllRules() {
   let ruleList = await chrome.storage.local.get(ruleDBName);
@@ -9,7 +14,7 @@ async function getAllRules() {
   return resultList;
 }
 
-async function addRule(myNewRule) {
+async function addRule(myNewRule: ProdRule) {
   const ruleList = await getAllRules();
   const targetWebsite = myNewRule.source;
 
@@ -22,14 +27,14 @@ async function addRule(myNewRule) {
   return (ruleList[targetWebsite].length - 1)
 }
 
-async function updateRule(badSite, index, updatedRule) {
+async function updateRule(badSite: string, index: number, updatedRule: ProdRule) {
   // let ruleList = await getAllRules();
 
   await deleteRule(badSite, index);
   return addRule(updatedRule);
 }
 
-async function deleteRule(badSite, index) {
+async function deleteRule(badSite:string, index: number) {
   let ruleList = await getAllRules();
   ruleList[badSite].splice(index, 1);
   if(ruleList[badSite].length == 0){
@@ -38,7 +43,7 @@ async function deleteRule(badSite, index) {
   setRuleList(ruleList);
 }
 
-function setRuleList(ruleList) {
+function setRuleList(ruleList: RuleList) {
   chrome.storage.local.set({ productivityRules: ruleList });
 }
 
@@ -48,3 +53,6 @@ const PersistanceHandler = {
   deleteRule: deleteRule,
   updateRule: updateRule,
 };
+
+
+export default PersistanceHandler
