@@ -1,25 +1,40 @@
 const path = require("path");
+var webpack = require('webpack');
+
 
 module.exports = {
   entry: {
-    "options": ["./src/ui/prodRulesController.js", "./src/ui/prodRulesView.js"],
-    "content-scripts": ["./src/content-scripts/productivity.ts"]
+    options: ["./src/options/prodRulesController.ts", "./src/options/prodRulesView.ts"],
+    content_scripts: ["./src/content-scripts/productivity.ts"],
   },
+  output: {
+    filename: "[name].bundle.js",
+    path: path.resolve(__dirname, "./prod-extension/js"),
+    library: ["MyLibrary", "[name]"],
+    clean: true,
+  },
+
   module: {
     rules: [
       {
-        test: "/\.tsx?$/",
-        use: "ts-loader",
-        exclude: "/node_modules/",
+        test: /\.ts$/,
+        use: {
+          loader: "ts-loader",
+        },
+        exclude: /node_modules/,
       },
     ],
   },
   resolve: {
-    extensions: [".tsx", ".ts", ".js"],
+    extensions: [".ts"],
   },
-  output: {
-    filename: "[name].js",
-    path: path.resolve(__dirname, "dist/[name]"),
+
+  mode: "development",
+  devtool: "inline-source-map",
+  devServer: {
+    static: "./prod-extension/js",
   },
-  mode: "development"
+  optimization: {
+    runtimeChunk: "single",
+  },
 };

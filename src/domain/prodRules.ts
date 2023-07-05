@@ -1,5 +1,5 @@
-import { Action, ActionType, ActionFactory } from "./action.js"
-import {msToTime } from "../helpers/helpers.ts"
+import { Action, ActionType, ActionFactory } from "./action"
+import {msToTime } from "../helpers/helpers"
 
 class ProdRule {
   source: string

@@ -18,14 +18,18 @@
     "tailwindcss": "^3.3.1",
     "typescript": "^5.1.6",
     "webpack": "^5.88.1",
-    "webpack-cli": "^5.1.4"
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^4.15.1"
   },
   "scripts": {
     "tsc": "tsc",
-    "build": "tsc | webpack"
+    "build": "webpack",
+    "watch": "webpack --watch",
+    "serve": "webpack serve --open"
   },
   "dependencies": {
-    "jquery": "^3.7.0"
+    "jquery": "^3.7.0",
+    "ts-loader": "^9.4.4"
   },
   "babel": {
     "presets": [

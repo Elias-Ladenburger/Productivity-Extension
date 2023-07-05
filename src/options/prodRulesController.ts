@@ -8,6 +8,7 @@ const addButton = document.getElementById("addRuleButton");
 const editButton = document.getElementById("editRuleButton");
 
 function prepareProdRules() {
+  console.log("preparing form!")
   prepareForm();
   prepareProdRuleTable();
   prepareAddRuleButton();
@@ -31,7 +32,7 @@ function prepareForm() {
 
 function getMultipleChoiceFields(): {[key:string]: {[key:string] : string}} {
   return {
-    actionCondition: {
+    rulecondition: {
       ALWAYS: "always",
       WORK: "during my work times",
       GOALS: "while my goals are not reached (WIP)",
@@ -44,7 +45,7 @@ function getMultipleChoiceFields(): {[key:string]: {[key:string] : string}} {
       LOG: "log my visit only (WIP)",
     },
 
-    enumactiondelay: {
+    actiondelay: {
       0: "immediately",
       30000: "30 seconds",
       300000: "5 minutes",

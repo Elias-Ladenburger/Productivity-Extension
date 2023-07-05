@@ -3,10 +3,7 @@
   <head>
     <title>Productivity Booster - Browser Extension</title>
     <meta charset="utf-8" />
-    <link rel="stylesheet" href="../public/css/main.css" />
-
-    <script src="../persistance/persistance.js"></script>
-    <script src="../domain/action.js"></script>
+    <link rel="stylesheet" href="../assets/css/main.css" />
   </head>
 
   <body class="pt-5 px-5 text-base bg-white text-navy bg-abstractBG bg-cover">
@@ -24,14 +21,14 @@
     <div id="settingsBody" class="grid grid-cols-2 space-x-4">
       <div id="leftBody">
         <h2 class="text-2xl font-bold pb-4">Add a Rule</h2>
-        <form id="rulesForm" class="py-5 focus:placeholder-navy bg-primary bg-opacity-70 px-5">
+        <form class="py-5 focus:placeholder-navy bg-primary bg-opacity-70 px-5">
           <div class="grid grid-cols-4">
-            <input type="hidden" id="ruleID" value="New"/>
             <label for="actionsource" class="col-span-1 mt-2"
               >When I visit...</label
             >
             <input
               id="actionsource"
+              name="actionsource"
               type="text"
               placeholder="unproductiveSite.com"
               class="bg-lightRed mt-2 col-span-3 px-1"
@@ -48,6 +45,7 @@
 
             <input
               id="targetvalue"
+              name="targetvalue"
               type="text"
               placeholder="productiveURL.com"
               class="bg-lightRed w-full col-span-4 px-1 mt-2"
@@ -57,15 +55,18 @@
             <details class="col-span-4">
               <summary>Advanced Settings</summary>
               <div class="grid grid-cols-4">
-                <label for="condition" class="col-span-1 mt-2">apply this rule</label>
+                <label for="rulecondition" class="col-span-1 mt-2"
+                  >do this</label
+                >
                 <select
-                  id="actioncondition"
+                  id="rulecondition"
+                  name="rulecondition"
                   class="col-span-3 bg-lightRed px-1 mt-2"
                   required
                 ></select>
 
                 <label for="actiondelay" class="col-span-1 mt-2"
-                  >do this</label
+                  >repeat this</label
                 >
                 <select
                   id="actiondelay"
@@ -109,6 +110,7 @@
               <label for="timepicker_from">I work between</label>
               <input
                 id="timepicker_from"
+                name="timepicker_from"
                 type="time"
                 value="12:00"
                 class="bg-lightRed col-span-3 px-1 mt-2"
@@ -119,6 +121,7 @@
               <label for="timepicker_to">and</label>
               <input
                 id="timepicker_to"
+                name="timepicker_to"
                 type="time"
                 value="12:00"
                 class="bg-lightRed col-span-3 px-1 mt-2"
@@ -135,7 +138,7 @@
           </div>
           <div class="flex justify-center pt-3">
             <button
-              id="blacklistButton"
+              id="workTimeButton"
               class="text-center rounded-lg bg-navy text-white hover:bg-blueRoyal px-2"
             >
               Schedule Work Time
@@ -158,18 +161,15 @@
 
       <div>
         <h2 class="text-2xl font-bold pb-4">My Work Times</h2>
-        <table id="worktimeTable" class="text-base space-y-3 pb-3">
+        <table id="workTimeTable" class="text-base space-y-3 pb-3">
           <tr class="text-lg text-left bg-grey text-primary mx-3">
-            <th class="px-3 w-4/5">Work Time</th>
+            <th class="px-3 w-4/5">Rule</th>
             <th class="px-3 w-1/5">Actions</th>
           </tr>
         </table>
       </div>
     </div>
-
-    <script src="prodRulesController.js"></script>
-    <script src="prodRulesView.js"></script>
-    <script src="workTimesUI.js"></script>
-    <script src="options.js"></script>
+    <script src="../js/options.bundle.js"></script>
+    <script src="../js/runtime.bundle.js"></script>
   </body>
 </html>

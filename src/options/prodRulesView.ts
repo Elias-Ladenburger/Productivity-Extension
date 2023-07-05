@@ -1,7 +1,7 @@
 import { ActionFactory } from "../domain/action";
 import { ProdRule } from "../domain/prodRules";
 import { msToTime } from "../helpers/helpers";
-import * as Controller from "./prodRulesController.ts";
+import * as Controller from "./prodRulesController";
 
 class RuleForm extends HTMLFormControlsCollection {
     actionsource = document.getElementById("actionsource") as HTMLInputElement

@@ -16,34 +16,39 @@ class WorkTime {
     this.is_active = this.is_active == false;
   }
 
-  #parseHour(timeValue: Date): number {
+  _parseHour(timeValue: Date): number {
     let normalizedTime = new Date(timeValue);
     let hours = normalizedTime.getHours();
     return hours;
   }
 
-  #parseMinutes(timeValue: Date): number {
+  _parseMinutes(timeValue: Date): number {
     let normalizedTime = new Date(timeValue);
     let minutes = normalizedTime.getMinutes();
     return minutes;
   }
 
-  get startTime(): string {
-    return this.startHour + ":" + this.startMinutes;
+  get startTime(): Date {
+    let startDate = new Date()
+    startDate.setHours(this.startHour)
+    startDate.setMinutes(this.startMinutes) 
+    return startDate
   }
 
   set startTime(timeValue: Date) {
-    this.startHour = this.#parseHour(timeValue);
-    this.startMinutes = this.#parseMinutes(timeValue);
+    this.startHour = this._parseHour(timeValue);
+    this.startMinutes = this._parseMinutes(timeValue);
   }
 
-  get endTime(): string {
-    return this.endHour + ":" + this.endMinutes;
-  }
+  get endTime(): Date {
+    let endDate = new Date()
+    endDate.setHours(this.endHour)
+    endDate.setMinutes(this.endMinutes) 
+    return endDate  }
 
   set endTime(timeValue: Date) {
-    this.endHour = this.#parseHour(timeValue);
-    this.endMinutes = this.#parseMinutes(timeValue);
+    this.endHour = this._parseHour(timeValue);
+    this.endMinutes = this._parseMinutes(timeValue);
   }
 
   isWorkTime(currentTime = new Date()) {

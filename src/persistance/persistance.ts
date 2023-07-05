@@ -7,7 +7,7 @@ interface RuleList {
 
 async function getAllRules() {
   let ruleList = await chrome.storage.local.get(ruleDBName);
-  let resultList = typeof ruleList === "undefined" ? [] : ruleList;
+  let resultList: {[key: string]: any} = typeof ruleList === "undefined" ? {} : ruleList;
   if (ruleDBName in ruleList) {
     return ruleList[ruleDBName];
   }

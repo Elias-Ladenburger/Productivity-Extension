@@ -1,6 +1,6 @@
-import { ActionFactory } from "../domain/action.ts"
-import { ProdRule, ProdRuleFactory } from "../domain/prodRules.ts" 
-import PersistanceHandler from "../persistance/persistance.ts"
+import { ActionFactory } from "../domain/action"
+import { ProdRule, ProdRuleFactory } from "../domain/prodRules" 
+import PersistanceHandler from "../persistance/persistance"
 
 applyRule();
 

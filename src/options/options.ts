@@ -1,4 +1,5 @@
 import PersistanceHandler from "../persistance/persistance";
+require("options.html")
 
 prepareAll();
 
