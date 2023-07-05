@@ -90,3 +90,26 @@ In the future, the following functionality may be added (with no guarantee whats
 - requesting payment to visit one of the distracting websites during work-time
 - rewards for staying on productive websites
 - integration with other services to track "productivity points"
+
+
+## Development
+
+### Setup
+Clone this repository:
+```
+git clone https://github.com/Elias-Ladenburger/Productivity-Extension
+```
+
+Install the dependencies:
+```
+npm install
+```
+
+### Build
+
+To generate a release-ready package, run:
+```
+rum run build
+```
+
+You should now be good to go!

@@ -23,9 +23,10 @@
   },
   "scripts": {
     "tsc": "tsc",
-    "build": "webpack",
-    "watch": "webpack --watch",
-    "serve": "webpack serve --open"
+    "build": "tailwindcss | webpack",
+    "wp-watch": "webpack --watch",
+    "wp-server": "webpack serve --open",
+    "tailwind": "tailwindcss -i ./input.css -o ./prod-extension/assets/css/main.css"
   },
   "dependencies": {
     "jquery": "^3.7.0",
