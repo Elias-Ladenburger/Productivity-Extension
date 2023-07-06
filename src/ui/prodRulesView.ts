@@ -1,6 +1,6 @@
 import { ActionFactory } from "../domain/action";
 import { ProdRule } from "../domain/prodRules";
-import { msToTime } from "../helpers/helpers";
+import { getStringsForEnums, msToTime } from "../helpers/helpers";
 import * as Controller from "./prodRulesController";
 
 class RuleForm {
@@ -84,19 +84,21 @@ const ProdRulesView = {
     myForm.targetVal.value = formValues.action.targetValue  
     myForm.condition.value = formValues.condition
     myForm.delay.value = formValues.delay.toString()
+    myForm.ruleID.value = ruleID
     
   }
 };
 
 function _formatString(prodRule: ProdRule) {
-    const conditionStr = prodRule.condition.toLowerCase()
-    const delayStr = msToTime(prodRule.delay)
+    const enumStrings = getStringsForEnums()
+    const conditionStr = enumStrings.rulecondition[prodRule.condition]
+    const actionStr = enumStrings.actiontype[prodRule.action.type]
+    const delayStr = enumStrings.actiontype[prodRule.delay] || msToTime(prodRule.delay)
 
   const resultsStr =  `<em class="text-lg">${prodRule.source}</em> <br><b>${
     conditionStr
-  }</b> when I visit <b>${prodRule.source}</b> then <b>${
-    delayStr
-  } ${prodRule.action.type} ${prodRule.action.targetValue}</b>`;
+  }</b> when I visit <b>${prodRule.source}</b> then <b>${delayStr} 
+  ${actionStr}: <em>${prodRule.action.targetValue}</em></b>`;
 
   return resultsStr
 }

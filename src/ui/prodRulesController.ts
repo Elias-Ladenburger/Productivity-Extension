@@ -1,5 +1,6 @@
 import { ActionFactory, ActionType } from "../domain/action";
 import { ProdRule, ProdRuleFactory, RuleCondition } from "../domain/prodRules";
+import { getStringsForEnums } from "../helpers/helpers";
 import PersistanceHandler from "../persistance/persistance";
 import ProdRulesView from "./prodRulesView";
 
@@ -28,30 +29,6 @@ function prepareForm() {
       selectElement.appendChild(optionElement);
     }
   }
-}
-
-function getStringsForEnums(): {[key:string]: {[key:string] : string}} {
-  return {
-    rulecondition: {
-      ALWAYS: "always",
-      WORK: "during my work times",
-      GOALS: "while my goals are not reached (WIP)",
-    },
-
-    actiontype: {
-      REDIRECT: "redirect me to",
-      POPUP: "show a popup with the following text",
-      FRAME: "frame the unproductive page in the following color",
-      LOG: "log my visit only (WIP)",
-    },
-
-    actiondelay: {
-      0: "immediately",
-      30000: "after 30 seconds",
-      300000: "after 5 minutes",
-      1200000: "after 20 minutes",
-    },
-  };
 }
 
 async function prepareProdRuleTable() {
@@ -97,30 +74,31 @@ async function addRuleFromForm() {
   const actionDelay = formData.delay;
   const actionCondition = formData.condition;
   const actionType = formData.actiontype;
-  const ruleID = formData.ruleID;
+  const ruleID: string = formData.ruleID as string;
 
   let newAction = ActionFactory.createAction(actionType, targetVal)
   let newEntry = ProdRuleFactory.createRule(actionsource, newAction, actionCondition, actionDelay)
   console.log(newEntry)
 
   if (actionsource && actionType && targetVal) {
+    if(ruleID == IDHandler.STANDARD_ID()){
       const ruleIndex = await PersistanceHandler.addRule(newEntry);
       addToProdTable(newEntry, ruleIndex);
     }
-  /*} else {
-    const id_elems = _deconstructID(ruleID);
-    PersistanceHandler.updateRule(
-      id_elems["badSite"],
-      id_elems["index"],
-      newEntry
-    );
-  }
-  */
+    else {
+      const id_elems = IDHandler.deconstructID(ruleID);
+      PersistanceHandler.updateRule(
+        id_elems["badSite"],
+        id_elems["index"],
+        newEntry
+      );
+    }
+    }
   ProdRulesView.clearForm();
 }
 
 function addToProdTable(prodRule: ProdRule, ruleIndex: number) {
-  const ruleID = _getRowID(prodRule.source, ruleIndex)
+  const ruleID = IDHandler.getRowID(prodRule.source, ruleIndex)
   const actionButtons = ProdRulesView.addEntryToTable(prodRule, ruleID);
   actionButtons["edit"].addEventListener("click", function (e) {
     prepareToEdit(prodRule, ruleIndex);
@@ -136,28 +114,34 @@ function addToProdTable(prodRule: ProdRule, ruleIndex: number) {
 }
 
 function prepareToEdit(prodRule: ProdRule, ruleIndex: number) {
-  const ruleID = _getRowID(prodRule.source, ruleIndex)
+  const ruleID = IDHandler.getRowID(prodRule.source, ruleIndex)
   ProdRulesView.setFormValues(prodRule, ruleID);
 }
 
 function deleteEntry(unproductiveSite: string, ruleIndex: number) {
-  const ruleID = _getRowID(unproductiveSite, ruleIndex);
+  const ruleID = IDHandler.getRowID(unproductiveSite, ruleIndex);
   PersistanceHandler.deleteRule(unproductiveSite, ruleIndex);
   ProdRulesView.removeFromTable(ruleID);
 }
 
-function _getRowID(unproductiveSite: string, ruleIndex: number) {
+
+const IDHandler = {
+getRowID: (unproductiveSite: string, ruleIndex: number) => {
   const rowID = `${unproductiveSite}-${ruleIndex}`;
   return rowID;
-}
+},
 
-function _deconstructID(ruleID: string) {
+deconstructID: (ruleID: string) => {
   const id_array = ruleID.split("-");
   return {
     badSite: id_array[0],
-    index: id_array[1],
+    index: +id_array[1],
   };
+},
+
+STANDARD_ID: (): string => {return "NEW"}
 }
+
 
 
 const ProdRulesController = {
