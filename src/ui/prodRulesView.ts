@@ -3,15 +3,25 @@ import { ProdRule } from "../domain/prodRules";
 import { msToTime } from "../helpers/helpers";
 import * as Controller from "./prodRulesController";
 
-class RuleForm extends HTMLFormControlsCollection {
-    actionsource = document.getElementById("actionsource") as HTMLInputElement
-  actiontype = document.getElementById("actiontype") as HTMLSelectElement
-  targetVal = document.getElementById("targetvalue") as HTMLInputElement
-  condition = document.getElementById("actioncondition") as HTMLSelectElement
-  delay = document.getElementById("actiondelay") as HTMLSelectElement
-  ruleID = document.getElementById("ruleID") as HTMLInputElement
+class RuleForm {
+    actionsource: HTMLInputElement;
+    actiontype: HTMLSelectElement;
+    targetVal: HTMLInputElement;
+    condition: HTMLSelectElement;
+    delay: HTMLSelectElement;
+    ruleID: HTMLInputElement;
 
-    reset(){
+
+    constructor(){
+      this.actionsource = document.getElementById("actionsource") as HTMLInputElement
+      this.actiontype = document.getElementById("actiontype") as HTMLSelectElement
+      this.targetVal = document.getElementById("targetvalue") as HTMLInputElement
+      this.condition = document.getElementById("rulecondition") as HTMLSelectElement
+      this.delay = document.getElementById("actiondelay") as HTMLSelectElement
+      this.ruleID = document.getElementById("ruleID") as HTMLInputElement    }
+
+
+    toStart(){
       this.actionsource.value = ""
       this.actiontype.selectedIndex = 0
       this.targetVal.value = ""
@@ -65,23 +75,28 @@ const ProdRulesView = {
 
   clearForm: () => {
     const form = new RuleForm()
-    form.reset()
+    form.toStart()
   },
   setFormValues(formValues: ProdRule, ruleID: string) {
     let myForm = new RuleForm()
     myForm.actionsource.value = formValues.source
+    myForm.actiontype.value = formValues.action.type
+    myForm.targetVal.value = formValues.action.targetValue  
+    myForm.condition.value = formValues.condition
+    myForm.delay.value = formValues.delay.toString()
     
   }
 };
 
 function _formatString(prodRule: ProdRule) {
-    const conditionStr = msToTime(prodRule.delay)
+    const conditionStr = prodRule.condition.toLowerCase()
     const delayStr = msToTime(prodRule.delay)
+
   const resultsStr =  `<em class="text-lg">${prodRule.source}</em> <br><b>${
     conditionStr
   }</b> when I visit <b>${prodRule.source}</b> then <b>${
     delayStr
-  } ${prodRule.action.toString()}</b>`;
+  } ${prodRule.action.type} ${prodRule.action.targetValue}</b>`;
 
   return resultsStr
 }

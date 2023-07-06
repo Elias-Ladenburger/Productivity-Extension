@@ -15,7 +15,7 @@ function prepareProdRules() {
 }
 
 function prepareForm() {
-  const multipleChoiceFields = getMultipleChoiceFields();
+  const multipleChoiceFields = getStringsForEnums();
   let selectElement;
   let myDict;
   for (let elemID in multipleChoiceFields) {
@@ -30,7 +30,7 @@ function prepareForm() {
   }
 }
 
-function getMultipleChoiceFields(): {[key:string]: {[key:string] : string}} {
+function getStringsForEnums(): {[key:string]: {[key:string] : string}} {
   return {
     rulecondition: {
       ALWAYS: "always",
@@ -47,9 +47,9 @@ function getMultipleChoiceFields(): {[key:string]: {[key:string] : string}} {
 
     actiondelay: {
       0: "immediately",
-      30000: "30 seconds",
-      300000: "5 minutes",
-      1200000: "20 minutes",
+      30000: "after 30 seconds",
+      300000: "after 5 minutes",
+      1200000: "after 20 minutes",
     },
   };
 }
@@ -82,6 +82,7 @@ function prepareAddRuleButton() {
   addButton.addEventListener(
     "click",
     function (e) {
+        console.log("Adding new rule:")
       addRuleFromForm();
     },
     false
@@ -91,15 +92,18 @@ function prepareAddRuleButton() {
 async function addRuleFromForm() {
   const formData = ProdRulesView.getFormData();
 
-  let actionDelay = formData.delay;
-  let actionCondition = formData.condition;
-  let actionType = formData.actiontype;
-  let ruleID = formData.ruleID;
+  const actionsource = formData.actionsource
+  const targetVal = formData.targetVal
+  const actionDelay = formData.delay;
+  const actionCondition = formData.condition;
+  const actionType = formData.actiontype;
+  const ruleID = formData.ruleID;
 
-  let newAction = ActionFactory.createAction(formData.actiontype, formData.targetVal)
-  let newEntry = ProdRuleFactory.createRule(formData.actionsource, newAction, formData.condition, formData.delay)
+  let newAction = ActionFactory.createAction(actionType, targetVal)
+  let newEntry = ProdRuleFactory.createRule(actionsource, newAction, actionCondition, actionDelay)
+  console.log(newEntry)
 
-  if (formData.actionsource && actionType && formData.targetVal) {
+  if (actionsource && actionType && targetVal) {
       const ruleIndex = await PersistanceHandler.addRule(newEntry);
       addToProdTable(newEntry, ruleIndex);
     }
@@ -154,3 +158,14 @@ function _deconstructID(ruleID: string) {
     index: id_array[1],
   };
 }
+
+
+const ProdRulesController = {
+  deleteEntry: deleteEntry,
+  prepareToEdit: prepareToEdit,
+  addToProdTable: addToProdTable,
+  addRuleFromForm: addRuleFromForm,
+  getStringsForEnums: getStringsForEnums
+}
+
+export default ProdRulesController

@@ -4,8 +4,9 @@ var webpack = require('webpack');
 
 module.exports = {
   entry: {
-    options: ["./src/options/prodRulesController.ts", "./src/options/prodRulesView.ts"],
+    options: ["./src/ui/prodRulesController.ts"],
     content_scripts: ["./src/content-scripts/productivity.ts"],
+    popup: ["./src/popup/popup.js"]
   },
   output: {
     filename: "[name].bundle.js",
