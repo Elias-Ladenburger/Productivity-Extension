@@ -6,13 +6,14 @@ import ProdRulesView from "./prodRulesView";
 
 prepareProdRules();
 const addButton = document.getElementById("addRuleButton");
-const editButton = document.getElementById("editRuleButton");
+const cancelButton = document.getElementById("cancelRuleButton");
 
 function prepareProdRules() {
   console.log("preparing form!")
   prepareForm();
   prepareProdRuleTable();
   prepareAddRuleButton();
+  prepareCancelButton();
 }
 
 function prepareForm() {
@@ -29,6 +30,19 @@ function prepareForm() {
       selectElement.appendChild(optionElement);
     }
   }
+}
+
+function prepareCancelButton(){
+const cancelButton = document.getElementById("cancelRuleButton");
+
+  cancelButton.addEventListener(
+    "click",
+    function (e) {
+      e.preventDefault()
+      ProdRulesView.clearForm();
+    },
+    false
+  );
 }
 
 async function prepareProdRuleTable() {
@@ -81,13 +95,13 @@ async function addRuleFromForm() {
   console.log(newEntry)
 
   if (actionsource && actionType && targetVal) {
-    if(ruleID == IDHandler.STANDARD_ID()){
+    if(ruleID == IDHandler.STANDARD_ID){
       const ruleIndex = await PersistanceHandler.addRule(newEntry);
       addToProdTable(newEntry, ruleIndex);
     }
     else {
       const id_elems = IDHandler.deconstructID(ruleID);
-      PersistanceHandler.updateRule(
+      await PersistanceHandler.updateRule(
         id_elems["badSite"],
         id_elems["index"],
         newEntry
@@ -95,12 +109,15 @@ async function addRuleFromForm() {
     }
     }
   ProdRulesView.clearForm();
+  ProdRulesView.clearTable();
+  prepareProdRuleTable();
 }
 
 function addToProdTable(prodRule: ProdRule, ruleIndex: number) {
   const ruleID = IDHandler.getRowID(prodRule.source, ruleIndex)
   const actionButtons = ProdRulesView.addEntryToTable(prodRule, ruleID);
   actionButtons["edit"].addEventListener("click", function (e) {
+    e.preventDefault()
     prepareToEdit(prodRule, ruleIndex);
   });
 
@@ -139,7 +156,7 @@ deconstructID: (ruleID: string) => {
   };
 },
 
-STANDARD_ID: (): string => {return "NEW"}
+STANDARD_ID: "NEW"
 }
 
 

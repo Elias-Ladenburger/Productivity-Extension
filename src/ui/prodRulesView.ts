@@ -42,31 +42,48 @@ class RuleForm {
     }
 }
 
-const ProdRulesView = {
-  addEntryToTable: (prodRule: ProdRule, ruleID: string) => {
-    const tableID = "productionRuleTable";
-    let settingsTable = document.getElementById(tableID) as HTMLTableElement;
-    
-      let newRow = settingsTable.insertRow(-1);
+const ProdTable = {
+  tableID: "productionRuleTable",
+
+  addEntry: (prodRule: ProdRule, ruleID: string) => {
+      const prodTable = document.getElementById(ProdTable.tableID) as HTMLTableElement
+      let newRow = prodTable.insertRow(-1);
       let ruleCell = newRow.insertCell(0);
       let actionsCell = newRow.insertCell(1);
 
       newRow.id = ruleID;
       ruleCell.innerHTML = _formatString(prodRule);
       ruleCell.setAttribute("class", "px-2");
-      actionsCell.innerHTML = `<button id="${tableID}_edit_${ruleID}" class="rounded-lg border-white bg-navy text-white hover:bg-blueRoyal px-2 mx-1 text-center">edit</button>
-    <button id="${tableID}_delete_${ruleID}" class="rounded-lg border-white bg-navy text-white hover:bg-blueRoyal px-2 mx-1 text-center">delete</button>`;
+      actionsCell.innerHTML = `<button id="${ProdTable.tableID}_edit_${ruleID}" class="rounded-lg border-white bg-navy text-white hover:bg-blueRoyal px-2 mx-1 text-center">edit</button>
+    <button id="${ProdTable.tableID}_delete_${ruleID}" class="rounded-lg border-white bg-navy text-white hover:bg-blueRoyal px-2 mx-1 text-center">delete</button>`;
 
-      const deleteButton = document.getElementById(`${tableID}_delete_${ruleID}`);
-      const editButton = document.getElementById(`${tableID}_edit_${ruleID}`);
+      const deleteButton = document.getElementById(`${ProdTable.tableID}_delete_${ruleID}`);
+      const editButton = document.getElementById(`${ProdTable.tableID}_edit_${ruleID}`);
       return { edit: editButton, delete: deleteButton, entry: ruleCell };
   },
 
-  removeFromTable: (ruleID:string) => {
+  removeRule: (ruleID:string) => {
     let toDelete = document.getElementById(ruleID)
     toDelete.remove();
     console.log(`Removing rule for ${ruleID}!`);
   },
+
+    clear: () => {
+      const prodTable = document.getElementById(ProdTable.tableID) as HTMLTableElement
+      const oldBody = prodTable.tBodies[0]
+      const newBody = document.createElement('tbody');
+      prodTable.replaceChild(newBody, oldBody)
+  }
+
+}
+
+const ProdRulesView = {
+
+  addEntryToTable: ProdTable.addEntry,
+  clearTable: ProdTable.clear,
+  removeFromTable: ProdTable.removeRule,
+  
+
 
   getFormData: () => {
     let myForm = new RuleForm()
@@ -77,6 +94,7 @@ const ProdRulesView = {
     const form = new RuleForm()
     form.toStart()
   },
+
   setFormValues(formValues: ProdRule, ruleID: string) {
     let myForm = new RuleForm()
     myForm.actionsource.value = formValues.source
