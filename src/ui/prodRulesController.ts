@@ -9,7 +9,6 @@ const addButton = document.getElementById("addRuleButton");
 const cancelButton = document.getElementById("cancelRuleButton");
 
 function prepareProdRules() {
-  console.log("preparing form!")
   prepareForm();
   prepareProdRuleTable();
   prepareAddRuleButton();
@@ -73,7 +72,7 @@ function prepareAddRuleButton() {
   addButton.addEventListener(
     "click",
     function (e) {
-        console.log("Adding new rule:")
+      e.preventDefault()
       addRuleFromForm();
     },
     false
@@ -92,14 +91,15 @@ async function addRuleFromForm() {
 
   let newAction = ActionFactory.createAction(actionType, targetVal)
   let newEntry = ProdRuleFactory.createRule(actionsource, newAction, actionCondition, actionDelay)
-  console.log(newEntry)
 
   if (actionsource && actionType && targetVal) {
-    if(ruleID == IDHandler.STANDARD_ID){
+    if(ruleID == IDHandler.STANDARD_ID || ruleID == ""){
       const ruleIndex = await PersistanceHandler.addRule(newEntry);
+      console.log(`Creating new rule: ${newEntry}`)
       addToProdTable(newEntry, ruleIndex);
     }
     else {
+      console.log(`Updating rule to be: ${newEntry}`)
       const id_elems = IDHandler.deconstructID(ruleID);
       await PersistanceHandler.updateRule(
         id_elems["badSite"],

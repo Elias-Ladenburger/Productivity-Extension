@@ -29,7 +29,6 @@ async function addRule(myNewRule: ProdRule) {
 
 async function updateRule(badSite: string, index: number, updatedRule: ProdRule) {
   // let ruleList = await getAllRules();
-
   await deleteRule(badSite, index);
   return addRule(updatedRule);
 }

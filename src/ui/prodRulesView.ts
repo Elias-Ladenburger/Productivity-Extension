@@ -45,8 +45,14 @@ class RuleForm {
 const ProdTable = {
   tableID: "productionRuleTable",
 
+  getBody: () => {
+    const prodTable = document.getElementById(ProdTable.tableID) as HTMLTableElement
+    const body = prodTable.tBodies[0]
+    return body
+  },
+
   addEntry: (prodRule: ProdRule, ruleID: string) => {
-      const prodTable = document.getElementById(ProdTable.tableID) as HTMLTableElement
+      const prodTable = ProdTable.getBody();
       let newRow = prodTable.insertRow(-1);
       let ruleCell = newRow.insertCell(0);
       let actionsCell = newRow.insertCell(1);
