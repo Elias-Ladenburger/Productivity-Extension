@@ -4,6 +4,8 @@ import PersistanceHandler from "../persistance/persistance"
 
 applyRule();
 
+console.log("checking for rules...")
+
 async function applyRule() {
   let currentURL: string = window.location.href;
   console.log("checking for rules...")
