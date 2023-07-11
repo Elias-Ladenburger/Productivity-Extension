@@ -27,7 +27,7 @@
       "matches": ["<all_urls>"],
       "run_at": "document_end",
       "js": [
-        "js/content_scripts.bundle.js"
+        "js/runtime.bundle.js", "js/content_scripts.bundle.js"
       ]
     }
   ],

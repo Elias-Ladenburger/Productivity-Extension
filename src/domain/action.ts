@@ -1,16 +1,11 @@
-class Action {
+abstract class Action {
   targetValue: string;
   type: ActionType = ActionType.LOG
   constructor(targetValue: string = "") {
     this.targetValue = targetValue;
   }
 
-  performAction() {
-    return;
-  }
-  toString() {
-    return `apply a rule!`;
-  }
+  abstract performAction(): void
 }
 
 class FrameAction extends Action {

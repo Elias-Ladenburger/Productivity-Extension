@@ -5,6 +5,8 @@ interface RuleList {
   [key: string]: ProdRule[]
 }
 
+
+
 async function getAllRules() {
   let ruleList = await chrome.storage.local.get(ruleDBName);
   let resultList: {[key: string]: any} = typeof ruleList === "undefined" ? {} : ruleList;
@@ -13,6 +15,21 @@ async function getAllRules() {
   }
   return resultList;
 }
+
+async function getRulesByURL(originURL: string) {
+  const ruleList = await getAllRules();
+  let applicableRules: ProdRule[] = []
+  Object.keys(ruleList).forEach((badSite) => {
+    if (originURL.includes(badSite)) {
+      for(let rule of ruleList[badSite]){
+        applicableRules.push(rule);
+      }
+    }
+    return applicableRules;
+  });
+  return applicableRules;
+}
+
 
 async function addRule(myNewRule: ProdRule) {
   const ruleList = await getAllRules();
@@ -46,12 +63,13 @@ function setRuleList(ruleList: RuleList) {
   chrome.storage.local.set({ productivityRules: ruleList });
 }
 
-const PersistanceHandler = {
+const ProdRuleRepository = {
   getAllRules: getAllRules,
+  getRulesByURL: getRulesByURL,
   addRule: addRule,
   deleteRule: deleteRule,
   updateRule: updateRule,
 };
 
 
-export default PersistanceHandler
+export default ProdRuleRepository

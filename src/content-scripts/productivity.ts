@@ -1,58 +1,16 @@
 import { ActionFactory } from "../domain/action"
-import { ProdRule, ProdRuleFactory } from "../domain/prodRules" 
-import PersistanceHandler from "../persistance/persistance"
+import { ProdRule, ProdRuleService } from "../domain/prodRules" 
+import ProdRuleRepository from "../persistance/prodRuleRepo"
 
-applyRule();
+applyRules();
 
-console.log("checking for rules...")
-
-async function applyRule() {
+export default async function applyRules() {
   let currentURL: string = window.location.href;
-  console.log("checking for rules...")
+  console.log("checking for productivity rules...")
 
-  if (await checkIfRule(currentURL)) {
-    const rulesForThisSite = await getRules(currentURL);
-    console.log(rulesForThisSite)
+  const rulesForThisSite: ProdRule[] = await ProdRuleRepository.getRulesByURL(currentURL);
 
-    for(let rule of rulesForThisSite){
-      console.log(rule)
-      rule.applyRule()
-    }
-    rulesForThisSite.forEach((myRule) => {
-      console.log(myRule);
-      myRule.applyRule();
-    });
-  }
-}
-
-async function checkIfRule(siteToCheck: string) {
-  const ruleList = await PersistanceHandler.getAllRules();
-  let siteHasRule = false;
-
-  if (ruleList) {
-    Object.keys(ruleList).forEach((badSite) => {
-      if (siteToCheck.includes(badSite)) {
-        siteHasRule = true;
-      }
-    });
-    return siteHasRule;
-  }
-}
-
-async function getRules(originURL: string) {
-  const ruleList = await PersistanceHandler.getAllRules();
-  let applicableRules: ProdRule[] = []
-  Object.keys(ruleList).forEach((badSite) => {
-    console.log(`checking rules: is ${badSite} in ${originURL} `)
-    if (originURL.includes(badSite)) {
-      console.log(ruleList[badSite])
-      for(let rule of ruleList[badSite]){
-        applicableRules.push(rule);
-      }
-    }
-    return applicableRules;
+  rulesForThisSite.forEach((myRule: ProdRule) => {
+    ProdRuleService.applyRule(myRule)
   });
-  console.log("rules for this site: ");
-  console.log(applicableRules);
-  return applicableRules;
 }

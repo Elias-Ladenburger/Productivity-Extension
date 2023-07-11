@@ -1,7 +1,7 @@
 import { ActionFactory, ActionType } from "../domain/action";
 import { ProdRule, ProdRuleFactory, RuleCondition } from "../domain/prodRules";
 import { getStringsForEnums } from "../helpers/helpers";
-import PersistanceHandler from "../persistance/persistance";
+import PersistanceHandler from "../persistance/prodRuleRepo";
 import ProdRulesView from "./prodRulesView";
 
 prepareProdRules();

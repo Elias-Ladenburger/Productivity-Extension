@@ -24,12 +24,6 @@ class ProdRule {
     }
   }
 
-  applyRule() {
-      setTimeout(() => {
-        this.action.performAction();
-      }, this.delay);
-  }
-
   toString() {
     const delayStr = msToTime(this.delay);
     return `${this.condition} when I visit ${
@@ -37,6 +31,7 @@ class ProdRule {
     } then ${delayStr} ${this.action.toString()}`;
   }
 }
+
 
 const ProdRuleFactory = {
   createRule(badWebsite: string, action: Action, condition: string = "ALWAYS", delay: number = 0): ProdRule {
@@ -51,9 +46,6 @@ const ProdRuleFactory = {
       throw e
       console.log(e)
     }
-
-
-
   },
   createRuleFromJSON(entry: any) {
     const action = ActionFactory.createAction(entry.action.type, entry.action.targetvalue)
@@ -68,4 +60,13 @@ enum RuleCondition {
   GOAL = "GOAL",
 }
 
-export {ProdRule, RuleCondition, ProdRuleFactory }
+const ProdRuleService = {
+  applyRule: (rule: ProdRule) => {
+    const action = ActionFactory.createAction(rule.action.type, rule.action.targetValue)
+    setTimeout(() => {
+      action.performAction();
+    }, rule.delay);
+  }
+}
+
+export {ProdRule, RuleCondition, ProdRuleFactory, ProdRuleService }
