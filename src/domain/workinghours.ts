@@ -51,8 +51,7 @@ class WorkTime {
     this.endMinutes = this._parseMinutes(timeValue);
   }
 
-  isWorkTime(currentTime = new Date()) {
-    currentTime = new Date(currentTime);
+  isWorkTime(currentTime: Date = new Date()) {
     if (currentTime.getDay() == this.weekday) {
       const currentHour = currentTime.getHours();
       const currentMinute = currentTime.getMinutes();
@@ -71,3 +70,25 @@ class WorkTime {
     return false;
   }
 }
+
+const WorkTimeFactory = {
+  createWorkTime: (starttime: Date, endtime: Date, weekday: number, is_active: boolean) => {
+    let wt = new WorkTime(starttime, endtime, weekday, is_active)
+    return wt
+  },
+
+  createWorkTimeFromStrings: (starttime: string, endtime: string, weekday: number, is_active: boolean) => {
+    const startTimeArr = starttime.split(":")
+    const endTimeArr = endtime.split(":")
+    let normalizedStart = new Date()
+    let normalizedEnd = new Date()
+
+    normalizedStart.setHours(parseInt(startTimeArr[0]), parseInt(startTimeArr[1]))
+    normalizedEnd.setHours(parseInt(endTimeArr[0]), parseInt(endTimeArr[1]))
+    
+    return WorkTimeFactory.createWorkTime(normalizedStart, normalizedEnd, weekday, is_active)
+  }
+}
+
+export { WorkTime, WorkTimeFactory }
+export default WorkTime

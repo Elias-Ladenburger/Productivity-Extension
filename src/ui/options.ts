@@ -1,4 +1,4 @@
-import PersistanceHandler from "../persistance/prodRuleRepo";
+import PersistanceHandler from "../domain/prodRuleRepo";
 
 prepareAll();
 

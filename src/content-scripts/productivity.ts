@@ -1,6 +1,6 @@
 import { ActionFactory } from "../domain/action"
 import { ProdRule, ProdRuleService } from "../domain/prodRules" 
-import ProdRuleRepository from "../persistance/prodRuleRepo"
+import ProdRuleRepository from "../domain/prodRuleRepo"
 
 applyRules();
 

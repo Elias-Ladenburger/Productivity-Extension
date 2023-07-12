@@ -1,19 +1,26 @@
-import { ProdRule } from "../domain/prodRules";
+import { ProdRule } from "./prodRules";
+import PersistanceHandler from "../persistance/persistance"
+import { ProdRuleFactory } from "./prodRules";
 
 const ruleDBName = "productivityRules";
 interface RuleList {
   [key: string]: ProdRule[]
 }
 
-
+const persHandler = new PersistanceHandler(ruleDBName)
 
 async function getAllRules() {
-  let ruleList = await chrome.storage.local.get(ruleDBName);
-  let resultList: {[key: string]: any} = typeof ruleList === "undefined" ? {} : ruleList;
-  if (ruleDBName in ruleList) {
-    return ruleList[ruleDBName];
-  }
-  return resultList;
+  const storedRules = await persHandler.getAll()
+  let ruleList: RuleList
+  Object.keys(storedRules).forEach((badSite) => {
+    let rulesForThisSite = storedRules[badSite]
+    ruleList[badSite] = []
+    rulesForThisSite.forEach((ruleData: any) => {
+      let newRule = ProdRuleFactory.createRule(badSite, ruleData.action, ruleData.condition, ruleData.delay)
+      ruleList[badSite].push(newRule)
+    })
+  })
+  return ruleList
 }
 
 async function getRulesByURL(originURL: string) {
