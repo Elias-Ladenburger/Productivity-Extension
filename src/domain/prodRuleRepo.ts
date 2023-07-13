@@ -11,7 +11,7 @@ const persHandler = new PersistanceHandler(ruleDBName)
 
 async function getAllRules() {
   const storedRules = await persHandler.getAll()
-  let ruleList: RuleList
+  let ruleList: RuleList = {}
   Object.keys(storedRules).forEach((badSite) => {
     let rulesForThisSite = storedRules[badSite]
     ruleList[badSite] = []
