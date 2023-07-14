@@ -9,7 +9,7 @@ module.exports = {
   },
   output: {
     filename: '[name].bundle.js',
-    path: path.resolve(__dirname, './prod-extension/js'),
+    path: path.resolve(__dirname, '../prod-extension/js'),
     library: ['MyLibrary', '[name]'],
     clean: true
   },

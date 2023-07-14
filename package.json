@@ -27,9 +27,10 @@
   },
   "scripts": {
     "tsc": "tsc --project config/tsconfig.json",
-    "build": "tailwind | webpack",
-    "wp-watch": "webpack --watch",
-    "wp-server": "webpack serve --open",
+    "wp": "webpack --config config/webpack.config.js",
+    "build": "tailwind | wp",
+    "wp-watch": "wp --watch",
+    "wp-server": "wp serve --open",
     "tailwind": "tailwindcss -c config/tailwind.config.js -i config/input.css -o ./prod-extension/assets/css/main.css",
     "test": "jest --config=config/jest.config.js"
   },
