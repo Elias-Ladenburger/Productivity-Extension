@@ -5,8 +5,6 @@ import PersistanceHandler from "../domain/prodRuleRepo";
 import ProdRulesView from "./prodRulesView";
 
 prepareProdRules();
-const addButton = document.getElementById("addRuleButton");
-const cancelButton = document.getElementById("cancelRuleButton");
 
 function prepareProdRules() {
   prepareForm();
@@ -32,7 +30,7 @@ function prepareForm() {
 }
 
 function prepareCancelButton(){
-const cancelButton = document.getElementById("cancelRuleButton");
+const cancelButton = document.getElementById("cancelRuleButton") as HTMLButtonElement;
 
   cancelButton.addEventListener(
     "click",
@@ -46,7 +44,7 @@ const cancelButton = document.getElementById("cancelRuleButton");
 
 async function prepareProdRuleTable() {
   const ruleList = await PersistanceHandler.getAllRules();
-  if (!ruleList || ruleList.length == 0 || Object.keys(ruleList).length == 0) {
+  if (!ruleList || Object.keys(ruleList).length == 0 || Object.keys(ruleList).length == 0) {
     addDemoRule();
   } else {
     Object.keys(ruleList).forEach((unproductiveSite) => {
@@ -68,7 +66,7 @@ function addDemoRule() {
 }
 
 function prepareAddRuleButton() {
-  let addButton = document.getElementById("addRuleButton");
+  let addButton = document.getElementById("addRuleButton") as HTMLButtonElement;
   addButton.addEventListener(
     "click",
     function (e) {
@@ -116,12 +114,14 @@ async function addRuleFromForm() {
 function addToProdTable(prodRule: ProdRule, ruleIndex: number) {
   const ruleID = IDHandler.getRowID(prodRule.source, ruleIndex)
   const actionButtons = ProdRulesView.addEntryToTable(prodRule, ruleID);
-  actionButtons["edit"].addEventListener("click", function (e) {
+  const editButton = actionButtons["edit"] as HTMLButtonElement
+  const deleteButton = actionButtons["delete"] as HTMLButtonElement
+  editButton.addEventListener("click", function (e) {
     e.preventDefault()
     prepareToEdit(prodRule, ruleIndex);
   });
 
-  actionButtons["delete"].addEventListener(
+  deleteButton.addEventListener(
     "click",
     function (e) {
       deleteEntry(prodRule.source, ruleIndex);

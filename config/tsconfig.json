@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "target": "ES5" /* Set the JavaScript language version for emitted JavaScript and include compatible library declarations. */,
-    "outDir": "prod-extension/dist",
+    "outDir": "../prod-extension/dist",
 
     "module": "ES6" /* Specify what module code is generated. */,
     "allowJs": true /* Allow JavaScript files to be a part of your program. Use the 'checkJS' option to get errors from these files. */,
@@ -24,5 +24,5 @@
   "types": [
     "chrome"
   ],
-  "include": ["src/domain/*", "src/content-scripts/*", "src/popup/*", "src/ui/*"]
+  "include": ["../src/domain/*", "../src/content-scripts/*", "../src/popup/*", "../src/ui/*"]
 }

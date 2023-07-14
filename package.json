@@ -26,12 +26,12 @@
     "webpack-dev-server": "^4.15.1"
   },
   "scripts": {
-    "tsc": "tsc",
-    "build": "tailwindcss | webpack",
+    "tsc": "tsc --project config/tsconfig.json",
+    "build": "tailwind | webpack",
     "wp-watch": "webpack --watch",
     "wp-server": "webpack serve --open",
-    "tailwind": "tailwindcss -i ./input.css -o ./prod-extension/assets/css/main.css",
-    "test": "jest"
+    "tailwind": "tailwindcss -c config/tailwind.config.js -i config/input.css -o ./prod-extension/assets/css/main.css",
+    "test": "jest --config=config/jest.config.js"
   },
   "dependencies": {
     "jquery": "^3.7.0",
