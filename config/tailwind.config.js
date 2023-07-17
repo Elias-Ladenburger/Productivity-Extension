@@ -2,7 +2,7 @@ const colors = require('tailwindcss/colors');
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ["../**/*.{html,js}"],
+  content: ["./prod-extension/**/*.{html,js}"],
   theme: {
     listStyleType: {
       none: 'none',
@@ -49,7 +49,7 @@ module.exports = {
       blueGrotto: "#0476D0",
       blueBaby: "#89CFF0",
 		  black: colors.black,
-      //white: colors.white,
+      white: colors.white,
     },
     backgroundImage: {
       abstractBG: "url('../img/Abstract-mountains-bg.jpg')"

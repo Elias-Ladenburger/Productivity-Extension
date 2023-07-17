@@ -8,19 +8,59 @@
     <script src="../js/popup.bundle.js"></script>
   </head>
 
-  <body>
-    <div id="popup-content" class="text-navy px-5 py-5 ">
+  <body class="bg-primary">
+    <!-- navigation -->
+    <nav
+      class="space-x-4 w-full top-0 px-1 pt-1 flex items-center justify-between"
+    >
+      <div class="flex flex-row space-x-2 bg-navy text-primary">
+        <div class="bg-green rounded-full bg-primary">
+          <img class="h-6 fill-navy" src="../assets/icons/bolt-solid-black.svg" />
+        </div>
+        <h1 class="text-xl font-bold">Productivity Booster</h1>
+      </div>
+      <ul>
+        <li>
+          <button class="rounded-full bg-navy hover:bg-blueRoyal">
+            <div class="p-2 invert h-max w-max">
+              <img
+                class="h-6 w-6"
+                src="../assets/img/setting.png"
+                alt="Productivity Booster Settings"
+              />
+            </div>
+          </button>
+        </li>
+      </ul>
+    </nav>
+
+    <hr/>
+
+    <div id="popup-content" class="text-navy px-5 py-5 text-base">
       <p class="py-2 w-128">
-        This extension will redirect you from "productivity killers" to more
-        harmless, maybe even productivity-friendly sites.<br />
-        In the settings you can toggle at what times this applies, what sites
-        are affected and where you want to be redirected to.
+        This extension will redirect you from <b>"productivity killers"</b> to
+        more harmless, maybe even <b>productive sites</b>.<br />
       </p>
-      <button
-        id="settingsButton"
-        class="text-white bg-navy rounded-full px-3 hover:bg-blueRoyal">
-        Settings
-    </button>
+      <div class="py-3">
+        <button
+          id="toggleProductivityButton"
+          class="text-white bg-navy rounded-full px-3 hover:bg-blueRoyal"
+        >
+          Stop productivity rules
+        </button>
+      </div>
+      <div>
+        <p>
+          In the settings you can toggle at what times this applies, what sites
+          are affected and where you want to be redirected to.
+        </p>
+        <button
+          id="settingsButton"
+          class="text-white bg-navy rounded-full px-3 hover:bg-blueRoyal"
+        >
+          Settings
+        </button>
+      </div>
     </div>
 
     <div id="error-content" class="hidden">

@@ -28,10 +28,10 @@
   "scripts": {
     "tsc": "tsc --project config/tsconfig.json",
     "wp": "webpack --config config/webpack.config.js",
-    "build": "tailwind | wp",
-    "wp-watch": "wp --watch",
-    "wp-server": "wp serve --open",
-    "tailwind": "tailwindcss -c config/tailwind.config.js -i config/input.css -o ./prod-extension/assets/css/main.css",
+    "tailwind": "tailwindcss -i config/input.css -o prod-extension/assets/css/main.css -c config/tailwind.config.js",
+    "build": "npm run wp && npm run tailwind",
+    "wp-watch": "npm run wp --watch",
+    "wp-server": "npm run wp serve --open",
     "test": "jest --config=config/jest.config.js"
   },
   "dependencies": {
