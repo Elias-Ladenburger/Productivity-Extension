@@ -6,10 +6,13 @@
     <link rel="stylesheet" href="../assets/css/main.css" />
   </head>
 
-  <body class="pt-5 px-5 text-lg bg-white text-navy bg-abstractBG bg-cover">
+  <body class="pt-5 px-5 text-lg text-navy space-y-4 bg-abstractBG">
+    <div class="flex flex-row items-center space-x-4 mb-2">
+      <img class="h-20 w-24" src="../assets/icons/Productivity-Logo.png"/>
     <h1 class="text-3xl font-bold pb-4">
-      <em class="bg-navy text-white">Productivity Booster</em>
+      <em class="">Productivity Booster</em>
     </h1>
+    </div>
     <p class="pb-4 text-xl">
       Re-take control of your productivity! This extension will redirect you
       from sites that kill your motivation and productivity and instead redirect
@@ -21,7 +24,7 @@
     <div id="settingsBody" class="grid grid-cols-2 space-x-4">
       <div id="leftBody">
         <h2 id="ruleFormTitle" class="text-2xl font-bold pb-4">Add a Rule</h2>
-        <form class="py-5 focus:placeholder-navy bg-primary bg-opacity-70 px-5">
+        <form class="py-5 focus:placeholder-navy bg-bgGrey100 bg-opacity-70 px-5">
           <div class="grid grid-cols-4">
             <input type="hidden" id="ruleID" />
             <label for="actionsource" class="col-span-1 mt-2"

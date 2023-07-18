@@ -63,6 +63,9 @@ enum RuleCondition {
 const ProdRuleService = {
   applyRule: (rule: ProdRule) => {
     const action = ActionFactory.createAction(rule.action.type, rule.action.targetValue)
+
+    // if is working time:
+
     setTimeout(() => {
       action.performAction();
     }, rule.delay);

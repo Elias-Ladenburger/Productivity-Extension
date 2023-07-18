@@ -90,22 +90,28 @@ async function addRuleFromForm() {
   let newAction = ActionFactory.createAction(actionType, targetVal)
   let newEntry = ProdRuleFactory.createRule(actionsource, newAction, actionCondition, actionDelay)
 
-  if (actionsource && actionType && targetVal) {
+  addOrUpdateEntry(newEntry, ruleID)
+    resetSite()
+}
+
+async function addOrUpdateEntry(ruleData: ProdRule, ruleID: string) {
+    if (ruleData.source && ruleData.action.type && ruleData.action.targetValue) {
     if(ruleID == IDHandler.STANDARD_ID || ruleID == ""){
-      const ruleIndex = await PersistanceHandler.addRule(newEntry);
-      console.log(`Creating new rule: ${newEntry}`)
-      addToProdTable(newEntry, ruleIndex);
+      const ruleIndex = await PersistanceHandler.addRule(ruleData);
+      addToProdTable(ruleData, ruleIndex);
     }
     else {
-      console.log(`Updating rule to be: ${newEntry}`)
       const id_elems = IDHandler.deconstructID(ruleID);
       await PersistanceHandler.updateRule(
         id_elems["badSite"],
         id_elems["index"],
-        newEntry
+        ruleData
       );
     }
     }
+}
+
+function resetSite(){
   ProdRulesView.clearForm();
   ProdRulesView.clearTable();
   prepareProdRuleTable();
@@ -158,7 +164,6 @@ deconstructID: (ruleID: string) => {
 
 STANDARD_ID: "NEW"
 }
-
 
 
 const ProdRulesController = {

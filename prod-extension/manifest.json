@@ -7,10 +7,10 @@
   "homepage_url": "https://github.com/Elias-Ladenburger/Productivity-Extension",
 
   "icons": {
-    "16": "assets/icons/bolt-solid.png",
-    "48": "assets/icons/bolt-solid.png",
-    "96": "assets/icons/bolt-solid.png",
-    "128": "assets/icons/bolt-solid.png"
+    "16": "assets/icons/Productivity-Logo.png",
+    "48": "assets/icons/Productivity-Logo.png",
+    "96": "assets/icons/Productivity-Logo.png",
+    "128": "assets/icons/Productivity-Logo.png"
   },
 
   "permissions": [
@@ -26,9 +26,7 @@
     {
       "matches": ["<all_urls>"],
       "run_at": "document_end",
-      "js": [
-        "js/runtime.bundle.js", "js/content_scripts.bundle.js"
-      ]
+      "js": ["js/runtime.bundle.js", "js/content_scripts.bundle.js"]
     }
   ],
 
@@ -39,7 +37,7 @@
   },
 
   "action": {
-    "default_icon": "assets/icons/bolt-solid.png",
+    "default_icon": "assets/icons/Productivity-Logo.png",
     "default_title": "Productivity Booster",
     "default_popup": "html/popup.html"
   },

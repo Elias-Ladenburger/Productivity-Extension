@@ -8,64 +8,66 @@
     <script src="../js/popup.bundle.js"></script>
   </head>
 
-  <body class="bg-primary">
+  <body class="text-black p-3">
     <!-- navigation -->
-    <nav
-      class="space-x-4 w-full top-0 px-1 pt-1 flex items-center justify-between"
-    >
-      <div class="flex flex-row space-x-2 bg-navy text-primary">
-        <div class="bg-green rounded-full bg-primary">
-          <img class="h-6 fill-navy" src="../assets/icons/bolt-solid-black.svg" />
+    <div>
+      <nav
+        class="space-x-4 w-full h-auto top-0 px-1 py-1 flex items-center justify-between"
+      >
+        <div class="flex flex-row space-x-2 items-center p-1">
+          <div class="rounded-full">
+            <img class="h-6" src="../assets/icons/Productivity-Logo.png" />
+          </div>
+
+          <h1 class="text-xl font-bold">Productivity Booster</h1>
         </div>
-        <h1 class="text-xl font-bold">Productivity Booster</h1>
-      </div>
-      <ul>
-        <li>
-          <button class="rounded-full bg-navy hover:bg-blueRoyal">
-            <div class="p-2 invert h-max w-max">
-              <img
-                class="h-6 w-6"
-                src="../assets/img/setting.png"
-                alt="Productivity Booster Settings"
-              />
-            </div>
-          </button>
-        </li>
-      </ul>
-    </nav>
-
-    <hr/>
-
-    <div id="popup-content" class="text-navy px-5 py-5 text-base">
-      <p class="py-2 w-128">
+        <ul>
+          <li>
+            <button
+              id="settingsButton"
+              class="rounded-full bg-primary hover:bg-primary800"
+            >
+              <div class="invert h-max w-max p-1">
+                <img
+                  class="h-5 w-5"
+                  src="../assets/img/setting.png"
+                  alt="Productivity Booster Settings"
+                />
+              </div>
+            </button>
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <hr />
+    <div class="px-2">
+      <p class="py-2 w-128 text-base text-neutral700">
         This extension will redirect you from <b>"productivity killers"</b> to
         more harmless, maybe even <b>productive sites</b>.<br />
       </p>
-      <div class="py-3">
-        <button
-          id="toggleProductivityButton"
-          class="text-white bg-navy rounded-full px-3 hover:bg-blueRoyal"
-        >
-          Stop productivity rules
-        </button>
-      </div>
-      <div>
-        <p>
-          In the settings you can toggle at what times this applies, what sites
-          are affected and where you want to be redirected to.
-        </p>
-        <button
-          id="settingsButton"
-          class="text-white bg-navy rounded-full px-3 hover:bg-blueRoyal"
-        >
-          Settings
-        </button>
-      </div>
-    </div>
 
-    <div id="error-content" class="hidden">
-      <p>Some error occured.</p>
-      <p>Please try opening this popup on a different page.</p>
+      <div id="productivityStatus" class="p-2">
+        <form class="flex flex-row justify-between my-4 items-center">
+          <div>
+            <label class="text-lg font-bold" for="flexSwitchCheckDefault">
+              Applying Productivity Rules</label
+            >
+            <p class="text-base">Until <span id="time">12:30</span></p>
+          </div>
+          <input
+            class="mr-2 mt-[0.3rem] h-3.5 w-8 appearance-none rounded-[0.4375rem] bg-neutral before:pointer-events-none before:absolute before:h-3.5 before:w-3.5 before:rounded-full before:bg-transparent before:content-[''] after:absolute after:z-[2] after:-mt-[0.1875rem] after:h-5 after:w-5 after:rounded-full after:border-none after:bg-neutral700 after:shadow-[0_0px_3px_0_rgb(0_0_0_/_7%),_0_2px_2px_0_rgb(0_0_0_/_4%)] after:transition-[background-color_0.2s,transform_0.2s] after:content-[''] checked:bg-success checked:after:absolute checked:after:z-[2] checked:after:-mt-[3px] checked:after:ml-[1.0625rem] checked:after:h-5 checked:after:w-5 checked:after:rounded-full checked:after:border-none checked:after:bg-success checked:after:shadow-[0_3px_1px_-2px_rgba(0,0,0,0.2),_0_2px_2px_0_rgba(0,0,0,0.14),_0_1px_5px_0_rgba(0,0,0,0.12)] checked:after:transition-[background-color_0.2s,transform_0.2s] checked:after:content-[''] hover:cursor-pointer focus:outline-none focus:ring-0 focus:before:scale-100 focus:before:opacity-[0.12] focus:before:shadow-[3px_-1px_0px_13px_rgba(0,0,0,0.6)] focus:before:transition-[box-shadow_0.2s,transform_0.2s] focus:after:absolute focus:after:z-[1] focus:after:block focus:after:h-5 focus:after:w-5 focus:after:rounded-full focus:after:content-[''] checked:focus:border-success checked:focus:bg-success checked:focus:before:ml-[1.0625rem] checked:focus:before:scale-100 checked:focus:before:shadow-[3px_-1px_0px_13px_#3b71ca] checked:focus:before:transition-[box-shadow_0.2s,transform_0.2s] dark:bg-neutral680 dark:after:bg-neutral900 dark:checked:bg-success dark:checked:after:bg-success dark:focus:before:shadow-[3px_-1px_0px_13px_rgba(255,255,255,0.4)] dark:checked:focus:before:shadow-[3px_-1px_0px_13px_#3b71ca]"
+            type="checkbox"
+            role="switch"
+            id="flexSwitchCheckDefault"
+          />
+        </form>
+      </div>
+
+      <div class="">
+        <p class="text-base text-neutral">
+          This site is <span id="pageStatus">neutral</span>
+        </p>
+      </div>
     </div>
   </body>
 </html>
