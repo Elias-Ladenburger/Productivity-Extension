@@ -546,6 +546,11 @@ video {
   margin-right: 0.75rem;
 }
 
+.my-2 {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
 .my-4 {
   margin-top: 1rem;
   margin-bottom: 1rem;
@@ -735,6 +740,11 @@ video {
   background-color: rgb(0 73 158 / var(--tw-bg-opacity));
 }
 
+.bg-primary300 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(0 96 207 / var(--tw-bg-opacity));
+}
+
 .bg-white {
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
@@ -853,14 +863,9 @@ video {
   color: rgb(0 0 0 / var(--tw-text-opacity));
 }
 
-.text-neutral {
+.text-neutral900 {
   --tw-text-opacity: 1;
-  color: rgb(158 158 158 / var(--tw-text-opacity));
-}
-
-.text-neutral700 {
-  --tw-text-opacity: 1;
-  color: rgb(115 115 115 / var(--tw-text-opacity));
+  color: rgb(71 71 71 / var(--tw-text-opacity));
 }
 
 .text-primary {
@@ -978,9 +983,9 @@ video {
   content: var(--tw-content);
 }
 
-.checked\:bg-success:checked {
+.checked\:bg-primary:checked {
   --tw-bg-opacity: 1;
-  background-color: rgb(0 157 16 / var(--tw-bg-opacity));
+  background-color: rgb(0 73 158 / var(--tw-bg-opacity));
 }
 
 .checked\:after\:absolute:checked::after {
@@ -1023,10 +1028,10 @@ video {
   border-style: none;
 }
 
-.checked\:after\:bg-success:checked::after {
+.checked\:after\:bg-primary:checked::after {
   content: var(--tw-content);
   --tw-bg-opacity: 1;
-  background-color: rgb(0 157 16 / var(--tw-bg-opacity));
+  background-color: rgb(0 73 158 / var(--tw-bg-opacity));
 }
 
 .checked\:after\:shadow-\[0_3px_1px_-2px_rgba\(0\2c 0\2c 0\2c 0\.2\)\2c _0_2px_2px_0_rgba\(0\2c 0\2c 0\2c 0\.14\)\2c _0_1px_5px_0_rgba\(0\2c 0\2c 0\2c 0\.12\)\]:checked::after {
@@ -1052,9 +1057,14 @@ video {
   cursor: pointer;
 }
 
-.hover\:bg-primary800:hover {
+.hover\:bg-primary400:hover {
   --tw-bg-opacity: 1;
-  background-color: rgb(0 42 90 / var(--tw-bg-opacity));
+  background-color: rgb(0 80 171 / var(--tw-bg-opacity));
+}
+
+.hover\:bg-primary900:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(0 34 73 / var(--tw-bg-opacity));
 }
 
 .focus\:outline-none:focus {
@@ -1129,14 +1139,14 @@ video {
   content: var(--tw-content);
 }
 
-.checked\:focus\:border-success:focus:checked {
+.checked\:focus\:border-primary:focus:checked {
   --tw-border-opacity: 1;
-  border-color: rgb(0 157 16 / var(--tw-border-opacity));
+  border-color: rgb(0 73 158 / var(--tw-border-opacity));
 }
 
-.checked\:focus\:bg-success:focus:checked {
+.checked\:focus\:bg-primary:focus:checked {
   --tw-bg-opacity: 1;
-  background-color: rgb(0 157 16 / var(--tw-bg-opacity));
+  background-color: rgb(0 73 158 / var(--tw-bg-opacity));
 }
 
 .checked\:focus\:before\:ml-\[1\.0625rem\]:focus:checked::before {
@@ -1172,15 +1182,15 @@ video {
     background-color: rgb(71 71 71 / var(--tw-bg-opacity));
   }
 
-  .dark\:checked\:bg-success:checked {
+  .dark\:checked\:bg-primary:checked {
     --tw-bg-opacity: 1;
-    background-color: rgb(0 157 16 / var(--tw-bg-opacity));
+    background-color: rgb(0 73 158 / var(--tw-bg-opacity));
   }
 
-  .dark\:checked\:after\:bg-success:checked::after {
+  .dark\:checked\:after\:bg-primary:checked::after {
     content: var(--tw-content);
     --tw-bg-opacity: 1;
-    background-color: rgb(0 157 16 / var(--tw-bg-opacity));
+    background-color: rgb(0 73 158 / var(--tw-bg-opacity));
   }
 
   .dark\:focus\:before\:shadow-\[3px_-1px_0px_13px_rgba\(255\2c 255\2c 255\2c 0\.4\)\]:focus::before {
