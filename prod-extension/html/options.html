@@ -6,98 +6,99 @@
     <link rel="stylesheet" href="../assets/css/main.css" />
   </head>
 
-  <body class="pt-5 px-5 text-lg text-navy space-y-4 bg-abstractBG">
-    <div class="flex flex-row items-center space-x-4 mb-2">
-      <img class="h-20 w-24" src="../assets/icons/Productivity-Logo.png"/>
-    <h1 class="text-3xl font-bold pb-4">
-      <em class="">Productivity Booster</em>
-    </h1>
-    </div>
-    <p class="pb-4 text-xl">
-      Re-take control of your productivity! This extension will redirect you
-      from sites that kill your motivation and productivity and instead redirect
-      you to more productive places. <br />
-      Apply proven methods taken from “Atomic Habits” by James Clear. Become
-      more focused with the Pomodoro-technique. Finish what you started and feel
-      good about it.
-    </p>
-    <div id="settingsBody" class="grid grid-cols-2 space-x-4">
-      <div id="leftBody">
-        <h2 id="ruleFormTitle" class="text-2xl font-bold pb-4">Add a Rule</h2>
-        <form class="py-5 focus:placeholder-navy bg-bgGrey100 bg-opacity-70 px-5">
-          <div class="grid grid-cols-4">
-            <input type="hidden" id="ruleID" />
-            <label for="actionsource" class="col-span-1 mt-2"
-              >When I visit...</label
-            >
-            <input
-              id="actionsource"
-              name="actionsource"
-              type="text"
-              placeholder="unproductiveSite.com"
-              class="bg-lightRed mt-2 col-span-3 px-1"
-              required
-            />
-
-            <label for="actiontype" class="col-span-1 mt-2">then</label>
-            <select
-              id="actiontype"
-              name="actiontype"
-              class="bg-lightRed col-span-3 px-1 mt-2"
-              required
-            ></select>
-
-            <input
-              id="targetvalue"
-              name="targetvalue"
-              type="text"
-              placeholder="productiveURL.com"
-              class="bg-lightRed w-full col-span-4 px-1 mt-2"
-              required
-            />
-
-            <details class="col-span-4">
-              <summary>Advanced Settings</summary>
-              <div class="grid grid-cols-4">
-                <label for="rulecondition" class="col-span-1 mt-2"
-                  >do this</label
-                >
-                <select
-                  id="rulecondition"
-                  name="rulecondition"
-                  class="col-span-3 bg-lightRed px-1 mt-2"
-                  required
-                ></select>
-
-                <label for="actiondelay" class="col-span-1 mt-2"
-                  >repeat this</label
-                >
-                <select
-                  id="actiondelay"
-                  name="actiondelay"
-                  class="bg-lightRed px-1 mt-2 col-span-3"
-                  required
-                ></select>
-              </div>
-            </details>
-          </div>
-          <div class="flex justify-center pt-3 space-x-4">
-            <button
-              id="addRuleButton"
-              class="text-center rounded-lg bg-navy text-white hover:bg-blueRoyal px-2"
-            >
-              Add Rule
-            </button>
-            <button
-              id="cancelRuleButton"
-              class="text-center rounded-lg bg-navy text-white hover:bg-blueRoyal px-2"
-            >
-              Cancel
-            </button>
-          </div>
-        </form>
+  <body
+    class="pt-5 text-lg text-navy space-y-4 bg-abstractBG bg-cover lg:px-96 md:px-48 sm:px-5"
+  >
+    <div class="bg-white p-2 rounded-md">
+      <div class="flex flex-row items-center space-x-4 mb-2 rounded-md">
+        <img class="w-24" src="../assets/icons/Productivity-Logo.png" />
+        <h1 class="text-3xl font-bold pb-4">
+          <em class="text-black">Productivity Booster</em>
+        </h1>
+        <p class="pb-4 text-base hidden md:visible">
+          Re-take control of your productivity! This extension will redirect you
+          from sites that kill your motivation and productivity and instead
+          redirect you to more productive places. <br />
+          Apply proven methods taken from “Atomic Habits” by James Clear. Become
+          more focused with the Pomodoro-technique. Finish what you started and
+          feel good about it.
+        </p>
       </div>
-      <!-- <div>
+    </div>
+
+    <div class="bg-white p-12 rounded-md">
+      <div id="settingsBody" class="space-x-4">
+        <div id="leftBody">
+          <h2 id="ruleFormTitle" class="text-2xl font-bold">Add a Rule</h2>
+          <form
+            class="pb-5 pt-3 focus:placeholder-navy rounded-md bg-opacity-70 px-5 justify-between"
+          >
+            <div class="">
+              <select
+                id="rulecondition"
+                name="rulecondition"
+                class="bg-bgRed100 rounded-md px-1 mt-2"
+                required
+              ></select>
+
+              <input type="hidden" id="ruleID" />
+
+              <label for="actionsource" class="mt-2">when I visit...</label>
+              <input
+                id="actionsource"
+                name="actionsource"
+                type="text"
+                placeholder="unproductiveSite.com"
+                class="bg-bgRed100 rounded-md mt-2 px-1"
+                required
+              />
+
+              <label for="actiontype" class="col-span-1 mt-2">then</label>
+              <select
+                id="actiondelay"
+                name="actiondelay"
+                class="bg-bgRed100 rounded-md px-1 mt-2"
+                required
+              ></select>
+
+              <select
+                id="actiontype"
+                name="actiontype"
+                class="bg-bgRed100 rounded-md col-span-3 px-1 mt-2"
+                required
+              ></select>
+
+              <input
+                id="targetvalue"
+                name="targetvalue"
+                type="text"
+                placeholder="productiveURL.com"
+                class="bg-bgRed100 rounded-md w-full col-span-4 px-1 mt-2"
+                required
+              />
+            </div>
+
+            <div class="flex justify-center pt-3 space-x-4">
+              <button
+                id="addRuleButton"
+                class="text-center rounded-lg bg-primary100 text-white hover:bg-primary px-2"
+              >
+                Add Rule
+              </button>
+              <button
+                id="cancelRuleButton"
+                class="text-center rounded-lg bg-primary100 text-white hover:bg-primary px-2"
+              >
+                Cancel
+              </button>
+            </div>
+          </form>
+        </div>
+        <hr />
+      </div>
+
+      <div class="bg-white rounded-md">
+        <!-- <div>
         <h2 class="text-2xl font-bold pb-4">My work schedule</h2>
         <form class="py-5 focus:placeholder-navy bg-primary bg-opacity-70 px-5">
           <div>
@@ -156,23 +157,46 @@
           </div>
         </form>
       </div> -->
-    </div>
-
-    <div id="workinghours" class="pt-5 grid grid-cols-2 space-x-4">
-      <div id="rightBody" class="">
-        <h2 class="text-2xl font-bold pb-4">My Productivity Rules</h2>
-        <table id="productionRuleTable" class="text-base space-y-3 pb-3">
-          <thead>
-          <tr class="text-lg text-left bg-grey text-primary mx-3">
-            <th class="px-3 w-4/5">Rule</th>
-            <th class="px-3 w-1/5">Actions</th>
-          </tr>
-          </thead>
-          <tbody></tbody>
-        </table>
       </div>
 
+      <div id="rightBody" class="">
+        <h2 class="text-2xl font-bold py-4 pt-4">My Productivity Rules</h2>
+
+        <table id="productionRuleTable" class="text-base space-y-3 pb-3">
+          <thead>
+            <tr class="text-lg text-left text-black mx-3">
+              <th class="px-3 w-4/5">Rule</th>
+              <th class="px-3 w-1/5">Actions</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr id="prototypeCell">
+              <td>Some rule!</td>
+              <td>
+                <button
+                  id="prototypeEditButton"
+                  class="rounded-md border-white bg-primary100 text-white hover:bg-primary px-2 mx-1 text-center"
+                >
+                  <img
+                    class="invert h-9 py-2"
+                    src="../assets/icons/Edit icon.svg"
+                  />
+                </button>
+                <button
+                  id="prototypeDeleteButton"
+                  class="rounded-lg border-white bg-primary100 hover:bg-primary text-white px-2 mx-1 text-center"
+                >
+                  delete
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
       <!-- <div>
+          <div id="workinghours" class="pt-5 grid grid-cols-2 space-x-4"></div>
+
         <h2 class="text-2xl font-bold pb-4">My Work Times</h2>
         <table id="workTimeTable" class="text-base space-y-3 pb-3">
           <tr class="text-lg text-left bg-grey text-primary mx-3">
@@ -180,7 +204,8 @@
             <th class="px-3 w-1/5">Actions</th>
           </tr>
         </table>
-      </div> -->
+      </div> 
+      </div>-->
     </div>
     <script src="../js/runtime.bundle.js"></script>
 

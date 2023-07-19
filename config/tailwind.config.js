@@ -22,15 +22,16 @@ module.exports = {
       }
     },
     colors: {
-      primary100: '#0077FF',
-      primary200: '#006BE5',
-      primary300: '#0060CF',
-      primary400: '#0050AB',
-      primary: '#00499E',
-      primary600: '#00408A',
-      primary700: '#003573',
-      primary800: '#002A5A',
-      primary900: '#002249',
+      primary100: '#24C5CF',
+      primary200: '#72BCC2',
+      primary300: '#1AB0BE',
+      primary400: '#0C9BAB',
+      primary500: '#0C9BAB',
+      primary600: '#0C9BAB',
+      primary700: '#0C9BAB',
+      primary800: '#008AA0',
+      primary900: '#007694',
+      primary: '#007694',
 
       secondary: '#91009E',
       tertiary: '',
@@ -69,7 +70,18 @@ module.exports = {
       neutral600: '#8A8A8A',
       neutral700: '#737373',
       neutral800: '#595959',
-      neutral900: '#474747'
+      neutral900: '#474747',
+
+      bgRed100: '#FFB2B2',
+      bgRed200: '#E5A0A0',
+      bgRed300: '#CF9090',
+      bgRed400: '#B27D7D',
+      bgRed: '#9E6F6F',
+      bgRed600: '#8A6060',
+      bgRed700: '#735050',
+      bgRed800: '#593E3E',
+      bgRed900: '#4A3434',
+
     },
     backgroundImage: {
       abstractBG: "url('../img/Abstract-mountains-bg.jpg')"

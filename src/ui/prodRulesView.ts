@@ -69,7 +69,7 @@ const ProdTable = {
   },
 
   removeRule: (ruleID:string) => {
-    let toDelete = document.getElementById(ruleID)
+    let toDelete = document.getElementById(ruleID) as HTMLTableElement;
     toDelete.remove();
     console.log(`Removing rule for ${ruleID}!`);
   },
