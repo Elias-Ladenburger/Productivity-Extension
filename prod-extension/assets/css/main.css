@@ -556,10 +556,6 @@ video {
   margin-bottom: 1rem;
 }
 
-.-ml-2 {
-  margin-left: -0.5rem;
-}
-
 .mb-2 {
   margin-bottom: 0.5rem;
 }
@@ -750,6 +746,11 @@ video {
 .bg-bgGrey100 {
   --tw-bg-opacity: 1;
   background-color: rgb(179 214 255 / var(--tw-bg-opacity));
+}
+
+.bg-bgGrey500 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(111 133 158 / var(--tw-bg-opacity));
 }
 
 .bg-bgRed100 {

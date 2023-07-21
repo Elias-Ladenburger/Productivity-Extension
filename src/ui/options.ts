@@ -12,6 +12,9 @@ const blockElements: { [key: string]: BlockItem } = {
 
 const inactiveButton = document.getElementById("inactiveButton") as HTMLButtonElement
 const activeButton = document.getElementById("activeButton") as HTMLButtonElement
+const commonHTML = "h-14 rounded-t-md px-2 "
+const activeHTML = "bg-white font-bold"
+const inactiveHTML = "bg-neutral200 hover: bg-bgGrey500"
 
 handleInactiveClick()
 
@@ -19,22 +22,25 @@ function handleInactiveClick() {
 
   inactiveButton.addEventListener("click", (e) => {
     e.preventDefault()
+    inactiveButton.className = commonHTML + activeHTML
+    activeButton.className = commonHTML + inactiveHTML
+    selectBody(blockElements.worktimes)
+  })
 
-
-    let oldValue = activeButton.value
-    const oldConf = blockElements[oldValue]
-    let newValue = inactiveButton.value
-    const newConf = blockElements[newValue]
-    populateButton(inactiveButton, oldConf, oldValue)
-    populateButton(activeButton, newConf, newValue)
-    selectBody(newConf)
+  activeButton.addEventListener("click", (e) => {
+    e.preventDefault()
+    activeButton.className = commonHTML + activeHTML
+    inactiveButton.className = commonHTML + inactiveHTML
+    selectBody(blockElements.prodrules)
   })
 
 }
 
-function populateButton(button: HTMLButtonElement, conf: BlockItem, value: string) {
-  button.value = value
-  button.innerHTML = conf.name
+function toggleButtons() {
+  inactiveButton.classList.toggle(activeHTML)
+  inactiveButton.classList.toggle(inactiveHTML)
+  activeButton.classList.toggle(activeHTML)
+  activeButton.classList.toggle(inactiveHTML)
 }
 
 function selectBody(bodyItem: BlockItem) {
