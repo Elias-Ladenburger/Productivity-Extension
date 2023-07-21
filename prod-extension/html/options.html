@@ -1,180 +1,145 @@
 <!DOCTYPE html>
 <html>
-  <head>
+
+<head>
     <title>Productivity Booster - Browser Extension</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../assets/css/main.css" />
-  </head>
+</head>
 
-  <body class="pt-5 text-lg text-navy space-y-4 bg-abstractBG bg-cover lg:w-10/12 sm:px-5">
+<body class="pt-5 text-lg text-navy space-y-4 bg-abstractBG bg-cover lg:w-10/12 sm:px-5">
+
     <aside>
-      <div class="bg-white p-2 rounded-md">
-        <div class="flex flex-row items-center space-x-4 mb-2 rounded-md">
-          <img class="w-24" src="../assets/icons/Productivity-Logo.png" />
-          <h1 class="text-3xl font-bold pb-4">
-            <em class="text-black">Productivity Booster</em>
-          </h1>
-          <p class="pb-4 text-base">
-            Re-take control of your productivity! This extension will redirect
-            you from sites that kill your motivation and productivity and
-            instead redirect you to more productive places. <br />
-            Apply proven methods taken from “Atomic Habits” by James Clear.
-            Become more focused with the Pomodoro-technique. Finish what you
-            started and feel good about it.
-          </p>
+        <div class="bg-white p-2 rounded-md">
+            <div class="flex flex-row items-center space-x-4 mb-2 rounded-md">
+                <img class="w-24" src="../assets/icons/Productivity-Logo.png" />
+                <h1 class="text-3xl font-bold pb-4">
+                    <em class="text-black">Productivity Booster</em>
+                </h1>
+                <p class="pb-4 text-base">
+                    Re-take control of your productivity! This extension will redirect you from sites that kill your motivation and productivity and instead redirect you to more productive places. <br /> Apply proven methods taken from “Atomic Habits” by James Clear. Become more focused with the Pomodoro-technique. Finish what you started and feel good about it.
+                </p>
+            </div>
         </div>
-      </div>
     </aside>
 
-    <div class="bg-white p-12 rounded-md">
-      <div id="rulesBody" class="space-x-4">
-          <h2 id="ruleFormTitle" class="text-2xl font-bold">Add a Rule</h2>
-          <form class="pb-5 pt-3 focus:placeholder-navy rounded-md bg-opacity-70 px-5 justify-between">
-            <div class="">
-              <select
-                id="rulecondition"
-                name="rulecondition"
-                class="bg-bgRed100 rounded-md px-1 mt-2"
-                required
-              ></select>
-
-              <input type="hidden" id="ruleID" />
-
-              <label for="actionsource" class="mt-2">when I visit...</label>
-              <input
-                id="actionsource"
-                name="actionsource"
-                type="text"
-                placeholder="unproductiveSite.com"
-                class="bg-bgRed100 rounded-md mt-2 px-1"
-                required
-              />
-
-              <label for="actiontype" class="col-span-1 mt-2">then</label>
-              <select
-                id="actiondelay"
-                name="actiondelay"
-                class="bg-bgRed100 rounded-md px-1 mt-2"
-                required
-              ></select>
-
-              <select
-                id="actiontype"
-                name="actiontype"
-                class="bg-bgRed100 rounded-md col-span-3 px-1 mt-2"
-                required
-              ></select>
-
-              <input
-                id="targetvalue"
-                name="targetvalue"
-                type="text"
-                placeholder="productiveURL.com"
-                class="bg-bgRed100 rounded-md w-full col-span-4 px-1 mt-2"
-                required
-              />
+    <div class="rounded-md bg-bgGrey100">
+        <div class="flex ">
+            <div class="justify-start">
+                <button id="activeButton" value="prodrules" class="h-14 bg-white rounded-t-md px-2 mr-2 font-bold">
+            Productivity Rules
+          </button>
+                <button id="inactiveButton" value="worktimes" class="h-14 bg-neutral200 hover:bg-bgGrey500 rounded-t-md px-2 -ml-2">
+            Work Times
+          </button>
             </div>
-
-            <div class="flex justify-center pt-3 space-x-4">
-              <button
-                id="addRuleButton"
-                class="text-center rounded-lg bg-primary100 text-white hover:bg-primary px-2"
-              >
-                Add Rule
-              </button>
-              <button
-                id="cancelRuleButton"
-                class="text-center rounded-lg bg-primary100 text-white hover:bg-primary px-2"
-              >
-                Cancel
-              </button>
-            </div>
-          </form>
         </div>
-      
-      <h2 class="text-2xl font-bold py-4 pt-4">My Productivity Rules</h2>
 
-      <table id="productionRuleTable" class="text-base space-y-3 pb-3">
-        <thead>
-          <tr class="text-lg text-left text-black mx-3">
-            <th class="px-3 w-4/5">Rule</th>
-            <th class="px-3 w-1/5">Actions</th>
-          </tr>
-        </thead>
+        <main class="bg-white p-12 rounded-b-md ">
+            <div id="rulesBody" class="space-x-4">
+                <div>
+                    <h2 id="ruleFormTitle" class="text-2xl font-bold">Add a Rule</h2>
+                    <form class="pb-5 pt-3 focus:placeholder-navy rounded-md bg-opacity-70 px-5 justify-between">
+                        <div class="">
+                            <select id="rulecondition" name="rulecondition" class="bg-bgRed100 rounded-md px-1 mt-2" required></select>
 
-        <tbody>
-          <tr id="prototypeCell">
-            <td>Some rule!</td>
-            <td>
-              <button
-                id="prototypeEditButton"
-                class="rounded-md border-white bg-primary100 text-white hover:bg-primary px-2 mx-1 text-center"
-              >
-                <img class="invert h-9 py-2" src="../assets/icons/Edit icon.svg" />
-              </button>
-              <button
-                id="prototypeDeleteButton"
-                class="rounded-lg border-white bg-primary100 hover:bg-primary text-white px-2 mx-1 text-center"
-              >
-                delete
-              </button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+                            <input type="hidden" id="ruleID" />
 
-    <div id="worktimesblock" class="rounded-md bg-white hidden">
+                            <label for="actionsource" class="mt-2">when I visit...</label>
+                            <input id="actionsource" name="actionsource" type="text" placeholder="unproductiveSite.com" class="bg-bgRed100 rounded-md mt-2 px-1" required />
+
+                            <label for="actiontype" class="col-span-1 mt-2">then</label>
+                            <select id="actiondelay" name="actiondelay" class="bg-bgRed100 rounded-md px-1 mt-2" required></select>
+
+                            <select id="actiontype" name="actiontype" class="bg-bgRed100 rounded-md col-span-3 px-1 mt-2" required></select>
+
+                            <input id="targetvalue" name="targetvalue" type="text" placeholder="productiveURL.com" class="bg-bgRed100 rounded-md w-full col-span-4 px-1 mt-2" required />
+                        </div>
+
+                        <div class="flex justify-center pt-3 space-x-4">
+                            <button id="addRuleButton" class="text-center rounded-lg bg-primary100 text-white hover:bg-primary px-2">
+                  Add Rule
+                </button>
+                            <button id="cancelRuleButton" class="text-center rounded-lg bg-primary100 text-white hover:bg-primary px-2">
+                  Cancel
+                </button>
+                        </div>
+                    </form>
+
+                </div>
+                <hr/>
+                <h2 class="text-2xl font-bold py-4 pt-4">My Productivity Rules</h2>
+
+                <table id="productionRuleTable" class="text-base space-y-3 pb-3">
+                    <thead>
+                        <tr class="text-lg text-left text-black mx-3">
+                            <th class="px-3 w-4/5">Rule</th>
+                            <th class="px-3 w-1/5">Actions</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr id="prototypeCell">
+                            <td>Some rule!</td>
+                            <td>
+                                <button id="prototypeEditButton" class="rounded-md border-white bg-primary100 text-white hover:bg-primary px-2 mx-1 text-center">
+                    <img class="invert h-9 py-2" src="../assets/icons/Edit icon.svg" />
+                  </button>
+                                <button id="prototypeDeleteButton" class="rounded-lg border-white bg-primary100 hover:bg-primary text-white px-2 mx-1 text-center">
+                    delete
+                  </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+          <div id="worktimeBody" class="hidden">
         <h2 class="text-2xl font-bold pb-4">My work schedule</h2>
         <form class="py-5 focus:placeholder-navy bg-opacity-70 px-5">
-          <label for="workingday" class="col-span-1 mt-2">On</label>
-          <select
-            id="workingday"
-            name="workingday"
-            class="bg-bgRed100 col-span-3 px-1 mt-2 rounded-md"
-            required
-          >
-            <option value="1">Mondays</option>
-            <option value="2">Tuesdays</option>
-            <option value="3">Wednesdays</option>
-            <option value="4">Thursdays</option>
-            <option value="5">Fridays</option>
-            <option value="6">Saturdays</option>
-            <option value="7">Sundays</option>
-          </select>
+            <label for="workingday" class="col-span-1 mt-2">On</label>
+            <select id="workingday" name="workingday" class="bg-bgRed100 col-span-3 px-1 mt-2 rounded-md" required>
+              <option value="1">Mondays</option>
+              <option value="2">Tuesdays</option>
+              <option value="3">Wednesdays</option>
+              <option value="4">Thursdays</option>
+              <option value="5">Fridays</option>
+              <option value="6">Saturdays</option>
+              <option value="7">Sundays</option>
+            </select>
 
-            
-          <label for="timepicker_from">From:</label>
-          <input type="text" id="timepicker_from" class="bg-bgRed100 rounded-md" />
-          <label for="timepicker_to">To:</label>
-          <input type="text" id="timepicker_to" class="bg-bgRed100 rounded-md" />
-        
-          <div class="flex justify-center pt-3">
-            <button
-            id="workTimeButton"
-            class="text-center rounded-lg bg-primary100 text-white hover:bg-primary px-2"
-            >
-            Schedule Work Time
-            </button>
-          </div>
+            <label for="timepicker_from">From:</label>
+            <input type="time" value="12:00" id="timepicker_from" class="bg-bgRed100 rounded-md" />
+            <label for="timepicker_to">To:</label>
+            <input type="time" value="12:00" id="timepicker_to" class="bg-bgRed100 rounded-md" />
+
+            <div class="flex justify-center pt-3">
+                <button id="workTimeButton" class="text-center rounded-lg bg-primary100 text-white hover:bg-primary px-2">
+              Schedule Work Time
+              </button>
+            </div>
         </form>
-        
-      <div id="workinghours" class="pt-5 grid grid-cols-2 space-x-4">
+        <hr/>
 
-        <h2 class="text-2xl font-bold pb-4">My Work Times</h2>
-        <table id="workTimeTable" class="text-base space-y-3 pb-3">
-          <thead>
-            <tr class="text-lg text-left bg-grey text-primary mx-3">
-              <th class="px-3 w-4/5">Rule</th>
-              <th class="px-3 w-1/5">Actions</th>
-            </tr>
-          </thead>
-        </table>
-      </div>
+        <div id="workinghours" class="pt-5 grid grid-cols-2 space-x-4">
+
+            <h2 class="text-2xl font-bold pb-4">My Work Times</h2>
+            <table id="workTimeTable" class="text-base space-y-3 pb-3">
+                <thead>
+                    <tr class="text-lg text-left bg-grey text-primary mx-3">
+                        <th class="px-3 w-4/5">Rule</th>
+                        <th class="px-3 w-1/5">Actions</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+           </div>
+
+        </main>
     </div>
 
     <script src="../js/runtime.bundle.js"></script>
 
     <script src="../js/options.bundle.js"></script>
-  </body>
+</body>
+
 </html>

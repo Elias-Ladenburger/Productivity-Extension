@@ -1,38 +1,61 @@
 
 interface BlockItem {
-  body: string, 
-  nav: string
+  body: string,
+  nav: string,
+  name: string
 }
 
-const blockElements = {rules: {body: "rulesBody", nav: "rulesNav"}, worktimes: {body: "worktimebody", nav: "worktimenav"}}
+const blockElements: { [key: string]: BlockItem } = {
+  prodrules: { body: "rulesBody", nav: "rulesNav", name: "Productivity Rules" },
+  worktimes: { body: "worktimeBody", nav: "worktimenav", name: "Work Times" }
+}
 
-function toggleBody(bodyName: string, make_visible: boolean) {
+const inactiveButton = document.getElementById("inactiveButton") as HTMLButtonElement
+const activeButton = document.getElementById("activeButton") as HTMLButtonElement
+
+handleInactiveClick()
+
+function handleInactiveClick() {
+
+  inactiveButton.addEventListener("click", (e) => {
+    e.preventDefault()
 
 
+    let oldValue = activeButton.value
+    const oldConf = blockElements[oldValue]
+    let newValue = inactiveButton.value
+    const newConf = blockElements[newValue]
+    populateButton(inactiveButton, oldConf, oldValue)
+    populateButton(activeButton, newConf, newValue)
+    selectBody(newConf)
+  })
+
+}
+
+function populateButton(button: HTMLButtonElement, conf: BlockItem, value: string) {
+  button.value = value
+  button.innerHTML = conf.name
+}
+
+function selectBody(bodyItem: BlockItem) {
+  hideAll()
+  makeVisible(bodyItem)
 }
 
 function hideAll() {
-  for(let elem in blockElements) {
-
+  for (let elem in blockElements) {
+    makeInvisible(blockElements[elem])
   }
-    
-  }
+}
 
-  function makeVisible(active: BlockItem) {
+function makeVisible(active: BlockItem) {
 
-  const ruleBody = document.getElementById(active.body) as HTMLElement 
-  ruleBody.style.visibility = "visible"
+  const activeBody = document.getElementById(active.body) as HTMLElement
+  activeBody.classList.remove("hidden")
 
-  const navItem = document.getElementById(active.nav) as HTMLElement
-  navItem.classList.add("bg-white")
-  navItem.classList.remove("bg-BGred100")
-  }
+}
 
-  function makeInvisible(item: any) {
-      const ruleBody = document.getElementById(item.body) as HTMLElement 
-  ruleBody.style.visibility = "hidden"
-
-  const navItem = document.getElementById(item.nav) as HTMLElement
-  navItem.classList.add("bg-BGred100")
-  navItem.classList.remove("bg-white")
-  }
+function makeInvisible(item: any) {
+  const activeBody = document.getElementById(item.body) as HTMLElement
+  activeBody.classList.add("hidden")
+}

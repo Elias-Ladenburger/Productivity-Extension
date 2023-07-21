@@ -3,7 +3,7 @@ var webpack = require('webpack');
 
 module.exports = {
   entry: {
-    options: ['./src/ui/prodRulesController.ts'],
+    options: ['./src/ui/prodRulesController.ts', './src/ui/options.ts'],
     content_scripts: ['./src/content-scripts/productivity.ts'],
     popup: ['./src/popup/popup.js']
   },
