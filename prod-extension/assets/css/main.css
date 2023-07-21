@@ -1246,20 +1246,8 @@ video {
   }
 }
 
-@media (min-width: 768px) {
-  .md\:visible {
-    visibility: visible;
-  }
-
-  .md\:px-48 {
-    padding-left: 12rem;
-    padding-right: 12rem;
-  }
-}
-
 @media (min-width: 1024px) {
-  .lg\:px-96 {
-    padding-left: 24rem;
-    padding-right: 24rem;
+  .lg\:w-10\/12 {
+    width: 83.333333%;
   }
 }

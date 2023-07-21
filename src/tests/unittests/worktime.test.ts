@@ -47,5 +47,11 @@ describe("WorkTimeFactory", function () {
     expect(work.weekday).toEqual(4);
     expect(work.is_active).toEqual(true);
   });
+  test("should trigger worktime today", function () {
+    let today = new Date()
+    let weekday = today.getDay()
+    let work = WorkTimeFactory.createWorkTimeFromStrings("00:01", "23:59", weekday, true)
+    expect(work.isWorkTime()).toEqual(true)
+  })
 
 });

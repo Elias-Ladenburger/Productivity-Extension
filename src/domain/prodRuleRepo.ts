@@ -69,7 +69,7 @@ const ProdRuleRepository = {
   },
 
   setRuleList: (ruleList: RuleList) => {
-    chrome.storage.local.set({ productivityRules: ruleList });
+    persHandler.setAll(ruleList)
   }
 
 }

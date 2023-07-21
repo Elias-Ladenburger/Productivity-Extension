@@ -1,4 +1,4 @@
-
+import PersistanceHandler from "../persistance/persistance"
 
 const WorkHourService = {
     toggleBreak: (breakTimeInMS: number) => {
@@ -7,7 +7,10 @@ const WorkHourService = {
 
     isWorkingTime: () => {
         
-    }
+        
+    },
+    addWorkHour: () => {
 
+    }
 
 }
