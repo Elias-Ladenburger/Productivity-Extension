@@ -29,8 +29,8 @@ function handleInactiveClick() {
 
   activeButton.addEventListener("click", (e) => {
     e.preventDefault()
-    activeButton.className = commonHTML + activeHTML
-    inactiveButton.className = commonHTML + inactiveHTML
+    activeButton.className = commonHTML + " " + activeHTML
+    inactiveButton.className = commonHTML + " " + inactiveHTML
     selectBody(blockElements.prodrules)
   })
 
