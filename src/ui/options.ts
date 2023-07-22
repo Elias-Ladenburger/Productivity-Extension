@@ -14,7 +14,7 @@ const inactiveButton = document.getElementById("inactiveButton") as HTMLButtonEl
 const activeButton = document.getElementById("activeButton") as HTMLButtonElement
 const commonHTML = "h-14 rounded-t-md px-2 "
 const activeHTML = "bg-white font-bold"
-const inactiveHTML = "bg-neutral200 hover: bg-bgGrey500"
+const inactiveHTML = "bg-bgGrey100 hover:bg-bgGrey500"
 
 handleInactiveClick()
 

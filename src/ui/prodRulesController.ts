@@ -29,8 +29,8 @@ function prepareForm() {
   }
 }
 
-function prepareCancelButton(){
-const cancelButton = document.getElementById("cancelRuleButton") as HTMLButtonElement;
+function prepareCancelButton() {
+  const cancelButton = document.getElementById("cancelRuleButton") as HTMLButtonElement;
 
   cancelButton.addEventListener(
     "click",
@@ -66,12 +66,13 @@ function addDemoRule() {
 }
 
 function prepareAddRuleButton() {
-  let addButton = document.getElementById("addRuleButton") as HTMLButtonElement;
-  addButton.addEventListener(
+  const saveButton = document.getElementById("saveRuleButton") as HTMLButtonElement;
+  saveButton.addEventListener(
     "click",
     function (e) {
       e.preventDefault()
       addRuleFromForm();
+      ProdRulesView.isFormEditMode(false)
     },
     false
   );
@@ -91,12 +92,12 @@ async function addRuleFromForm() {
   let newEntry = ProdRuleFactory.createRule(actionsource, newAction, actionCondition, actionDelay)
 
   addOrUpdateEntry(newEntry, ruleID)
-    resetSite()
+  resetSite()
 }
 
 async function addOrUpdateEntry(ruleData: ProdRule, ruleID: string) {
-    if (ruleData.source && ruleData.action.type && ruleData.action.targetValue) {
-    if(ruleID == IDHandler.STANDARD_ID || ruleID == ""){
+  if (ruleData.source && ruleData.action.type && ruleData.action.targetValue) {
+    if (ruleID == IDHandler.STANDARD_ID || ruleID == "") {
       const ruleIndex = await PersistanceHandler.addRule(ruleData);
       addToProdTable(ruleData, ruleIndex);
     }
@@ -108,10 +109,10 @@ async function addOrUpdateEntry(ruleData: ProdRule, ruleID: string) {
         ruleData
       );
     }
-    }
+  }
 }
 
-function resetSite(){
+function resetSite() {
   ProdRulesView.clearForm();
   ProdRulesView.clearTable();
   prepareProdRuleTable();
@@ -139,6 +140,7 @@ function addToProdTable(prodRule: ProdRule, ruleIndex: number) {
 function prepareToEdit(prodRule: ProdRule, ruleIndex: number) {
   const ruleID = IDHandler.getRowID(prodRule.source, ruleIndex)
   ProdRulesView.setFormValues(prodRule, ruleID);
+  ProdRulesView.isFormEditMode(true)
 }
 
 function deleteEntry(unproductiveSite: string, ruleIndex: number) {
@@ -149,20 +151,20 @@ function deleteEntry(unproductiveSite: string, ruleIndex: number) {
 
 
 const IDHandler = {
-getRowID: (unproductiveSite: string, ruleIndex: number) => {
-  const rowID = `${unproductiveSite}-${ruleIndex}`;
-  return rowID;
-},
+  getRowID: (unproductiveSite: string, ruleIndex: number) => {
+    const rowID = `${unproductiveSite}-${ruleIndex}`;
+    return rowID;
+  },
 
-deconstructID: (ruleID: string) => {
-  const id_array = ruleID.split("-");
-  return {
-    badSite: id_array[0],
-    index: +id_array[1],
-  };
-},
+  deconstructID: (ruleID: string) => {
+    const id_array = ruleID.split("-");
+    return {
+      badSite: id_array[0],
+      index: +id_array[1],
+    };
+  },
 
-STANDARD_ID: "NEW"
+  STANDARD_ID: "NEW"
 }
 
 
