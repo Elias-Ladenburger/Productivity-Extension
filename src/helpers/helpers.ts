@@ -15,15 +15,14 @@ export function msToTime(miliseconds: number) {
 export function getStringsForEnums(): {[key:string]: {[key:string] : string}} {
   return {
     rulecondition: {
-      ALWAYS: "always",
-      WORK: "during my work times",
-      GOALS: "while my goals are not reached (WIP)",
+      ALWAYS: "Always",
+      WORK: "While working"
     },
 
     actiontype: {
       REDIRECT: "redirect me to",
-      POPUP: "show a popup with the following text",
-      FRAME: "frame the unproductive page in the following color",
+      POPUP: "show a popup with text",
+      FRAME: "color the frame in ",
       LOG: "log my visit only (WIP)",
     },
 
