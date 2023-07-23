@@ -22,7 +22,7 @@ export function getStringsForEnums(): {[key:string]: {[key:string] : string}} {
     actiontype: {
       REDIRECT: "redirect me to",
       POPUP: "show a popup with text",
-      FRAME: "color the frame in ",
+      FRAME: "color the frame in",
       LOG: "log my visit only (WIP)",
     },
 

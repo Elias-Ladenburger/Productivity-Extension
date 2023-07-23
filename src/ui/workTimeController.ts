@@ -1,9 +1,10 @@
+import { WorkTimeFactory } from "../domain/workinghours"
 
 prepareWorkTimes();
 
 function prepareWorkTimes() {
   prepareWorkHourTable();
-  // prepareAddWorkTimeButton();
+  prepareAddWorkTimeButton();
 }
 
 async function prepareWorkHourTable() {
@@ -22,5 +23,11 @@ function addToWorkTimeTable(entry: any) {
 }
 
 function addDemoWorkTime() {
-  return
+  let now = new Date()
+  let demoWorkTime = WorkTimeFactory.createWorkTime(now, now, now.getDay())
+  WorkTimeView.addEntry(demoWorkTime)
+}
+
+function prepareAddWorkTimeButton() {
+  throw new Error("Function not implemented.");
 }

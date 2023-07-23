@@ -62,7 +62,7 @@ function addDemoRule() {
   const demoAction = ActionFactory.createAction("POPUP", "Do you really want to spend time on this site?")
   const demoRule = ProdRuleFactory.createRule(demoURL, demoAction)
 
-  ProdRulesView.addEntryToTable(demoRule, "demo");
+  ProdRulesView.addEntry(demoRule, "demo");
 }
 
 function prepareAddRuleButton() {
@@ -114,13 +114,13 @@ async function addOrUpdateEntry(ruleData: ProdRule, ruleID: string) {
 
 function resetSite() {
   ProdRulesView.clearForm();
-  ProdRulesView.clearTable();
+  ProdRulesView.clearEntries();
   prepareProdRuleTable();
 }
 
 function addToProdTable(prodRule: ProdRule, ruleIndex: number) {
   const ruleID = IDHandler.getRowID(prodRule.source, ruleIndex)
-  const actionButtons = ProdRulesView.addEntryToTable(prodRule, ruleID);
+  const actionButtons = ProdRulesView.addEntry(prodRule, ruleID);
   const editButton = actionButtons["edit"] as HTMLButtonElement
   const deleteButton = actionButtons["delete"] as HTMLButtonElement
   editButton.addEventListener("click", function (e) {
@@ -146,7 +146,7 @@ function prepareToEdit(prodRule: ProdRule, ruleIndex: number) {
 function deleteEntry(unproductiveSite: string, ruleIndex: number) {
   const ruleID = IDHandler.getRowID(unproductiveSite, ruleIndex);
   PersistanceHandler.deleteRule(unproductiveSite, ruleIndex);
-  ProdRulesView.removeFromTable(ruleID);
+  ProdRulesView.removeEntry(ruleID);
 }
 
 

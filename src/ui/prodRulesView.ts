@@ -114,9 +114,9 @@ const ProdTable = {
 
 const ProdRulesView = {
 
-  addEntryToTable: ProdTable.addEntry,
-  clearTable: ProdTable.clear,
-  removeFromTable: ProdTable.removeRule,
+  addEntry: ProdTable.addEntry,
+  clearEntries: ProdTable.clear,
+  removeEntry: ProdTable.removeRule,
 
   isFormEditMode: (editMode: boolean) => {
     let myForm = new RuleForm()
@@ -149,7 +149,7 @@ function _formatString(prodRule: ProdRule) {
   const enumStrings = getStringsForEnums()
   const conditionStr = enumStrings.rulecondition[prodRule.condition]
   const actionStr = enumStrings.actiontype[prodRule.action.type]
-  const delayStr = enumStrings.actiontype[prodRule.delay] || msToTime(prodRule.delay)
+  const delayStr = enumStrings.actiontype[prodRule.delay] || msToTime(prodRule.delay).toLowerCase()
 
   const resultsStr = `<em class="text-lg">${prodRule.source}</em> <br><b>${conditionStr
     }</b> when I visit <b>${prodRule.source}</b> then <b>${delayStr} 

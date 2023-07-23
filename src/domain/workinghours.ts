@@ -72,7 +72,7 @@ class WorkTime {
 }
 
 const WorkTimeFactory = {
-  createWorkTime: (starttime: Date, endtime: Date, weekday: number, is_active: boolean) => {
+  createWorkTime: (starttime: Date, endtime: Date, weekday: number, is_active: boolean = true) => {
     let wt = new WorkTime(starttime, endtime, weekday, is_active)
     return wt
   },
