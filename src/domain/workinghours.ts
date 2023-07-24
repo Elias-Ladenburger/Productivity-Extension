@@ -51,6 +51,10 @@ class WorkTime {
     this.endMinutes = this._parseMinutes(timeValue);
   }
 
+  get weekdayAsString() {
+    return WEEKDAYS[this.weekday]
+  }
+
   isWorkTime(currentTime: Date = new Date()) {
     if (currentTime.getDay() == this.weekday) {
       const currentHour = currentTime.getHours();
@@ -77,7 +81,7 @@ const WorkTimeFactory = {
     return wt
   },
 
-  createWorkTimeFromStrings: (starttime: string, endtime: string, weekday: number, is_active: boolean) => {
+  createWorkTimeFromStrings: (starttime: string, endtime: string, weekday: number, is_active: boolean = true) => {
     const startTimeArr = starttime.split(":")
     const endTimeArr = endtime.split(":")
     let normalizedStart = new Date()
@@ -88,6 +92,16 @@ const WorkTimeFactory = {
     
     return WorkTimeFactory.createWorkTime(normalizedStart, normalizedEnd, weekday, is_active)
   }
+}
+
+const WEEKDAYS: {[key: number]: string} = {
+  1: "Monday",
+  2: "Tuesday", 
+  3: "Wednesday",
+  4: "Thursday",
+  5: "Friday",
+  6: "Saturday",
+  0: "Sunday"
 }
 
 export { WorkTime, WorkTimeFactory }

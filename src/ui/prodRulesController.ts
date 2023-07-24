@@ -1,6 +1,6 @@
 import { ActionFactory, ActionType } from "../domain/action";
 import { ProdRule, ProdRuleFactory, RuleCondition } from "../domain/prodRules";
-import { getStringsForEnums } from "../helpers/helpers";
+import { IDHandler, getStringsForEnums } from "../helpers/helpers";
 import PersistanceHandler from "../domain/prodRuleRepo";
 import ProdRulesView from "./prodRulesView";
 
@@ -104,8 +104,8 @@ async function addOrUpdateEntry(ruleData: ProdRule, ruleID: string) {
     else {
       const id_elems = IDHandler.deconstructID(ruleID);
       await PersistanceHandler.updateRule(
-        id_elems["badSite"],
-        id_elems["index"],
+        id_elems.collectionID,
+        id_elems.index,
         ruleData
       );
     }
@@ -147,24 +147,6 @@ function deleteEntry(unproductiveSite: string, ruleIndex: number) {
   const ruleID = IDHandler.getRowID(unproductiveSite, ruleIndex);
   PersistanceHandler.deleteRule(unproductiveSite, ruleIndex);
   ProdRulesView.removeEntry(ruleID);
-}
-
-
-const IDHandler = {
-  getRowID: (unproductiveSite: string, ruleIndex: number) => {
-    const rowID = `${unproductiveSite}-${ruleIndex}`;
-    return rowID;
-  },
-
-  deconstructID: (ruleID: string) => {
-    const id_array = ruleID.split("-");
-    return {
-      badSite: id_array[0],
-      index: +id_array[1],
-    };
-  },
-
-  STANDARD_ID: "NEW"
 }
 
 
