@@ -133,6 +133,7 @@ const ProdRulesView = {
   clearForm: () => {
     const form = new RuleForm()
     form.toStart()
+    ProdRulesView.removeTableHighlighting()
   },
 
   setFormValues(formValues: ProdRule, ruleID: string) {
@@ -147,18 +148,23 @@ const ProdRulesView = {
   },
 
   highlightRow: (rowID: string, mode: string = "standard") => {
-    const table = ProdTable.getTable()
-    for (let i = 0, row; row = table.rows[i]; i++) {
-      const standardFormat = document.getElementById(`standard_row`) as HTMLElement
-      const formatting = standardFormat.className
-      row.className = formatting
-    }
-
+    ProdRulesView.removeTableHighlighting()
     const formatPrototype = document.getElementById(`${mode}_row`) as HTMLElement
     const formatting = formatPrototype.className
     const formattedRow = document.getElementById(rowID) as HTMLElement
     formattedRow.className = formatting
   },
+
+  removeTableHighlighting: () => {
+    const table = ProdTable.getTable()
+
+    for (let i = 0, row; row = table.rows[i]; i++) {
+      const standardFormat = document.getElementById(`standard_row`) as HTMLElement
+      const formatting = standardFormat.className
+      row.className = formatting
+    }
+  },
+
   addDemoRow: () => {
     const demoURL = "demo: UnproductiveSite.com";
     const demoAction = ActionFactory.createAction("POPUP", "Do you really want to spend time on this site?")
