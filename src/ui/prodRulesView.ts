@@ -165,15 +165,11 @@ const ProdRulesView = {
     }
   },
 
-  addDemoRow: () => {
-    const demoURL = "demo: UnproductiveSite.com";
-    const demoAction = ActionFactory.createAction("POPUP", "Do you really want to spend time on this site?")
-    const demoRule = ProdRuleFactory.createRule(demoURL, demoAction)
-
-    ProdRulesView.addEntry(demoRule, "demo");
-    ProdRulesView.highlightRow("demo", "demo")
-    const editButton = document.getElementById(ProdTable.tableID + "_edit_demo") as HTMLButtonElement
-    editButton.remove()
+  showOnboarding: () => {
+    const row = ProdTable.getBody().insertRow()
+    const cell = row.insertCell()
+    cell.innerHTML = "No productivity rule created yet"
+    cell.id = "demo"
   }
 };
 

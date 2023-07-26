@@ -65,8 +65,8 @@ class WorkTimeForm {
 
     toStart() {
         let now = new Date()
-        this.starttime.value = `${now.getHours()}:00`
-        this.endtime.value = `${now.getHours() + 4}:00`
+        this.starttime.value = `08:00`
+        this.endtime.value = `17:00`
         this.weekday.value = String(now.getDay())
         this.worktimeID.value = "NEW"
     }
@@ -102,6 +102,14 @@ const WorkTimeView = {
         myForm.starttime.value = TimeHandler.timeToStr(formValues.startHour) + ":" + TimeHandler.timeToStr(formValues.startMinutes)
         myForm.endtime.value = TimeHandler.timeToStr(formValues.endHour) + ":" + TimeHandler.timeToStr(formValues.endMinutes)
         myForm.worktimeID.value = wtID
+    },
+
+    showOnboarding: () => {
+        const table = WTtable.getBody()
+        const row = table.insertRow()
+        const cell = row.insertCell()
+        cell.innerHTML = "No work times scheduled yet"
+        cell.id = "demo"
     }
 }
 

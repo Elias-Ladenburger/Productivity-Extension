@@ -36,6 +36,7 @@ function initializeButtons() {
     console.log(blockElements[blockElem])
     button = blockElements[blockElem]["nav"]
     button.addEventListener("click", (e) => {
+      window.location.hash = `#${blockElem}`
       selectElem(blockElements[blockElem])
     })
   }

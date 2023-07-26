@@ -45,7 +45,7 @@ function prepareCancelButton() {
 async function prepareProdRuleTable() {
   const ruleList = await PersistanceHandler.getAllRules();
   if (!ruleList || Object.keys(ruleList).length == 0 || Object.keys(ruleList).length == 0) {
-    ProdRulesView.addDemoRow();
+    ProdRulesView.showOnboarding();
 
   } else {
     Object.keys(ruleList).forEach((unproductiveSite) => {

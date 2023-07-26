@@ -18,7 +18,7 @@ function prepareWTForm() {
 async function prepareWorkHourTable() {
   const workTimes = await WorkTimeRepository.getAll();
   if (!workTimes || Object.keys(workTimes).length == 0) {
-    addDemoWorkTime();
+    WorkTimeView.showOnboarding()
   } else {
     let wtID: string
     for (let weekday in workTimes) {
@@ -46,20 +46,13 @@ function addToWorkTimeTable(entry: WorkTime, wtID: string) {
   );
 }
 
-function addDemoWorkTime() {
-  let start = new Date()
-  let end = new Date()
-  end.setHours(start.getHours() + 4)
-  let demoWorkTime = WorkTimeFactory.createWorkTime(start, end, start.getDay())
-  WorkTimeView.addEntry(demoWorkTime, "DEMO")
-}
-
 function prepareSaveWorkTimeButton() {
 
   const saveWTButton = document.getElementById("saveWTButton") as HTMLButtonElement
   saveWTButton.addEventListener("click", (e) => {
     e.preventDefault()
     addWTfromForm()
+    window.location.reload()
   })
 }
 
