@@ -39,16 +39,15 @@
               id="PRnav"
               value="prodrules"
               class="h-14 rounded-t-md px-2 bg-white/90 font-bold"
-              href="rulesBody"
             >
-              Productivity Rules
+              <a href="#prodrules">Productivity Rules</a>
             </button>
             <button
               id="WTnav"
               value="worktimes"
-              class="h-14 rounded-t-md px-2 bg-white/60 hover:bg-white/90 hover:font-bold"
+              class="h-14 rounded-t-md px-2 bg-white/60 hover:bg-white/90"
             >
-              Work Times
+              <a href="#worktimes">Work Times</a>
             </button>
           </div>
           <button
@@ -140,9 +139,7 @@
             <h2 id="wtFormTitle" class="text-2xl font-bold">
               Schedule Work Times
             </h2>
-            <form
-              class="pb-5 pt-3 focus:placeholder-navy rounded-md bg-opacity-70 px-5 justify-between"
-            >
+            <form class="pb-5 pt-3 rounded-md px-5 justify-between">
               <input type="hidden" id="wtID" />
               <label for="weekday" class="col-span-1 mt-2">On</label>
               <select
@@ -174,7 +171,9 @@
                 id="endtime"
                 class="border border-1 border-bgRed100 rounded-md hover:cursor-text"
               />
-
+              <div>
+                <span id="errors" class="text-bgRed"></span>
+              </div>
               <div class="flex justify-center pt-3 space-x-4">
                 <button
                   id="saveWTButton"
@@ -220,7 +219,7 @@
         <button
           id="prototypeNavInactive"
           value="worktimes"
-          class="h-14 rounded-t-md px-2 bg-white/60 hover:bg-white/90 hover:font-bold"
+          class="h-14 rounded-t-md px-2 bg-white/60 hover:bg-white/90"
         >
           Work Times
         </button>
