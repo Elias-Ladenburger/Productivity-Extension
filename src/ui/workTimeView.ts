@@ -25,20 +25,15 @@ const WTtable = {
         startTimeCell.innerHTML = TimeHandler.timeToStr(wt.startHour) + ":" + TimeHandler.timeToStr(wt.startMinutes)
         endTimeCell.innerHTML = TimeHandler.timeToStr(wt.endHour) + ":" + TimeHandler.timeToStr(wt.endMinutes)
 
-        const editButtonPrototype = document.getElementById("prototypeEditButton") as HTMLButtonElement
         const deleteButtonPrototype = document.getElementById("prototypeDeleteButton") as HTMLButtonElement
-
-        let editButton = editButtonPrototype.cloneNode(true) as HTMLButtonElement
-        editButton.id = `${WTtable.tableID}_edit_${wtID}`
 
 
         let deleteButton = deleteButtonPrototype.cloneNode(true) as HTMLButtonElement
         deleteButton.id = `${WTtable.tableID}_delete_${wtID}`
 
-        actionsCell.insertBefore(editButton, null)
         actionsCell.insertBefore(deleteButton, null)
 
-        return { edit: editButton, delete: deleteButton, entry: newRow };
+        return { delete: deleteButton, entry: newRow };
 
     },
     removeEntry: (wtID: string) => {
@@ -73,7 +68,7 @@ class WorkTimeForm {
         this.starttime.value = `${now.getHours()}:00`
         this.endtime.value = `${now.getHours() + 4}:00`
         this.weekday.value = String(now.getDay())
-        this.setEditMode(false)
+        this.worktimeID.value = "NEW"
     }
 
     getValues() {
@@ -84,30 +79,12 @@ class WorkTimeForm {
             worktimeID: this.worktimeID.value
         }
     }
-
-    setEditMode(editing: boolean) {
-        if (editing) {
-            this._title.innerHTML = "Edit working hours"
-            this._button.innerHTML = "Save Changes"
-        }
-        else {
-            this.worktimeID.value = "NEW"
-            this._title.innerHTML = "Schedule Working Hours"
-            this._button.innerHTML = "Add work hours"
-        }
-
-    }
 }
 
 const WorkTimeView = {
     addEntry: WTtable.addEntry,
     clearEntries: WTtable.clear,
     removeEntry: WTtable.removeEntry,
-
-    isFormEditMode: (editMode: boolean) => {
-        let myForm = new WorkTimeForm()
-        myForm.setEditMode(editMode)
-    },
 
     getFormData: () => {
         let myForm = new WorkTimeForm()

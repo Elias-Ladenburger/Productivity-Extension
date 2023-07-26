@@ -34,13 +34,7 @@ async function prepareWorkHourTable() {
 
 function addToWorkTimeTable(entry: WorkTime, wtID: string) {
   const actionButtons = WorkTimeView.addEntry(entry, wtID)
-  const editButton = actionButtons["edit"] as HTMLButtonElement
   const deleteButton = actionButtons["delete"] as HTMLButtonElement
-
-  editButton.addEventListener("click", function (e) {
-    e.preventDefault()
-    prepareToEdit(entry, wtID);
-  });
 
   deleteButton.addEventListener(
     "click",
@@ -84,11 +78,6 @@ async function addWTfromForm() {
   }
   addToWorkTimeTable(newWT, wtID)
   WorkTimeView.clearForm()
-}
-
-function prepareToEdit(entry: WorkTime, entryID: string) {
-  WorkTimeView.setFormValues(entry, entryID)
-  WorkTimeView.isFormEditMode(true)
 }
 
 function deleteEntry(wtID: string) {
