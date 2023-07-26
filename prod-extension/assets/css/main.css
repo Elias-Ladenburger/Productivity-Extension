@@ -760,6 +760,10 @@ video {
   border-color: rgb(255 255 255 / var(--tw-border-opacity));
 }
 
+.bg-bgGrey100\/50 {
+  background-color: rgb(179 214 255 / 0.5);
+}
+
 .bg-bgGrey100\/70 {
   background-color: rgb(179 214 255 / 0.7);
 }
@@ -942,6 +946,11 @@ video {
 
 .font-bold {
   font-weight: 700;
+}
+
+.text-bgGrey600 {
+  --tw-text-opacity: 1;
+  color: rgb(96 116 138 / var(--tw-text-opacity));
 }
 
 .text-bgRed {

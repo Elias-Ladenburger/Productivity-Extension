@@ -1,6 +1,6 @@
 import { doc } from "prettier";
 import { ActionFactory } from "../domain/action";
-import { ProdRule } from "../domain/prodRules";
+import { ProdRule, ProdRuleFactory } from "../domain/prodRules";
 import { getStringsForEnums, msToTime } from "../helpers/helpers";
 import * as Controller from "./prodRulesController";
 
@@ -64,8 +64,13 @@ class RuleForm {
 const ProdTable = {
   tableID: "productionRuleTable",
 
-  getBody: () => {
+  getTable: () => {
     const prodTable = document.getElementById(ProdTable.tableID) as HTMLTableElement
+    return prodTable
+  },
+
+  getBody: () => {
+    const prodTable = ProdTable.getTable()
     const body = prodTable.tBodies[0]
     return body
   },
@@ -78,18 +83,15 @@ const ProdTable = {
 
     newRow.id = ruleID;
     ruleCell.innerHTML = _formatString(prodRule);
-    ruleCell.setAttribute("class", "px-2");
+    ruleCell.setAttribute("class", "px-2 ");
     const editButtonPrototype = document.getElementById("prototypeEditButton") as HTMLButtonElement
     const deleteButtonPrototype = document.getElementById("prototypeDeleteButton") as HTMLButtonElement
 
     let editButton = editButtonPrototype.cloneNode(true) as HTMLButtonElement
     editButton.id = ProdTable.tableID + "_edit_" + ruleID
 
-
     let deleteButton = deleteButtonPrototype.cloneNode(true) as HTMLButtonElement
     deleteButton.id = `${ProdTable.tableID}_delete_${ruleID}`
-
-    let deleteButtonHTML = ``
 
     actionsCell.insertBefore(editButton, null)
     actionsCell.insertBefore(deleteButton, null)
@@ -142,6 +144,30 @@ const ProdRulesView = {
     myForm.delay.value = formValues.delay.toString()
     myForm.ruleID.value = ruleID
 
+  },
+
+  highlightRow: (rowID: string, mode: string = "standard") => {
+    const table = ProdTable.getTable()
+    for (let i = 0, row; row = table.rows[i]; i++) {
+      const standardFormat = document.getElementById(`standard_row`) as HTMLElement
+      const formatting = standardFormat.className
+      row.className = formatting
+    }
+
+    const formatPrototype = document.getElementById(`${mode}_row`) as HTMLElement
+    const formatting = formatPrototype.className
+    const formattedRow = document.getElementById(rowID) as HTMLElement
+    formattedRow.className = formatting
+  },
+  addDemoRow: () => {
+    const demoURL = "demo: UnproductiveSite.com";
+    const demoAction = ActionFactory.createAction("POPUP", "Do you really want to spend time on this site?")
+    const demoRule = ProdRuleFactory.createRule(demoURL, demoAction)
+
+    ProdRulesView.addEntry(demoRule, "demo");
+    ProdRulesView.highlightRow("demo", "demo")
+    const editButton = document.getElementById(ProdTable.tableID + "_edit_demo") as HTMLButtonElement
+    editButton.remove()
   }
 };
 

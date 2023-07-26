@@ -207,41 +207,48 @@
           </div>
         </main>
       </div>
-      <div class="hidden" class="prototypes">
-        <button
-          id="prototypeNavActive"
-          value="prodrules"
-          class="h-14 rounded-t-md px-2 bg-white/90 font-bold"
-          href="rulesBody"
-        >
-          Productivity Rules
-        </button>
-        <button
-          id="prototypeNavInactive"
-          value="worktimes"
-          class="h-14 rounded-t-md px-2 bg-white/60 hover:bg-white/90"
-        >
-          Work Times
-        </button>
+      <div id="prototypes" class="hidden">
+        <div id="prototypeButtons">
+          <button
+            id="prototypeNavActive"
+            value="prodrules"
+            class="h-14 rounded-t-md px-2 bg-white/90 font-bold"
+            href="rulesBody"
+          >
+            Productivity Rules
+          </button>
+          <button
+            id="prototypeNavInactive"
+            value="worktimes"
+            class="h-14 rounded-t-md px-2 bg-white/60 hover:bg-white/90"
+          >
+            Work Times
+          </button>
 
-        <button
-          id="prototypeEditButton"
-          class="rounded-md border-white bg-primary500 text-white hover:bg-primary px-2 mx-1 text-center"
-        >
-          <img
-            class="invert h-9 w-9 py-2"
-            src="../assets/icons/Edit icon.svg"
-          />
-        </button>
-        <button
-          id="prototypeDeleteButton"
-          class="rounded-lg border-white bg-bgRed hover:bg-bgRed900 text-white px-2 mx-1 text-center"
-        >
-          <img
-            class="invert h-9 w-9 py-2"
-            src="../assets/icons/trash-solid.svg"
-          />
-        </button>
+          <button
+            id="prototypeEditButton"
+            class="rounded-md border-white bg-primary500 text-white hover:bg-primary px-2 mx-1 text-center"
+          >
+            <img
+              class="invert h-9 w-9 py-2"
+              src="../assets/icons/Edit icon.svg"
+            />
+          </button>
+          <button
+            id="prototypeDeleteButton"
+            class="rounded-lg border-white bg-bgRed hover:bg-bgRed900 text-white px-2 mx-1 text-center"
+          >
+            <img
+              class="invert h-9 w-9 py-2"
+              src="../assets/icons/trash-solid.svg"
+            />
+          </button>
+        </div>
+        <div id="formatting">
+          <div id="standard_row" class="md-rounded"></div>
+          <div id="edit_row" class="md-rounded bg-bgGrey100/50"></div>
+          <div id="demo_row" class="md-rounded text-bgGrey600 before-content-['Example: ']"></div>
+        </div>
       </div>
 
       <div

@@ -45,7 +45,8 @@ function prepareCancelButton() {
 async function prepareProdRuleTable() {
   const ruleList = await PersistanceHandler.getAllRules();
   if (!ruleList || Object.keys(ruleList).length == 0 || Object.keys(ruleList).length == 0) {
-    addDemoRule();
+    ProdRulesView.addDemoRow();
+
   } else {
     Object.keys(ruleList).forEach((unproductiveSite) => {
       let ruleIndex = 0;
@@ -57,14 +58,6 @@ async function prepareProdRuleTable() {
   }
 }
 
-function addDemoRule() {
-  const demoURL = "demoUnproductiveSite.com";
-  const demoAction = ActionFactory.createAction("POPUP", "Do you really want to spend time on this site?")
-  const demoRule = ProdRuleFactory.createRule(demoURL, demoAction)
-
-  ProdRulesView.addEntry(demoRule, "demo");
-}
-
 function prepareAddRuleButton() {
   const saveButton = document.getElementById("saveRuleButton") as HTMLButtonElement;
   saveButton.addEventListener(
@@ -72,7 +65,7 @@ function prepareAddRuleButton() {
     function (e) {
       e.preventDefault()
       addRuleFromForm();
-      ProdRulesView.isFormEditMode(false)
+      window.location.reload()
     },
     false
   );
@@ -141,6 +134,7 @@ function prepareToEdit(prodRule: ProdRule, ruleIndex: number) {
   const ruleID = IDHandler.getRowID(prodRule.source, ruleIndex)
   ProdRulesView.setFormValues(prodRule, ruleID);
   ProdRulesView.isFormEditMode(true)
+  ProdRulesView.highlightRow(ruleID, "edit")
 }
 
 function deleteEntry(unproductiveSite: string, ruleIndex: number) {
