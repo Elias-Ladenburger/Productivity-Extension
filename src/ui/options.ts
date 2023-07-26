@@ -10,27 +10,27 @@ const blockElements: { [key: string]: BlockItem } = {
   worktimes: { body: "worktimeBody", nav: "worktimenav", name: "Work Times" }
 }
 
-const inactiveButton = document.getElementById("inactiveButton") as HTMLButtonElement
-const activeButton = document.getElementById("activeButton") as HTMLButtonElement
-const commonHTML = "h-14 rounded-t-md px-2 "
-const activeHTML = "bg-white font-bold"
-const inactiveHTML = "bg-bgGrey100 hover:bg-bgGrey500"
+const inactiveButton = document.getElementById("WTnav") as HTMLButtonElement
+const activeButton = document.getElementById("PRnav") as HTMLButtonElement
+const _activePrototype = document.getElementById("prototypeNavActive") as HTMLElement 
+const _inactivePrototype = document.getElementById("prototypeNavInactive") as HTMLElement
+const activeHTML = _activePrototype.className
+const inactiveHTML = _inactivePrototype.className
+
 
 handleInactiveClick()
 
 function handleInactiveClick() {
 
   inactiveButton.addEventListener("click", (e) => {
-    e.preventDefault()
-    inactiveButton.className = commonHTML + activeHTML
-    activeButton.className = commonHTML + inactiveHTML
+    inactiveButton.className = activeHTML
+    activeButton.className = inactiveHTML
     selectBody(blockElements.worktimes)
   })
 
   activeButton.addEventListener("click", (e) => {
-    e.preventDefault()
-    activeButton.className = commonHTML + " " + activeHTML
-    inactiveButton.className = commonHTML + " " + inactiveHTML
+    activeButton.className = activeHTML
+    inactiveButton.className = inactiveHTML
     selectBody(blockElements.prodrules)
   })
 

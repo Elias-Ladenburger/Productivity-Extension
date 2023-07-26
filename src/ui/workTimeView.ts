@@ -1,4 +1,5 @@
 import WorkTime from "../domain/workinghours"
+import { TimeHandler } from "../helpers/helpers"
 
 
 const WTtable = {
@@ -19,15 +20,16 @@ const WTtable = {
         let actionsCell = newRow.insertCell(3);
 
         newRow.id = wtID;
-        weekdayCell.innerHTML = wt.weekdayAsString;
-        startTimeCell.innerHTML = `${wt.startHour}:${wt.startMinutes}`
-        endTimeCell.innerHTML = `${wt.endHour}:${wt.endMinutes}` 
+        weekdayCell.innerHTML = TimeHandler.WEEKDAYS(wt.weekday);
+
+        startTimeCell.innerHTML = TimeHandler.timeToStr(wt.startHour) + ":" + TimeHandler.timeToStr(wt.startMinutes)
+        endTimeCell.innerHTML = TimeHandler.timeToStr(wt.endHour) + ":" + TimeHandler.timeToStr(wt.endMinutes)
 
         const editButtonPrototype = document.getElementById("prototypeEditButton") as HTMLButtonElement
         const deleteButtonPrototype = document.getElementById("prototypeDeleteButton") as HTMLButtonElement
 
         let editButton = editButtonPrototype.cloneNode(true) as HTMLButtonElement
-        editButton.id = WTtable.tableID + "_edit_" + wtID
+        editButton.id = `${WTtable.tableID}_edit_${wtID}`
 
 
         let deleteButton = deleteButtonPrototype.cloneNode(true) as HTMLButtonElement
@@ -39,7 +41,11 @@ const WTtable = {
         return { edit: editButton, delete: deleteButton, entry: newRow };
 
     },
-    removeEntry: (wtID: string) => { },
+    removeEntry: (wtID: string) => {
+        let toDelete = document.getElementById(wtID) as HTMLTableElement;
+        toDelete.remove();
+        console.log(`Removing rule for ${wtID}!`);
+    },
     clear: () => { }
 }
 
@@ -64,15 +70,15 @@ class WorkTimeForm {
 
     toStart() {
         let now = new Date()
-        this.starttime.value = now.getHours() + ":00"
-        this.endtime.value = `${now.getHours() + 4}` + ":00"
-        this.weekday.selectedIndex = now.getDay()
+        this.starttime.value = `${now.getHours()}:00`
+        this.endtime.value = `${now.getHours() + 4}:00`
+        this.weekday.value = String(now.getDay())
         this.setEditMode(false)
     }
 
     getValues() {
         return {
-            weekday: this.weekday.selectedIndex,
+            weekday: Number(this.weekday.value),
             starttime: this.starttime.value,
             endtime: this.endtime.value,
             worktimeID: this.worktimeID.value
@@ -115,9 +121,9 @@ const WorkTimeView = {
 
     setFormValues(formValues: WorkTime, wtID: string) {
         let myForm = new WorkTimeForm()
-        myForm.weekday.selectedIndex = formValues.weekday
-        myForm.starttime.value = formValues.startHour + ":" + formValues.startMinutes
-        myForm.endtime.value = formValues.endHour + ":" + formValues.endMinutes
+        myForm.weekday.value = String(formValues.weekday)
+        myForm.starttime.value = TimeHandler.timeToStr(formValues.startHour) + ":" + TimeHandler.timeToStr(formValues.startMinutes)
+        myForm.endtime.value = TimeHandler.timeToStr(formValues.endHour) + ":" + TimeHandler.timeToStr(formValues.endMinutes)
         myForm.worktimeID.value = wtID
     }
 }

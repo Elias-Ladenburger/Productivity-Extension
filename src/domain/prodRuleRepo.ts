@@ -2,11 +2,11 @@ import { ProdRule } from "./prodRules";
 import PersistanceHandler from "../persistance/persistance"
 import { ProdRuleFactory } from "./prodRules";
 
-const ruleDBName = "productivityRules";
 interface RuleList {
   [key: string]: ProdRule[]
 }
 
+const ruleDBName = "productivityRules";
 const persHandler = new PersistanceHandler(ruleDBName)
 
 

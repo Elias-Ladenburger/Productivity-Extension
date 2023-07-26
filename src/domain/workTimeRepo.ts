@@ -4,20 +4,21 @@ import WorkTime from "./workinghours"
 
 const dbName = "workTimes"
 const persHandler = new PersistanceHandler(dbName)
+interface WTlist {
+    [key: number]: WorkTime[]
+}
 
 const WorkTimeRepository = {
 
-    getAll: async (): Promise<{ [key: number]: WorkTime[] }> => {
+    getAll: async (): Promise<WTlist> => {
         let workTimes = await persHandler.getAll()
-        if (workTimes == "undefined" || !workTimes || Object.keys(workTimes).length == 0) {
-            if (dbName in workTimes) {
-                return workTimes[dbName]
-            }
+        if (dbName in workTimes) {
+            return workTimes[dbName]
         }
-        return {}
+        return workTimes
     },
 
-    setWorkTimes: (timelist: { [key: number]: WorkTime[] }) => {
+    setWorkTimes: (timelist: WTlist) => {
         persHandler.setAll(timelist)
     },
 
@@ -41,6 +42,10 @@ const WorkTimeRepository = {
             delete allWTs[weekday]
         }
         WorkTimeRepository.setWorkTimes(allWTs);
+    },
+
+    _clear: () => {
+        persHandler.setAll({})
     }
 }
 

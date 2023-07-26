@@ -7,105 +7,180 @@
   </head>
 
   <body
-    class="pt-5 text-lg text-navy space-y-4 bg-abstractBG bg-cover lg:w-10/12 sm:px-5"
+    class="px-5 md:px-8 bg-gradient-to-t from-primary to-bgRed100 bg-fixed flex flex-col"
   >
-    <aside>
-      <div class="bg-white p-2 rounded-md">
-        <div class="flex flex-row items-center space-x-4 mb-2 rounded-md">
-          <img class="w-24" src="../assets/icons/Productivity-Logo.png" />
-          <h1 class="text-3xl font-bold pb-4">
-            <em class="text-black">Productivity Booster</em>
-          </h1>
-          <p class="pb-4 text-base">
-            Re-take control of your productivity! This extension will redirect
-            you from sites that kill your motivation and productivity and
-            instead redirect you to more productive places. <br />
-            Apply proven methods taken from “Atomic Habits” by James Clear.
-            Become more focused with the Pomodoro-technique. Finish what you
-            started and feel good about it.
-          </p>
+    <div
+      id="content"
+      class="py-5 text-lg space-y-4 lg:w-10/12 items-center self-center"
+    >
+      <aside>
+        <div class="bg-white/90 p-2 rounded-md">
+          <div class="flex flex-row items-center space-x-4 mb-2 rounded-md">
+            <img class="w-24" src="../assets/icons/Productivity-Logo.png" />
+            <h1 class="text-3xl font-bold pb-4">
+              <em class="text-black">Productivity Booster</em>
+            </h1>
+            <p class="pb-4 text-base">
+              Re-take control of your productivity! This extension will redirect
+              you from sites that kill your motivation and productivity and
+              instead redirect you to more productive places. <br />
+              Apply proven methods taken from “Atomic Habits” by James Clear.
+              Become more focused with the Pomodoro-technique. Finish what you
+              started and feel good about it.
+            </p>
+          </div>
         </div>
-      </div>
-    </aside>
+      </aside>
 
-    <div class="rounded-md">
-      <div class="flex">
-        <div class="justify-start">
+      <div class="rounded-md">
+        <div class="flex flex-row justify-between w-full">
+          <div class="flex-row">
+            <button
+              id="PRnav"
+              value="prodrules"
+              class="h-14 rounded-t-md px-2 bg-white/90 font-bold"
+              href="rulesBody"
+            >
+              Productivity Rules
+            </button>
+            <button
+              id="WTnav"
+              value="worktimes"
+              class="h-14 rounded-t-md px-2 bg-white/60 hover:bg-white/90 hover:font-bold"
+            >
+              Work Times
+            </button>
+          </div>
           <button
-            id="activeButton"
-            value="prodrules"
-            class="h-14 rounded-t-md px-2 bg-white font-bold"
+            id="aboutButton"
+            value="about"
+            class="h-14 rounded-t-md px-2 bg-bgGrey100/70 hover:bg-bgGrey100 hover:font-bold"
           >
-            Productivity Rules
-          </button>
-          <button
-            id="inactiveButton"
-            value="worktimes"
-            class="h-14 rounded-t-md px-2 bg-bgGrey100 hover:bg-bgGrey500"
-          >
-            Work Times
+            About
           </button>
         </div>
-      </div>
 
-      <main class="bg-white p-12 rounded-b-md">
-        <div id="rulesBody" class="space-x-4">
-          <div>
-            <h2 id="ruleFormTitle" class="text-2xl font-bold">Add a Rule</h2>
+        <main class="bg-white/90 p-12 rounded-b-md">
+          <div id="rulesBody" class="space-x-4">
+            <div>
+              <h2 id="ruleFormTitle" class="text-2xl font-bold">Add a Rule</h2>
+              <form
+                class="pb-5 pt-3 focus:placeholder-navy rounded-md bg-opacity-70 px-5 justify-between"
+              >
+                <div class="">
+                  <select
+                    id="rulecondition"
+                    name="rulecondition"
+                    class="bg-white/90 border-bgRed200 border-1 border rounded-md px-1 mt-2 hover:cursor-pointer"
+                    required
+                  ></select>
+
+                  <input type="hidden" id="ruleID" />
+
+                  <label for="actionsource" class="mt-2">when I visit</label>
+                  <input
+                    id="actionsource"
+                    name="actionsource"
+                    type="text"
+                    placeholder="unproductiveSite.com"
+                    class="bg-white/90 border-bgRed200 border-1 border rounded-md mt-2 px-1"
+                    required
+                  />
+
+                  <label for="actiondelay" class="col-span-1 mt-2">then</label>
+                  <select
+                    id="actiondelay"
+                    name="actiondelay"
+                    class="bg-white/90 border-bgRed200 border-1 border rounded-md px-1 mt-2 hover:cursor-pointer"
+                    required
+                  ></select>
+
+                  <select
+                    id="actiontype"
+                    name="actiontype"
+                    class="bg-white/90 border-bgRed200 border-1 border rounded-md col-span-3 px-1 mt-2 hover:cursor-pointer"
+                    required
+                  ></select>
+
+                  <input
+                    id="targetvalue"
+                    name="targetvalue"
+                    type="text"
+                    placeholder="productiveURL.com"
+                    class="bg-white/90 border-bgRed200 border-1 border rounded-md w-full col-span-4 px-1 mt-2"
+                    required
+                  />
+                </div>
+
+                <div class="flex justify-center pt-3 space-x-4">
+                  <button
+                    id="saveRuleButton"
+                    class="text-center rounded-lg px-2 bg-primary500 text-white hover:bg-primary100"
+                  >
+                    Add Rule
+                  </button>
+                  <button
+                    id="cancelRuleButton"
+                    class="text-center rounded-lg px-2 bg-bgRed text-white hover:bg-bgRed900"
+                  >
+                    Cancel
+                  </button>
+                </div>
+              </form>
+            </div>
+            <hr />
+            <h2 class="text-2xl font-bold py-4 pt-4">My Productivity Rules</h2>
+
+            <table id="productionRuleTable" class="text-base space-y-3 pb-3">
+              <tbody></tbody>
+            </table>
+          </div>
+
+          <div id="worktimeBody" class="hidden">
+            <h2 id="wtFormTitle" class="text-2xl font-bold">
+              Schedule Work Times
+            </h2>
             <form
               class="pb-5 pt-3 focus:placeholder-navy rounded-md bg-opacity-70 px-5 justify-between"
             >
-              <div class="">
-                <select
-                  id="rulecondition"
-                  name="rulecondition"
-                  class="border-bgRed200 border-1 border rounded-md px-1 mt-2 hover:cursor-pointer"
-                  required
-                ></select>
+              <input type="hidden" id="wtID" />
+              <label for="weekday" class="col-span-1 mt-2">On</label>
+              <select
+                id="weekday"
+                name="weekday"
+                class="border border-1 border-bgRed100 hover:cursor-pointer rounded-md px-1 mt-2"
+                required
+              >
+                <option value="1">Mondays</option>
+                <option value="2">Tuesdays</option>
+                <option value="3">Wednesdays</option>
+                <option value="4">Thursdays</option>
+                <option value="5">Fridays</option>
+                <option value="6">Saturdays</option>
+                <option value="0">Sundays</option>
+              </select>
 
-                <input type="hidden" id="ruleID" />
-
-                <label for="actionsource" class="mt-2">when I visit</label>
-                <input
-                  id="actionsource"
-                  name="actionsource"
-                  type="text"
-                  placeholder="unproductiveSite.com"
-                  class="border-bgRed200 border-1 border rounded-md mt-2 px-1"
-                  required
-                />
-
-                <label for="actiondelay" class="col-span-1 mt-2">then</label>
-                <select
-                  id="actiondelay"
-                  name="actiondelay"
-                  class="border-bgRed200 border-1 border rounded-md px-1 mt-2 hover:cursor-pointer"
-                  required
-                ></select>
-
-                <select
-                  id="actiontype"
-                  name="actiontype"
-                  class="border-bgRed200 border-1 border rounded-md col-span-3 px-1 mt-2 hover:cursor-pointer"
-                  required
-                ></select>
-
-                <input
-                  id="targetvalue"
-                  name="targetvalue"
-                  type="text"
-                  placeholder="productiveURL.com"
-                  class="border-bgRed200 border-1 border rounded-md w-full col-span-4 px-1 mt-2"
-                  required
-                />
-              </div>
+              <label for="starttime">I work from:</label>
+              <input
+                type="time"
+                value="12:00"
+                id="starttime"
+                class="border border-1 border-bgRed100 rounded-md hover:cursor-text"
+              />
+              <label for="endtime">to:</label>
+              <input
+                type="time"
+                value="12:00"
+                id="endtime"
+                class="border border-1 border-bgRed100 rounded-md hover:cursor-text"
+              />
 
               <div class="flex justify-center pt-3 space-x-4">
                 <button
-                  id="saveRuleButton"
+                  id="saveWTButton"
                   class="text-center rounded-lg px-2 bg-primary500 text-white hover:bg-primary100"
                 >
-                  Add Rule
+                  Schedule Work Time
                 </button>
                 <button
                   id="cancelRuleButton"
@@ -115,104 +190,77 @@
                 </button>
               </div>
             </form>
-          </div>
-          <hr />
-          <h2 class="text-2xl font-bold py-4 pt-4">My Productivity Rules</h2>
+            <hr />
 
-          <table id="productionRuleTable" class="text-base space-y-3 pb-3">
-            <tbody></tbody>
-          </table>
-        </div>
-        <div id="worktimeBody" class="hidden">
-          <h2 id="wtFormTitle" class="text-2xl font-bold">
-            Schedule Work Times
-          </h2>
-          <form
-            class="pb-5 pt-3 focus:placeholder-navy rounded-md bg-opacity-70 px-5 justify-between"
+            <div id="workinghours" class="pt-5 space-x-4">
+              <h2 class="text-2xl font-bold pb-4">My Work Times</h2>
+              <div class="grid grid-cols-3">
+                <table id="worktimeTable">
+                  <thead>
+                    <th>Weekday</th>
+                    <th>From</th>
+                    <th>Until</th>
+                  </thead>
+                  <tbody></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </main>
+      </div>
+      <div class="hidden" class="prototypes">
+        <button
+          id="prototypeNavActive"
+          value="prodrules"
+          class="h-14 rounded-t-md px-2 bg-white/90 font-bold"
+          href="rulesBody"
+        >
+          Productivity Rules
+        </button>
+        <button
+          id="prototypeNavInactive"
+          value="worktimes"
+          class="h-14 rounded-t-md px-2 bg-white/60 hover:bg-white/90 hover:font-bold"
+        >
+          Work Times
+        </button>
+
+        <button
+          id="prototypeEditButton"
+          class="rounded-md border-white bg-primary500 text-white hover:bg-primary px-2 mx-1 text-center"
+        >
+          <img
+            class="invert h-9 w-9 py-2"
+            src="../assets/icons/Edit icon.svg"
+          />
+        </button>
+        <button
+          id="prototypeDeleteButton"
+          class="rounded-lg border-white bg-bgRed hover:bg-bgRed900 text-white px-2 mx-1 text-center"
+        >
+          <img
+            class="invert h-9 w-9 py-2"
+            src="../assets/icons/trash-solid.svg"
+          />
+        </button>
+      </div>
+
+      <div
+        id="footer"
+        class="bg-white/90 rounded-md p-3 py-5 flex justify-between"
+      >
+        <p>Copyright 2023 Elias Ladenburger</p>
+        <div>
+          <a after=" | " class="after:content-[attr(after)]" href="imprint.html"
+            >Imprint</a
           >
-            <input type="hidden" id="wtID" />
-            <label for="weekday" class="col-span-1 mt-2">On</label>
-            <select
-              id="weekday"
-              name="weekday"
-              class="border border-1 border-bgRed100 hover:cursor-pointer rounded-md px-1 mt-2"
-              required
-            >
-              <option value="0">Sundays</option>
-              <option value="1">Mondays</option>
-              <option value="2">Tuesdays</option>
-              <option value="3">Wednesdays</option>
-              <option value="4">Thursdays</option>
-              <option value="5">Fridays</option>
-              <option value="6">Saturdays</option>
-            </select>
-
-            <label for="starttime">I work from:</label>
-            <input
-              type="time"
-              value="12:00"
-              id="starttime"
-              class="border border-1 border-bgRed100 rounded-md hover:cursor-text"
-            />
-            <label for="endtime">to:</label>
-            <input
-              type="time"
-              value="12:00"
-              id="endtime"
-              class="border border-1 border-bgRed100 rounded-md hover:cursor-text"
-            />
-
-            <div class="flex justify-center pt-3 space-x-4">
-              <button
-                id="saveWTButton"
-                class="text-center rounded-lg px-2 bg-primary500 text-white hover:bg-primary100"
-              >
-                Schedule Work Time
-              </button>
-              <button
-                id="cancelRuleButton"
-                class="text-center rounded-lg px-2 bg-bgRed text-white hover:bg-bgRed900"
-              >
-                Cancel
-              </button>
-            </div>
-          </form>
-          <hr />
-
-          <div id="workinghours" class="pt-5 space-x-4">
-            <h2 class="text-2xl font-bold pb-4">My Work Times</h2>
-            <div class="grid grid-cols-3">
-              <table id="worktimeTable">
-                <thead>
-                  <th>Weekday</th>
-                  <th>From</th>
-                  <th>Until</th>
-                </thead>
-                <tbody></tbody>
-              </table>
-            </div>
-          </div>
+          <a after=" | " class="after:content-[attr(after)]" href="terms.html"
+            >Terms and Conditions</a
+          >
+          <a href="privacy.html">Privacy Policy</a>
         </div>
-      </main>
+      </div>
     </div>
-    <div class="hidden" class="prototypes">
-      <button
-        id="prototypeEditButton"
-        class="rounded-md border-white bg-primary500 text-white hover:bg-primary px-2 mx-1 text-center"
-      >
-        <img class="invert h-9 w-9 py-2" src="../assets/icons/Edit icon.svg" />
-      </button>
-      <button
-        id="prototypeDeleteButton"
-        class="rounded-lg border-white bg-bgRed hover:bg-bgRed900 text-white px-2 mx-1 text-center"
-      >
-        <img
-          class="invert h-9 w-9 py-2"
-          src="../assets/icons/trash-solid.svg"
-        />
-      </button>
-    </div>
-
     <script src="../js/runtime.bundle.js"></script>
 
     <script src="../js/options.bundle.js"></script>

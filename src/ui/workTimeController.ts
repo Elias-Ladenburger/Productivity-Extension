@@ -6,31 +6,50 @@ import { IDHandler } from "../helpers/helpers";
 prepareWorkTimes();
 
 function prepareWorkTimes() {
+  prepareWTForm();
   prepareWorkHourTable();
   prepareSaveWorkTimeButton();
 }
 
-async function prepareWorkHourTable() {
+function prepareWTForm() {
   WorkTimeView.clearForm()
+}
+
+async function prepareWorkHourTable() {
   const workTimes = await WorkTimeRepository.getAll();
   if (!workTimes || Object.keys(workTimes).length == 0) {
     addDemoWorkTime();
   } else {
-    let index: number
     let wtID: string
-    for (let weekday = 0; weekday < 7; weekday++) {
-      index = 0
-      workTimes[weekday].forEach((workTime: WorkTime) => {
-        wtID = `${weekday}-${index}`
-        addToWorkTimeTable(workTime, wtID)
-        index++
-      });
+    for (let weekday in workTimes) {
+      for (let i = 0; i < workTimes[weekday].length; i++) {
+        wtID = `${weekday}-${i}`
+        addToWorkTimeTable(workTimes[weekday][i], wtID)
+      }
+
+
     }
   }
 }
 
 function addToWorkTimeTable(entry: WorkTime, wtID: string) {
-  WorkTimeView.addEntry(entry, wtID)
+  const actionButtons = WorkTimeView.addEntry(entry, wtID)
+  const editButton = actionButtons["edit"] as HTMLButtonElement
+  const deleteButton = actionButtons["delete"] as HTMLButtonElement
+
+  editButton.addEventListener("click", function (e) {
+    e.preventDefault()
+    prepareToEdit(entry, wtID);
+  });
+
+  deleteButton.addEventListener(
+    "click",
+    function (e) {
+      e.preventDefault()
+      deleteEntry(wtID);
+    },
+    false
+  );
 }
 
 function addDemoWorkTime() {
@@ -59,37 +78,23 @@ async function addWTfromForm() {
     idx = await WorkTimeRepository.addWorkTime(newWT)
     wtID = `${wtData.weekday}-${idx}`
   }
-  else{
+  else {
     const deconstructed = IDHandler.deconstructID(wtID)
     idx = ("index" in deconstructed) ? deconstructed.index : 0
   }
-
-  const actionButtons = WorkTimeView.addEntry(newWT, wtID)
-  const editButton = actionButtons["edit"] as HTMLButtonElement
-  const deleteButton = actionButtons["delete"] as HTMLButtonElement
-  editButton.addEventListener("click", function (e) {
-    e.preventDefault()
-    prepareToEdit(newWT, wtID);
-  });
-
-  deleteButton.addEventListener(
-    "click",
-    function (e) {
-      deleteEntry(wtData.weekday, idx);
-    },
-    false
-  );
-
+  addToWorkTimeTable(newWT, wtID)
   WorkTimeView.clearForm()
 }
 
-function prepareToEdit(entry: WorkTime, entryID: string){
+function prepareToEdit(entry: WorkTime, entryID: string) {
   WorkTimeView.setFormValues(entry, entryID)
   WorkTimeView.isFormEditMode(true)
 }
 
-function deleteEntry(weekday: number, index: number){
-  const entryID = IDHandler.getRowID(weekday, index)
+function deleteEntry(wtID: string) {
+  const decID = IDHandler.deconstructID(wtID)
+  const weekday = Number(decID.collectionID)
+  const index = decID.index
   WorkTimeRepository.deleteOne(weekday, index)
-  WorkTimeView.removeEntry(entryID)
+  WorkTimeView.removeEntry(wtID)
 }

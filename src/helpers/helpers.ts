@@ -51,3 +51,21 @@ export function getStringsForEnums(): { [key: string]: { [key: string]: string }
   };
 }
 
+export const TimeHandler = {
+  timeToStr: (time: number) => {
+    return time < 10 ? "0" + time : time
+  },
+  WEEKDAYS: (wd: number): string => {
+    const weekdays: {[key: number]: string} = {
+      1: "Monday",
+      2: "Tuesday",
+      3: "Wednesday",
+      4: "Thursday",
+      5: "Friday",
+      6: "Saturday",
+      0: "Sunday"
+    }
+    return weekdays[wd]
+  }
+
+}

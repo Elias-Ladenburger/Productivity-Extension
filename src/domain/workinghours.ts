@@ -1,3 +1,5 @@
+import { TimeHandler } from "../helpers/helpers";
+
 class WorkTime {
   weekday: number
   is_active: boolean
@@ -52,7 +54,7 @@ class WorkTime {
   }
 
   get weekdayAsString() {
-    return WEEKDAYS[this.weekday]
+    return TimeHandler.WEEKDAYS(this.weekday)
   }
 
   isWorkTime(currentTime: Date = new Date()) {
@@ -92,16 +94,6 @@ const WorkTimeFactory = {
     
     return WorkTimeFactory.createWorkTime(normalizedStart, normalizedEnd, weekday, is_active)
   }
-}
-
-const WEEKDAYS: {[key: number]: string} = {
-  1: "Monday",
-  2: "Tuesday", 
-  3: "Wednesday",
-  4: "Thursday",
-  5: "Friday",
-  6: "Saturday",
-  0: "Sunday"
 }
 
 export { WorkTime, WorkTimeFactory }

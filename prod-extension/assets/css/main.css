@@ -516,6 +516,10 @@ video {
   --tw-backdrop-sepia:  ;
 }
 
+.visible {
+  visibility: visible;
+}
+
 .absolute {
   position: absolute;
 }
@@ -611,9 +615,17 @@ video {
   height: auto;
 }
 
+.h-full {
+  height: 100%;
+}
+
 .h-max {
   height: -moz-max-content;
   height: max-content;
+}
+
+.w-11\/12 {
+  width: 91.666667%;
 }
 
 .w-128 {
@@ -659,12 +671,12 @@ video {
   flex-direction: row;
 }
 
-.items-center {
-  align-items: center;
+.flex-col {
+  flex-direction: column;
 }
 
-.justify-start {
-  justify-content: flex-start;
+.items-center {
+  align-items: center;
 }
 
 .justify-center {
@@ -697,6 +709,10 @@ video {
   --tw-space-y-reverse: 0;
   margin-top: calc(1rem * calc(1 - var(--tw-space-y-reverse)));
   margin-bottom: calc(1rem * var(--tw-space-y-reverse));
+}
+
+.self-center {
+  align-self: center;
 }
 
 .rounded-\[0\.4375rem\] {
@@ -744,9 +760,8 @@ video {
   border-color: rgb(255 255 255 / var(--tw-border-opacity));
 }
 
-.bg-bgGrey100 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(179 214 255 / var(--tw-bg-opacity));
+.bg-bgGrey100\/70 {
+  background-color: rgb(179 214 255 / 0.7);
 }
 
 .bg-bgRed {
@@ -779,16 +794,37 @@ video {
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
 }
 
+.bg-white\/60 {
+  background-color: rgb(255 255 255 / 0.6);
+}
+
+.bg-white\/90 {
+  background-color: rgb(255 255 255 / 0.9);
+}
+
 .bg-opacity-70 {
   --tw-bg-opacity: 0.7;
 }
 
-.bg-abstractBG {
-  background-image: url('../img/Abstract-mountains-bg.jpg');
+.bg-gradient-to-t {
+  background-image: linear-gradient(to top, var(--tw-gradient-stops));
 }
 
-.bg-cover {
-  background-size: cover;
+.from-primary {
+  --tw-gradient-from: #007694 var(--tw-gradient-from-position);
+  --tw-gradient-from-position:  ;
+  --tw-gradient-to: rgb(0 118 148 / 0)  var(--tw-gradient-from-position);
+  --tw-gradient-to-position:  ;
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+}
+
+.to-bgRed100 {
+  --tw-gradient-to: #FFB2B2 var(--tw-gradient-to-position);
+  --tw-gradient-to-position:  ;
+}
+
+.bg-fixed {
+  background-attachment: fixed;
 }
 
 .p-1 {
@@ -805,6 +841,10 @@ video {
 
 .p-3 {
   padding: 0.75rem;
+}
+
+.p-5 {
+  padding: 1.25rem;
 }
 
 .px-1 {
@@ -832,9 +872,19 @@ video {
   padding-bottom: 0.5rem;
 }
 
+.py-3 {
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+}
+
 .py-4 {
   padding-top: 1rem;
   padding-bottom: 1rem;
+}
+
+.py-5 {
+  padding-top: 1.25rem;
+  padding-bottom: 1.25rem;
 }
 
 .pb-3 {
@@ -1014,6 +1064,11 @@ video {
   content: var(--tw-content);
 }
 
+.after\:content-\[attr\(after\)\]::after {
+  --tw-content: attr(after);
+  content: var(--tw-content);
+}
+
 .checked\:bg-primary:checked {
   --tw-bg-opacity: 1;
   background-color: rgb(0 118 148 / var(--tw-bg-opacity));
@@ -1092,9 +1147,9 @@ video {
   cursor: text;
 }
 
-.hover\:bg-bgGrey500:hover {
+.hover\:bg-bgGrey100:hover {
   --tw-bg-opacity: 1;
-  background-color: rgb(111 133 158 / var(--tw-bg-opacity));
+  background-color: rgb(179 214 255 / var(--tw-bg-opacity));
 }
 
 .hover\:bg-bgRed900:hover {
@@ -1120,6 +1175,14 @@ video {
 .hover\:bg-primary900:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(0 118 148 / var(--tw-bg-opacity));
+}
+
+.hover\:bg-white\/90:hover {
+  background-color: rgb(255 255 255 / 0.9);
+}
+
+.hover\:font-bold:hover {
+  font-weight: 700;
 }
 
 .focus\:outline-none:focus {
@@ -1267,6 +1330,13 @@ video {
   .sm\:px-5 {
     padding-left: 1.25rem;
     padding-right: 1.25rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .md\:px-8 {
+    padding-left: 2rem;
+    padding-right: 2rem;
   }
 }
 

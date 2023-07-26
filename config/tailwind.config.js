@@ -83,9 +83,9 @@ module.exports = {
       bgRed900: '#4A3434',
 
     },
-    backgroundImage: {
-      abstractBG: "url('../img/Abstract-mountains-bg.jpg')"
-    },
+    /*backgroundImage: {
+      abstractBG: "url('../img/Abstract-mountains-bg.jpg')",
+    },*/
     fontFamily: {
       sans: ['Helvetica'],
       serif: []
