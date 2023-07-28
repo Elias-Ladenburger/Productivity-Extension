@@ -33,7 +33,7 @@ class WorkTime {
   get startTime(): Date {
     let startDate = new Date()
     startDate.setHours(this.startHour)
-    startDate.setMinutes(this.startMinutes) 
+    startDate.setMinutes(this.startMinutes)
     return startDate
   }
 
@@ -45,8 +45,9 @@ class WorkTime {
   get endTime(): Date {
     let endDate = new Date()
     endDate.setHours(this.endHour)
-    endDate.setMinutes(this.endMinutes) 
-    return endDate  }
+    endDate.setMinutes(this.endMinutes)
+    return endDate
+  }
 
   set endTime(timeValue: Date) {
     this.endHour = this._parseHour(timeValue);
@@ -57,10 +58,10 @@ class WorkTime {
     return TimeHandler.WEEKDAYS(this.weekday)
   }
 
-  isWorkTime(currentTime: Date = new Date()) {
-    if (currentTime.getDay() == this.weekday) {
-      const currentHour = currentTime.getHours();
-      const currentMinute = currentTime.getMinutes();
+  isWorkTime(now: Date = new Date()) {
+    if (now.getDay() == this.weekday) {
+      const currentHour = now.getHours();
+      const currentMinute = now.getMinutes();
 
       if (
         (currentHour > this.startHour ||
@@ -75,7 +76,9 @@ class WorkTime {
 
     return false;
   }
+
 }
+
 
 const WorkTimeFactory = {
   createWorkTime: (starttime: Date, endtime: Date, weekday: number, is_active: boolean = true) => {
@@ -91,7 +94,7 @@ const WorkTimeFactory = {
 
     normalizedStart.setHours(parseInt(startTimeArr[0]), parseInt(startTimeArr[1]))
     normalizedEnd.setHours(parseInt(endTimeArr[0]), parseInt(endTimeArr[1]))
-    
+
     return WorkTimeFactory.createWorkTime(normalizedStart, normalizedEnd, weekday, is_active)
   }
 }

@@ -79,4 +79,5 @@ function deleteEntry(wtID: string) {
   const index = decID.index
   WorkTimeRepository.deleteOne(weekday, index)
   WorkTimeView.removeEntry(wtID)
+  window.location.reload()
 }

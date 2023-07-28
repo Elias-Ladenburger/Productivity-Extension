@@ -7,11 +7,11 @@
   </head>
 
   <body
-    class="px-5 md:px-8 bg-gradient-to-t from-primary to-bgRed100 bg-fixed flex flex-col"
+    class="px-5 md:px-8 bg-fixed flex flex-col bg-gradient-to-t from-primary to-bgRed100"
   >
     <div
       id="content"
-      class="py-5 text-lg space-y-4 lg:w-10/12 items-center self-center"
+      class="py-5 text-lg space-y-4 lg:w-10/12 items-center self-center from-bgRed900 to-primary100/90"
     >
       <aside>
         <div class="bg-white/90 p-2 rounded-md">
@@ -47,15 +47,15 @@
               value="worktimes"
               class="h-14 rounded-t-md px-2 bg-white/60 hover:bg-white/90"
             >
-                Work Times
+              Work Times
             </button>
           </div>
           <button
             id="aboutButton"
             value="about"
-            class="h-14 rounded-t-md px-2 bg-bgGrey100/70 hover:bg-bgGrey100 hover:font-bold"
+            class="rounded-t-md bg-white/60 hover:bg-white/90"
           >
-            About
+            <a class="h-14 px-2" href="about"> About </a>
           </button>
         </div>
 
@@ -227,21 +227,24 @@
 
           <button
             id="prototypeEditButton"
-            class="rounded-md border-white bg-primary500 text-white hover:bg-primary px-2 mx-1 text-center"
+            class="rounded-md border border-1 border-opacity-0 border-primary hover:border-opacity-100 m-1 text-center items-center after:block"
           >
-            <img
-              class="invert h-9 w-9 py-2"
-              src="../assets/icons/Edit icon.svg"
-            />
+              <img
+                class="h-9 w-9 py-2"
+                src="../assets/icons/Edit icon.svg"
+              />
           </button>
           <button
             id="prototypeDeleteButton"
-            class="rounded-lg border-white bg-bgRed hover:bg-bgRed900 text-white px-2 mx-1 text-center"
+            class="rounded-lg border border-1 border-opacity-0 border-bgRed900 hover:border-opacity-100 m-1 text-center items-center"
           >
-            <img
-              class="invert h-9 w-9 py-2"
-              src="../assets/icons/trash-solid.svg"
-            />
+            <div class="flex flew-row items-center">
+              <img
+                class="h-9 w-9 py-2"
+                src="../assets/icons/trash-solid.svg"
+              />
+              
+            </div>
           </button>
         </div>
         <div id="formatting">

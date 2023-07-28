@@ -540,9 +540,8 @@ video {
   grid-column: span 4 / span 4;
 }
 
-.mx-1 {
-  margin-left: 0.25rem;
-  margin-right: 0.25rem;
+.m-1 {
+  margin: 0.25rem;
 }
 
 .my-2 {
@@ -755,17 +754,22 @@ video {
   border-color: rgb(229 160 160 / var(--tw-border-opacity));
 }
 
-.border-white {
+.border-bgRed900 {
   --tw-border-opacity: 1;
-  border-color: rgb(255 255 255 / var(--tw-border-opacity));
+  border-color: rgb(74 52 52 / var(--tw-border-opacity));
+}
+
+.border-primary {
+  --tw-border-opacity: 1;
+  border-color: rgb(0 118 148 / var(--tw-border-opacity));
+}
+
+.border-opacity-0 {
+  --tw-border-opacity: 0;
 }
 
 .bg-bgGrey100\/50 {
   background-color: rgb(179 214 255 / 0.5);
-}
-
-.bg-bgGrey100\/70 {
-  background-color: rgb(179 214 255 / 0.7);
 }
 
 .bg-bgRed {
@@ -814,6 +818,14 @@ video {
   background-image: linear-gradient(to top, var(--tw-gradient-stops));
 }
 
+.from-bgRed900 {
+  --tw-gradient-from: #4A3434 var(--tw-gradient-from-position);
+  --tw-gradient-from-position:  ;
+  --tw-gradient-to: rgb(74 52 52 / 0)  var(--tw-gradient-from-position);
+  --tw-gradient-to-position:  ;
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+}
+
 .from-primary {
   --tw-gradient-from: #007694 var(--tw-gradient-from-position);
   --tw-gradient-from-position:  ;
@@ -824,6 +836,11 @@ video {
 
 .to-bgRed100 {
   --tw-gradient-to: #FFB2B2 var(--tw-gradient-to-position);
+  --tw-gradient-to-position:  ;
+}
+
+.to-primary100\/90 {
+  --tw-gradient-to: rgb(36 197 207 / 0.9) var(--tw-gradient-to-position);
   --tw-gradient-to-position:  ;
 }
 
@@ -1033,6 +1050,11 @@ video {
   margin-top: -0.1875rem;
 }
 
+.after\:block::after {
+  content: var(--tw-content);
+  display: block;
+}
+
 .after\:h-5::after {
   content: var(--tw-content);
   height: 1.25rem;
@@ -1161,19 +1183,13 @@ video {
   cursor: text;
 }
 
-.hover\:bg-bgGrey100:hover {
-  --tw-bg-opacity: 1;
-  background-color: rgb(179 214 255 / var(--tw-bg-opacity));
+.hover\:border-opacity-100:hover {
+  --tw-border-opacity: 1;
 }
 
 .hover\:bg-bgRed900:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(74 52 52 / var(--tw-bg-opacity));
-}
-
-.hover\:bg-primary:hover {
-  --tw-bg-opacity: 1;
-  background-color: rgb(0 118 148 / var(--tw-bg-opacity));
 }
 
 .hover\:bg-primary100:hover {
@@ -1193,10 +1209,6 @@ video {
 
 .hover\:bg-white\/90:hover {
   background-color: rgb(255 255 255 / 0.9);
-}
-
-.hover\:font-bold:hover {
-  font-weight: 700;
 }
 
 .focus\:outline-none:focus {

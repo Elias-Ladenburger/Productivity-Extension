@@ -1,5 +1,6 @@
 import WorkTimeRepository from "../../domain/workTimeRepo";
 import { WorkTime, WorkTimeFactory } from "../../domain/workinghours"
+import WorkTimeService from "../../domain/workHourService"
 
 describe("A Working Time on Thursday from 09:00 to 12:00", function () {
   let starttime = new Date("2020-01-03T09:00:00");
@@ -23,6 +24,24 @@ describe("A Working Time on Thursday from 09:00 to 12:00", function () {
   });
 
 });
+
+describe("The WorkTimeService", function() {
+  test("should return true when now is work time", async function() {
+      let today = new Date()
+      let work = WorkTimeFactory.createWorkTimeFromStrings("00:01", "23:59", today.getDay(), true)
+      let idx = await WorkTimeRepository.addWorkTime(work)
+      const is_work_time = await WorkTimeService.isWorkingTime()
+      expect(is_work_time).toEqual(true)
+  }),
+    test("should return false when now is not work time", async function () {
+      let today = new Date()
+      const weekday = (today.getDay() + 1) % 6
+      let work = WorkTimeFactory.createWorkTimeFromStrings("00:01", "23:59", today.getDay() - 1, true)
+      let idx = await WorkTimeRepository.addWorkTime(work)
+      const is_work_time = await WorkTimeService.isWorkingTime()
+      expect(is_work_time).toEqual(true)
+    })
+})
 
 describe("WorkTimeFactory", function () {
   let starttime = new Date("2020-01-03T09:00:00");
@@ -48,12 +67,6 @@ describe("WorkTimeFactory", function () {
     expect(work.weekday).toEqual(4);
     expect(work.is_active).toEqual(true);
   });
-  test("should trigger worktime today", function () {
-    let today = new Date()
-    let weekday = today.getDay()
-    let work = WorkTimeFactory.createWorkTimeFromStrings("00:01", "23:59", weekday, true)
-    expect(work.isWorkTime()).toEqual(true)
-  })
 
 });
 

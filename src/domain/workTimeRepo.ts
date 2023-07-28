@@ -12,6 +12,10 @@ const WorkTimeRepository = {
 
     getAll: async (): Promise<WTlist> => {
         let workTimes = await persHandler.getAll()
+        if(typeof workTimes == "undefined" ){
+            console.log("could not load work times!")
+            return {}
+        }
         if (dbName in workTimes) {
             return workTimes[dbName]
         }

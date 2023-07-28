@@ -135,6 +135,7 @@ function prepareToEdit(prodRule: ProdRule, ruleIndex: number) {
   ProdRulesView.setFormValues(prodRule, ruleID);
   ProdRulesView.isFormEditMode(true)
   ProdRulesView.highlightRow(ruleID, "edit")
+  
 }
 
 function deleteEntry(unproductiveSite: string, ruleIndex: number) {
