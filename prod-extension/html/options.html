@@ -11,7 +11,7 @@
   >
     <div
       id="content"
-      class="py-5 text-lg space-y-4 lg:w-10/12 items-center self-center from-bgRed900 to-primary100/90"
+      class="py-5 text-lg space-y-4 lg:w-10/12 self-center from-bgRed900 to-primary100/90"
     >
       <aside>
         <div class="bg-white/90 p-2 rounded-md">
@@ -106,7 +106,7 @@
                     name="targetvalue"
                     type="text"
                     placeholder="productiveURL.com"
-                    class="bg-white/90 border-bgRed200 border-1 border rounded-md w-full col-span-4 px-1 mt-2"
+                    class="bg-white/90 border-bgRed200 border-1 border rounded-md px-1 mt-2"
                     required
                   />
                 </div>
@@ -120,7 +120,7 @@
                   </button>
                   <button
                     id="cancelRuleButton"
-                    class="text-center rounded-lg px-2 bg-bgRed text-white hover:bg-bgRed900"
+                    class="text-center rounded-lg px-2 bg-bgRed text-white hover:bg-bgRed900 hidden"
                   >
                     Cancel
                   </button>
@@ -194,7 +194,7 @@
             <div id="workinghours" class="pt-5 space-x-4">
               <h2 class="text-2xl font-bold pb-4">My Work Times</h2>
               <div class="grid grid-cols-3">
-                <table id="worktimeTable">
+                <table id="worktimeTable" class="text-center">
                   <thead>
                     <th>Weekday</th>
                     <th>From</th>
@@ -248,11 +248,11 @@
           </button>
         </div>
         <div id="formatting">
-          <div id="standard_row" class="md-rounded"></div>
-          <div id="edit_row" class="md-rounded bg-bgGrey100/50"></div>
+          <div id="standard_row" class="rounded-md"></div>
+          <div id="edit_row" class="rounded-md bg-bgGrey100/50"></div>
           <div
-            id="demo_row"
-            class="md-rounded text-bgGrey600 before-content-['Example: ']"
+            id="inactive_row"
+            class="rounded-md text-bgGrey600"
           ></div>
         </div>
       </div>
@@ -263,13 +263,15 @@
       >
         <p>Copyright 2023 Elias Ladenburger</p>
         <div>
-          <a after=" | " class="after:content-[attr(after)]" href="imprint.html"
+          <a after=" | " class="hover:text-primary hover:underline" href="imprint.html"
             >Imprint</a
-          >
-          <a after=" | " class="after:content-[attr(after)]" href="terms.html"
+          > |
+          <a after=" | " class="hover:text-primary hover:underline" href="terms.html"
             >Terms and Conditions</a
-          >
-          <a href="privacy.html">Privacy Policy</a>
+          > 
+          | 
+          <a href="privacy.html" class="hover:text-primary hover:underline
+">Privacy Policy</a>
         </div>
       </div>
     </div>

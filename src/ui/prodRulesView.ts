@@ -13,6 +13,7 @@ class RuleForm {
   ruleID: HTMLInputElement;
   _title: HTMLTitleElement;
   _button: HTMLButtonElement
+  _cancelButton: HTMLButtonElement
 
 
   constructor() {
@@ -23,6 +24,7 @@ class RuleForm {
     this.delay = document.getElementById("actiondelay") as HTMLSelectElement
     this.ruleID = document.getElementById("ruleID") as HTMLInputElement
     this._button = document.getElementById("saveRuleButton") as HTMLButtonElement
+    this._cancelButton = document.getElementById("cancelRuleButton") as HTMLButtonElement
     this._title = document.getElementById("ruleFormTitle") as HTMLTitleElement
   }
 
@@ -51,11 +53,13 @@ class RuleForm {
     if (editing) {
       this._title.innerHTML = "Edit Rule"
       this._button.innerHTML = "Save Changes"
+      this._cancelButton.classList.toggle("hidden")
     }
     else {
       this.ruleID.value = "NEW"
       this._title.innerHTML = "Add a Productivity Rule"
       this._button.innerHTML = "Add Rule"
+      this._cancelButton.classList.toggle("hidden")
     }
 
   }
@@ -133,7 +137,7 @@ const ProdRulesView = {
   clearForm: () => {
     const form = new RuleForm()
     form.toStart()
-    ProdRulesView.removeTableHighlighting()
+    ProdRulesView.applyTableFormat()
   },
 
   setFormValues(formValues: ProdRule, ruleID: string) {
@@ -148,18 +152,18 @@ const ProdRulesView = {
   },
 
   highlightRow: (rowID: string, mode: string = "standard") => {
-    ProdRulesView.removeTableHighlighting()
+    ProdRulesView.applyTableFormat("inactive")
     const formatPrototype = document.getElementById(`${mode}_row`) as HTMLElement
     const formatting = formatPrototype.className
     const formattedRow = document.getElementById(rowID) as HTMLElement
     formattedRow.className = formatting
   },
 
-  removeTableHighlighting: () => {
+  applyTableFormat: (mode: string = "standard") => {
     const table = ProdTable.getTable()
 
     for (let i = 0, row; row = table.rows[i]; i++) {
-      const standardFormat = document.getElementById(`standard_row`) as HTMLElement
+      const standardFormat = document.getElementById(`${mode}_row`) as HTMLElement
       const formatting = standardFormat.className
       row.className = formatting
     }

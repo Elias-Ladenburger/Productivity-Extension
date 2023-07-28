@@ -11,7 +11,7 @@ const persHandler = new PersistanceHandler(ruleDBName)
 
 
 const ProdRuleRepository = {
-  
+
   getAllRules: async () => {
     const storedRules = await persHandler.getAll()
     let ruleList: RuleList = {}
@@ -27,11 +27,16 @@ const ProdRuleRepository = {
   },
 
   getRulesByURL: async (originURL: string) => {
+    const compareURL = originURL.toLowerCase()
+    let compareRule: string
     const ruleList = await ProdRuleRepository.getAllRules();
     let applicableRules: ProdRule[] = []
     Object.keys(ruleList).forEach((badSite) => {
-      if (originURL.includes(badSite)) {
-        for(let rule of ruleList[badSite]){
+      compareRule = badSite.toLowerCase()
+      console.log(`comparing ${compareURL} against ${compareRule}`)
+
+      if (compareURL.includes(compareRule)) {
+        for (let rule of ruleList[badSite]) {
           applicableRules.push(rule);
         }
       }
@@ -59,10 +64,10 @@ const ProdRuleRepository = {
     return ProdRuleRepository.addRule(updatedRule);
   },
 
-  deleteRule: async (badSite:string, index: number) => {
+  deleteRule: async (badSite: string, index: number) => {
     let ruleList = await ProdRuleRepository.getAllRules();
     ruleList[badSite].splice(index, 1);
-    if(ruleList[badSite].length == 0){
+    if (ruleList[badSite].length == 0) {
       delete ruleList[badSite]
     }
     ProdRuleRepository.setRuleList(ruleList);

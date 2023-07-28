@@ -9,55 +9,55 @@ abstract class Action {
 }
 
 class FrameAction extends Action {
-   type: ActionType;
+  type: ActionType;
   constructor(frameColor: string) {
     super(frameColor);
     this.type = ActionType.FRAME;
   }
 
-   performAction() {
+  performAction() {
     alert(
-      `This site is unproductive! Framing this site in ${this.targetValue}.`
+      `This site is unproductive! Framing this site in red.`
     );
-    document.body.style.border = `10px solid ${this.targetValue}`;
+    document.body.style.border = `10px solid red`;
   }
 
-   toString() {
-    return `frame the site in ${this.targetValue}`;
+  toString() {
+    return `frame the site in red`;
   }
 }
 
 class PopupAction extends Action {
-   type: ActionType;
+  type: ActionType;
   constructor(popupText: string) {
     super(popupText);
     this.type = ActionType.POPUP;
   }
-   performAction() {
+  performAction() {
     if (!this.targetValue) {
       this.targetValue = "Do you truly want to spend more time on this site?";
     }
     alert(this.targetValue);
   }
-   toString() {
-    return `show a popup that says: \n '${this.targetValue}'`;
+  toString() {
+    return `show a popup that says: \n 'Do you really want to spend more time on this site?'`;
   }
 }
 
 class RedirectAction extends Action {
-   type: ActionType;
+  type: ActionType;
   constructor(redirectTo: string) {
     super(redirectTo);
     this.type = ActionType.REDIRECT;
   }
-   performAction() {
+  performAction() {
     alert(`This site is unproductive! Redirecting to ${this.targetValue}.`);
     let targetValue = this.targetValue.startsWith("http")
       ? this.targetValue
       : `https://${this.targetValue}`;
-    window.location.href = targetValue;
+    window.location.href = targetValue.toLowerCase();
   }
-   toString() {
+  toString() {
     return `redirect to ${this.targetValue}`;
   }
 }
