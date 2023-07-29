@@ -6,60 +6,178 @@
   </head>
 
   <body
-  class="px-5 md:px-8 bg-gradient-to-t from-primary to-bgRed100 bg-fixed flex flex-col"
->
-  <div
-    id="content"
-    class="py-5 text-lg space-y-4 lg:w-10/12 items-center self-center"
+    class="px-5 md:px-8 bg-fixed flex flex-col bg-gradient-to-t from-primary to-bgRed100"
   >
-    <aside>
+    <div
+      id="content"
+      class="py-5 text-lg space-y-4 lg:w-10/12 self-center from-bgRed900 to-primary100/90"
+    >
       <div class="bg-white/90 p-2 rounded-md">
-        <div class="flex flex-row items-center space-x-4 mb-2 rounded-md">
+        <a
+          href="options.html"
+          class="flex md:flex-row items-center justify-center rounded-md"
+        >
           <img class="w-24" src="../assets/icons/Productivity-Logo.png" />
-          <h1 class="text-3xl font-bold pb-4">
-            <em class="text-black">Productivity Booster</em>
+
+          <h1 class="flex flex-row">
+            <em class="px-2 text-3xl font-bold flex flex-row leading-7"
+              >Productivity Booster
+            </em>
           </h1>
-          <p class="pb-4 text-base">
-            Re-take control of your productivity! This extension will redirect
-            you from sites that kill your motivation and productivity and
-            instead redirect you to more productive places. <br />
-            Apply proven methods taken from “Atomic Habits” by James Clear.
-            Become more focused with the Pomodoro-technique. Finish what you
-            started and feel good about it.
-          </p>
+        </a>
+
+        <div class="my-10">
+          <a href="options.html" class="hover:underline text-primary">← Back</a>
+          <div id="imprint" class="mx-5 text-lg">
+            <section id="imprint-header" class="">
+              <h1 class="text-2xl pt-8 font-bold">Privacy Policy</h1>
+              <h2 class="text-xl mt-5 mb-2 font-bold">Preamble</h2>
+              <p>This app was built with privacy in mind.</p>
+
+              <h2 class="text-xl mt-5 mb-2 font-bold">
+                Information processed by this app
+              </h2>
+              <p>
+                No personally identifiable information is being requested,
+                stored or processed by this application. This application
+                processes and stores the following data:
+              </p>
+              <ul class="list-disc pl-6">
+                <li>
+                  Which websites are considered "unproductive" by the user
+                </li>
+                <li>Times which the user considers "work times".</li>
+              </ul>
+
+              Additionally, this websites processes, but does not store, the
+              following information:
+              <ul class="list-disc pl-6">
+                <li>Websites visited by the user.</li>
+              </ul>
+
+              <h2 class="text-xl mt-5 mb-2 font-bold">
+                Storage of information
+              </h2>
+              <p>
+                All information is processed and stored on the device of the
+                user.
+              </p>
+
+              <h2 class="text-xl mt-5 mb-2 font-bold">
+                Information processed during installation or technical support
+              </h2>
+              <p>
+                Depending on the means used to obtaining this app, personally
+                identifiable information may be processed by a third party. This
+                is not endorsed nor in any way facilitated by this app.
+                <br /><br />
+                Furthermore, personally identifiable information may be
+                transmitted if the user chooses to reach out to the maintainer
+                of this app for the purpose of providing feedback, reporting an
+                error or requesting technical support. This information will be
+                stored for a maximum of two years and deleted thereafter.
+              </p>
+
+              <h2 class="text-xl mt-5 mb-2 font-bold" id="rights">
+                What are your data protection rights?
+              </h2>
+              <p>
+                As a natural person and visitor of this website, you have
+                various rights with regards to your privacy:
+              </p>
+              <ul class="list-disc pl-6">
+                <li>
+                  <b>The right to access</b>: You have the right to request I
+                  for copies of your personal data. I may charge you a small fee
+                  for this service.
+                </li>
+                <li>
+                  <b>The right to rectification</b>: You have the right to
+                  request that I correct any information you believe is
+                  inaccurate. You also have the right to request I to complete
+                  the information you believe is incomplete.
+                </li>
+                <li>
+                  <b>The right to erasure</b>: You have the right to request
+                  that I erase your personal data, under certain conditions.
+                </li>
+                <li>
+                  <b>The right to restrict processing</b>: You have the right to
+                  request that I restrict the processing of your personal data,
+                  under certain conditions.
+                </li>
+                <li>
+                  <b>The right to object to processing</b>: You have the right
+                  to object to the processing of your personal data, under
+                  certain conditions.
+                </li>
+                <li>
+                  <b>The right to data portability</b>: You have the right to
+                  request that I transfer the data that I have collected to
+                  another organization, or directly to you, under certain
+                  conditions.
+                </li>
+              </ul>
+              <p>
+                If you make a request, I have to respond to you within one
+                month. If you would like to exercise any of these rights, please
+                contact me via the mail address provided in the
+                <a href="imprint.html">imprint</a>.
+              </p>
+
+              <h2 class="text-xl mt-5 mb-2 font-bold" id="cookies">Cookies</h2>
+              <p>
+                Cookies are text files placed on your computer to collect
+                standard Internet log information and visitor behavior
+                information.
+              </p>
+              <p>
+                For further information, visit
+                <a href="https://allaboutcookies.org"
+                  >https://allaboutcookies.org</a
+                >.
+              </p>
+
+              <h2 class="text-xl mt-5 mb-2 font-bold" id="how-cookies">
+                How do I use cookies?
+              </h2>
+
+              <p>This app does not use cookies.</p>
+            </section>
+          </div>
         </div>
       </div>
-    </aside>
 
-
-    <div class="bg-white rounded-md p-5 py-3">
-      <h1 class="text-2xl">Privacy Policy</h1>
-      <p class="text-lg">
-        This plugin does not collect personal information.
-
-        <br /><br />
-        This plugin stores all data visible in the "Productivity Rules" tab and
-        the "Working Times" tab. All data is stored locally on the device of the
-        user.
-        <br /><br />
-
-        No data is processed on any device other than the user's browser.
-        Additional data may have been sent to third parties from which this
-        plugin was obtained.
-      </p>
-    </div>
-    <div id="footer" class="bg-white rounded-md p-3 py-5 flex justify-between">
-      <p>Copyright 2023 Elias Ladenburger</p>
-      <div>
-        <a after=" | " class="after:content-[attr(after)]" href="imprint.html"
-          >Imprint</a
-        >
-        <a after=" | " class="after:content-[attr(after)]" href="terms.html"
-          >Terms and Conditions</a
-        >
-        <a href="privacy.html">Privacy Policy</a>
+      <div
+        id="footer"
+        class="bg-white/90 rounded-md p-3 py-5 flex justify-between"
+      >
+        <p>Copyright 2023 Elias Ladenburger</p>
+        <div>
+          <a
+            after=" | "
+            class="hover:text-primary hover:underline"
+            href="imprint.html"
+            >Imprint</a
+          >
+          |
+          <a href="privacy.html" class="hover:text-primary hover:underline"
+            >Privacy Policy</a
+          >
+          |
+          <a
+            href="mailto:prodextension@eliasladenburger.com?subject=bug%20report&body=Hi! I would
+like to report a bug. When I do this: ... then I expect this to happen: ... but
+instead, this happens: ...
+"
+            class="hover:text-primary hover:underline text-bgRed700"
+            >Report a Bug</a
+          >
+        </div>
       </div>
     </div>
-    </div>
+    <script src="../js/runtime.bundle.js"></script>
+
+    <script src="../js/options.bundle.js"></script>
   </body>
 </html>
