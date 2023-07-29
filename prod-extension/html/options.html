@@ -9,18 +9,22 @@
   <body
     class="px-5 md:px-8 bg-fixed flex flex-col bg-gradient-to-t from-primary to-bgRed100"
   >
-    <div
-      id="content"
-      class="py-5 text-lg space-y-4 lg:w-10/12 self-center from-bgRed900 to-primary100/90"
-    >
+    <div id="content" class="py-5 text-lg space-y-4 lg:w-10/12 self-center">
       <aside>
         <div class="bg-white/90 p-2 rounded-md">
-          <div class="flex flex-row items-center space-x-4 mb-2 rounded-md">
-            <img class="w-24" src="../assets/icons/Productivity-Logo.png" />
-            <h1 class="text-3xl font-bold pb-4">
-              <em class="text-black">Productivity Booster</em>
-            </h1>
-            <p class="pb-4 text-base">
+          <div
+            class="flex flex-row items-center justify-center my-2 rounded-md"
+          >
+            <div class="flex md:flex-row items-center justify-center">
+              <img class="w-24" src="../assets/icons/Productivity-Logo.png" />
+
+              <h1 class="flex flex-row">
+                <em class="px-2 text-3xl font-bold flex flex-row leading-7"
+                  >Productivity Booster
+                </em>
+              </h1>
+            </div>
+            <p class="md:ml-16 mx-2 px-4 text-base hidden md:flex">
               Re-take control of your productivity! This extension will redirect
               you from sites that kill your motivation and productivity and
               instead redirect you to more productive places. <br />
@@ -114,7 +118,7 @@
                 <div class="flex justify-center pt-3 space-x-4">
                   <button
                     id="saveRuleButton"
-                    class="text-center rounded-lg px-2 bg-primary500 text-white hover:bg-primary100"
+                    class="text-center rounded-lg px-2 bg-primary text-white hover:bg-primary500"
                   >
                     Add Rule
                   </button>
@@ -177,7 +181,7 @@
               <div class="flex justify-center pt-3 space-x-4">
                 <button
                   id="saveWTButton"
-                  class="text-center rounded-lg px-2 bg-primary500 text-white hover:bg-primary100"
+                  class="text-center rounded-lg px-2 bg-primary text-white hover:bg-primary500"
                 >
                   Schedule Work Time
                 </button>
@@ -229,31 +233,21 @@
             id="prototypeEditButton"
             class="rounded-md border border-1 border-opacity-0 border-primary hover:border-opacity-100 m-1 text-center items-center after:block"
           >
-              <img
-                class="h-9 w-9 py-2"
-                src="../assets/icons/Edit icon.svg"
-              />
+            <img class="h-9 w-9 py-2" src="../assets/icons/Edit icon.svg" />
           </button>
           <button
             id="prototypeDeleteButton"
             class="rounded-lg border border-1 border-opacity-0 border-bgRed900 hover:border-opacity-100 m-1 text-center items-center"
           >
             <div class="flex flew-row items-center">
-              <img
-                class="h-9 w-9 py-2"
-                src="../assets/icons/trash-solid.svg"
-              />
-              
+              <img class="h-9 w-9 py-2" src="../assets/icons/trash-solid.svg" />
             </div>
           </button>
         </div>
         <div id="formatting">
           <div id="standard_row" class="rounded-md"></div>
           <div id="edit_row" class="rounded-md bg-bgGrey100/50"></div>
-          <div
-            id="inactive_row"
-            class="rounded-md text-bgGrey600"
-          ></div>
+          <div id="inactive_row" class="rounded-md text-bgGrey600"></div>
         </div>
       </div>
 
@@ -263,15 +257,25 @@
       >
         <p>Copyright 2023 Elias Ladenburger</p>
         <div>
-          <a after=" | " class="hover:text-primary hover:underline" href="imprint.html"
+          <a
+            after=" | "
+            class="hover:text-primary hover:underline"
+            href="imprint.html"
             >Imprint</a
-          > |
-          <a after=" | " class="hover:text-primary hover:underline" href="terms.html"
-            >Terms and Conditions</a
-          > 
-          | 
-          <a href="privacy.html" class="hover:text-primary hover:underline
-">Privacy Policy</a>
+          >
+          |
+          <a href="privacy.html" class="hover:text-primary hover:underline"
+            >Privacy Policy</a
+          >
+          |
+          <a
+            href="mailto:prodextension@eliasladenburger.com?subject=bug%20report&body=Hi! I would
+like to report a bug. When I do this: ... then I expect this to happen: ... but
+instead, this happens: ...
+"
+            class="hover:text-primary hover:underline text-bgRed700"
+            >Report a Bug</a
+          >
         </div>
       </div>
     </div>
