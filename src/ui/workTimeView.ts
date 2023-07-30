@@ -20,6 +20,7 @@ const WTtable = {
         let actionsCell = newRow.insertCell(3);
 
         newRow.id = wtID;
+
         weekdayCell.innerHTML = TimeHandler.WEEKDAYS(wt.weekday);
 
         startTimeCell.innerHTML = TimeHandler.timeToStr(wt.startHour) + ":" + TimeHandler.timeToStr(wt.startMinutes)

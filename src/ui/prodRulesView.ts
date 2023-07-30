@@ -14,6 +14,8 @@ class RuleForm {
   _title: HTMLTitleElement;
   _button: HTMLButtonElement
   _cancelButton: HTMLButtonElement
+  _container: HTMLElement
+  fields: HTMLElement[]
 
 
   constructor() {
@@ -26,6 +28,8 @@ class RuleForm {
     this._button = document.getElementById("saveRuleButton") as HTMLButtonElement
     this._cancelButton = document.getElementById("cancelRuleButton") as HTMLButtonElement
     this._title = document.getElementById("ruleFormTitle") as HTMLTitleElement
+    this._container = document.getElementById("ruleForm") as HTMLElement
+    this.fields = [this.actionsource, this.actiontype, this.condition, this.delay, this.ruleID]
   }
 
 
@@ -36,6 +40,7 @@ class RuleForm {
     this.condition.selectedIndex = 0
     this.delay.selectedIndex = 0
     this.setEditMode(false)
+    this.hide()
   }
 
   getValues() {
@@ -49,21 +54,41 @@ class RuleForm {
     }
   }
 
+  show() {
+    this._container.classList.remove("hidden")
+    // this._container.classList.add("flex")
+  }
+
+  hide() {
+    this._container.classList.add("hidden")
+    // this._container.classList.remove("flex")
+  }
+
   setEditMode(editing: boolean) {
     if (editing) {
       this._title.innerHTML = "Edit Rule"
       this._button.innerHTML = "Save Changes"
-      this._cancelButton.classList.toggle("hidden")
+      this._toggleBorders("border-bgRed200", "border-bgGrey100")
+      this.show()
     }
     else {
       this.ruleID.value = "NEW"
       this._title.innerHTML = "Add a Productivity Rule"
       this._button.innerHTML = "Add Rule"
-      this._cancelButton.classList.toggle("hidden")
+      this._toggleBorders("border-bgGrey100", "border-bgRed200")
     }
 
   }
+
+  _toggleBorders(oldBorder: string, newBorder: string) {
+    this.fields.forEach((field) => {
+      field.classList.add(newBorder)
+      field.classList.remove(oldBorder)
+    })
+  }
+
 }
+
 
 const ProdTable = {
   tableID: "productionRuleTable",
@@ -124,30 +149,31 @@ const ProdRulesView = {
   clearEntries: ProdTable.clear,
   removeEntry: ProdTable.removeRule,
 
-  isFormEditMode: (editMode: boolean) => {
-    let myForm = new RuleForm()
-    myForm.setEditMode(editMode)
+  showForm: () => { const ruleForm = new RuleForm(); ruleForm.show() },
+  hideForm: () => { const ruleForm = new RuleForm(); ruleForm.hide() },
+
+
+  setFormEditMode: (editing: boolean) => {
+    const ruleForm = new RuleForm()
+    ruleForm.setEditMode(editing)
   },
 
-  getFormData: () => {
-    let myForm = new RuleForm()
-    return myForm.getValues();
-  },
+  getFormData: () => { const ruleForm = new RuleForm(); return ruleForm.getValues() },
 
   clearForm: () => {
-    const form = new RuleForm()
-    form.toStart()
+    const ruleForm = new RuleForm();
+    ruleForm.toStart()
     ProdRulesView.applyTableFormat()
   },
 
   setFormValues(formValues: ProdRule, ruleID: string) {
-    let myForm = new RuleForm()
-    myForm.actionsource.value = formValues.source
-    myForm.actiontype.value = formValues.action.type
-    myForm.targetVal.value = formValues.action.targetValue
-    myForm.condition.value = formValues.condition
-    myForm.delay.value = formValues.delay.toString()
-    myForm.ruleID.value = ruleID
+    const ruleForm = new RuleForm()
+    ruleForm.actionsource.value = formValues.source
+    ruleForm.actiontype.value = formValues.action.type
+    ruleForm.targetVal.value = formValues.action.targetValue
+    ruleForm.condition.value = formValues.condition
+    ruleForm.delay.value = formValues.delay.toString()
+    ruleForm.ruleID.value = ruleID
 
   },
 

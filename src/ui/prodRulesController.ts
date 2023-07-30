@@ -8,9 +8,19 @@ prepareProdRules();
 
 function prepareProdRules() {
   prepareForm();
-  prepareProdRuleTable();
   prepareAddRuleButton();
+  prepareProdRuleTable();
+  prepareSaveRuleButton();
   prepareCancelButton();
+}
+
+function prepareAddRuleButton(){
+  const button = document.getElementById("addRuleButton") as HTMLButtonElement
+  button.addEventListener("click", (e) => {
+    e.preventDefault()
+    ProdRulesView.clearForm()
+    ProdRulesView.showForm()
+  })
 }
 
 function prepareForm() {
@@ -58,7 +68,7 @@ async function prepareProdRuleTable() {
   }
 }
 
-function prepareAddRuleButton() {
+function prepareSaveRuleButton() {
   const saveButton = document.getElementById("saveRuleButton") as HTMLButtonElement;
   saveButton.addEventListener(
     "click",
@@ -133,7 +143,7 @@ function addToProdTable(prodRule: ProdRule, ruleIndex: number) {
 function prepareToEdit(prodRule: ProdRule, ruleIndex: number) {
   const ruleID = IDHandler.getRowID(prodRule.source, ruleIndex)
   ProdRulesView.setFormValues(prodRule, ruleID);
-  ProdRulesView.isFormEditMode(true)
+  ProdRulesView.setFormEditMode(true)
   ProdRulesView.highlightRow(ruleID, "edit")
   
 }
