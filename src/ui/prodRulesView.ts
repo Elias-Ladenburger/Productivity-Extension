@@ -29,7 +29,7 @@ class RuleForm {
     this._cancelButton = document.getElementById("cancelRuleButton") as HTMLButtonElement
     this._title = document.getElementById("ruleFormTitle") as HTMLTitleElement
     this._container = document.getElementById("ruleForm") as HTMLElement
-    this.fields = [this.actionsource, this.actiontype, this.condition, this.delay, this.ruleID]
+    this.fields = [this.actionsource, this.actiontype, this.condition, this.delay, this.targetVal, this.ruleID]
   }
 
 
@@ -68,14 +68,14 @@ class RuleForm {
     if (editing) {
       this._title.innerHTML = "Edit Rule"
       this._button.innerHTML = "Save Changes"
-      this._toggleBorders("border-bgRed200", "border-bgGrey100")
+      this._toggleBorders("border-primary", "border-bgGrey100")
       this.show()
     }
     else {
       this.ruleID.value = "NEW"
       this._title.innerHTML = "Add a Productivity Rule"
       this._button.innerHTML = "Add Rule"
-      this._toggleBorders("border-bgGrey100", "border-bgRed200")
+      this._toggleBorders("border-bgGrey100", "border-primary")
     }
 
   }

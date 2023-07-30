@@ -64,7 +64,7 @@
               </h2>
               <div>
                 <button
-                id="addRuleButton"
+                  id="addRuleButton"
                   class="hover:bg-primary500 bg-primary text-white rounded-md px-2 items-center"
                 >
                   <span class="text-3xl font-bold">+</span>
@@ -77,7 +77,7 @@
               id="ruleForm"
               class="pb-5 rounded-md hidden self-center items-center justify-center"
             >
-            <hr/>
+              <hr />
               <h2 id="ruleFormTitle" class="text-2xl font-bold hidden">
                 Add a Rule
               </h2>
@@ -87,7 +87,7 @@
                 <select
                   id="rulecondition"
                   name="rulecondition"
-                  class="bg-white/90 border-bgRed200 border-1 border rounded-md px-1 mt-2 hover:cursor-pointer"
+                  class="bg-white/90 border-primary border-1 border rounded-md px-1 mt-2 hover:cursor-pointer"
                   required
                 ></select>
 
@@ -99,7 +99,7 @@
                   name="actionsource"
                   type="text"
                   placeholder="unproductiveSite.com"
-                  class="bg-white/90 border-bgRed200 border-1 border rounded-md mt-2 px-1"
+                  class="bg-white/90 border-primary border-1 border rounded-md mt-2 px-1"
                   required
                 />
 
@@ -107,14 +107,14 @@
                 <select
                   id="actiondelay"
                   name="actiondelay"
-                  class="bg-white/90 border-bgRed200 border-1 border rounded-md px-1 mt-2 hover:cursor-pointer"
+                  class="bg-white/90 border-primary border-1 border rounded-md px-1 mt-2 hover:cursor-pointer"
                   required
                 ></select>
 
                 <select
                   id="actiontype"
                   name="actiontype"
-                  class="bg-white/90 border-bgRed200 border-1 border rounded-md col-span-3 px-1 mt-2 hover:cursor-pointer"
+                  class="bg-white/90 border-primary border-1 border rounded-md col-span-3 px-1 mt-2 hover:cursor-pointer"
                   required
                 ></select>
 
@@ -123,7 +123,7 @@
                   name="targetvalue"
                   type="text"
                   placeholder="productiveURL.com"
-                  class="bg-white/90 border-bgRed200 border-1 border rounded-md px-1 mt-2"
+                  class="bg-white/90 border-primary border-1 border rounded-md px-1 mt-2"
                   required
                 />
 
@@ -142,10 +142,13 @@
                   </button>
                 </div>
               </form>
-              <hr/>
+              <hr />
             </div>
 
-            <table id="productionRuleTable" class="text-base space-y-3 pb-3 w-full">
+            <table
+              id="productionRuleTable"
+              class="text-base space-y-3 pb-3 w-full"
+            >
               <tbody></tbody>
             </table>
           </div>
@@ -255,7 +258,6 @@
             </div>
           </button>
         </div>
-
 
         <div id="formatting">
           <div id="standard_row" class="rounded-md"></div>
