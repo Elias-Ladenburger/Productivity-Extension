@@ -46,7 +46,7 @@ class RuleForm {
   getValues() {
     return {
       "actionsource": this.actionsource.value,
-      "actiontype": this.actiontype.value,
+      "actiontype": this.actiontype.value || "",
       "targetVal": this.targetVal.value,
       "condition": this.condition.value,
       "delay": parseInt(this.delay.value),
@@ -56,12 +56,10 @@ class RuleForm {
 
   show() {
     this._container.classList.remove("hidden")
-    // this._container.classList.add("flex")
   }
 
   hide() {
     this._container.classList.add("hidden")
-    // this._container.classList.remove("flex")
   }
 
   setEditMode(editing: boolean) {
@@ -144,6 +142,7 @@ const ProdTable = {
 }
 
 const ProdRulesView = {
+  form: () => {return new RuleForm()},
 
   addEntry: ProdTable.addEntry,
   clearEntries: ProdTable.clear,
@@ -211,7 +210,7 @@ function _formatString(prodRule: ProdRule) {
 
   const resultsStr = `<em class="text-lg">${prodRule.source}</em> <br><b>${conditionStr
     }</b> when I visit <b>${prodRule.source}</b> then <b>${delayStr} 
-  ${actionStr}: <em>${prodRule.action.targetValue}</em></b>`;
+  ${actionStr} <em>${prodRule.action.targetValue}</em></b>`;
 
   return resultsStr
 }

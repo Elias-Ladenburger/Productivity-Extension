@@ -10,7 +10,7 @@ abstract class Action {
 
 class FrameAction extends Action {
   type: ActionType;
-  constructor(frameColor: string) {
+  constructor(frameColor: string = "") {
     super(frameColor);
     this.type = ActionType.FRAME;
   }
@@ -29,16 +29,18 @@ class FrameAction extends Action {
 
 class PopupAction extends Action {
   type: ActionType;
-  constructor(popupText: string) {
+  constructor(popupText: string = "") {
     super(popupText);
     this.type = ActionType.POPUP;
   }
+
   performAction() {
     if (!this.targetValue) {
       this.targetValue = "Do you truly want to spend more time on this site?";
     }
     alert(this.targetValue);
   }
+
   toString() {
     return `show a popup that says: \n 'Do you really want to spend more time on this site?'`;
   }
@@ -73,7 +75,7 @@ const ActionFactory = {
   createAction(type: string, targetValue: string): Action {
     switch (type.toUpperCase()) {
       case ActionType.FRAME:
-        return new FrameAction(targetValue);
+        return new FrameAction();
       case ActionType.REDIRECT:
         return new RedirectAction(targetValue);
       case ActionType.POPUP:

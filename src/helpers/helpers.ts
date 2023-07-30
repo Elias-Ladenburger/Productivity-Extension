@@ -37,9 +37,8 @@ export function getStringsForEnums(): { [key: string]: { [key: string]: string }
 
     actiontype: {
       REDIRECT: "redirect me to",
-      POPUP: "show a popup with text",
-      FRAME: "color the frame in",
-      LOG: "log my visit only (WIP)",
+      POPUP: "show a popup",
+      FRAME: "color the frame red",
     },
 
     actiondelay: {
@@ -56,7 +55,7 @@ export const TimeHandler = {
     return time < 10 ? "0" + time : time
   },
   WEEKDAYS: (wd: number): string => {
-    const weekdays: {[key: number]: string} = {
+    const weekdays: { [key: number]: string } = {
       1: "Monday",
       2: "Tuesday",
       3: "Wednesday",

@@ -14,7 +14,7 @@ function prepareProdRules() {
   prepareCancelButton();
 }
 
-function prepareAddRuleButton(){
+function prepareAddRuleButton() {
   const button = document.getElementById("addRuleButton") as HTMLButtonElement
   button.addEventListener("click", (e) => {
     e.preventDefault()
@@ -24,9 +24,11 @@ function prepareAddRuleButton(){
 }
 
 function prepareForm() {
+  const myForm = ProdRulesView.form()
   const multipleChoiceFields = getStringsForEnums();
   let selectElement;
   let myDict;
+
   for (let elemID in multipleChoiceFields) {
     selectElement = document.getElementById(elemID);
     myDict = multipleChoiceFields[elemID];
@@ -37,6 +39,16 @@ function prepareForm() {
       selectElement.appendChild(optionElement);
     }
   }
+
+  const actionField = myForm.actiontype
+  actionField.addEventListener("change", (e) => {
+    myForm.targetVal.classList.remove("hidden")
+
+    if (actionField.value != ActionType.REDIRECT) {
+      myForm.targetVal.classList.add("hidden")
+    }
+  })
+
 }
 
 function prepareCancelButton() {
@@ -75,7 +87,7 @@ function prepareSaveRuleButton() {
     function (e) {
       e.preventDefault()
       addRuleFromForm();
-      window.location.reload()
+      // window.location.reload()
     },
     false
   );
@@ -99,7 +111,10 @@ async function addRuleFromForm() {
 }
 
 async function addOrUpdateEntry(ruleData: ProdRule, ruleID: string) {
-  if (ruleData.source && ruleData.action.type && ruleData.action.targetValue) {
+  if (ruleData.source && ruleData.action.type) {
+    if (ruleData.action.type == ActionType.REDIRECT && !ruleData.action.targetValue) {
+      throw("No target value provided!")
+    }
     if (ruleID == IDHandler.STANDARD_ID || ruleID == "") {
       const ruleIndex = await PersistanceHandler.addRule(ruleData);
       addToProdTable(ruleData, ruleIndex);
@@ -145,7 +160,7 @@ function prepareToEdit(prodRule: ProdRule, ruleIndex: number) {
   ProdRulesView.setFormValues(prodRule, ruleID);
   ProdRulesView.setFormEditMode(true)
   ProdRulesView.highlightRow(ruleID, "edit")
-  
+
 }
 
 function deleteEntry(unproductiveSite: string, ruleIndex: number) {
