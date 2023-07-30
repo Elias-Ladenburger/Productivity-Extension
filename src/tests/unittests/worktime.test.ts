@@ -25,13 +25,13 @@ describe("A Working Time on Thursday from 09:00 to 12:00", function () {
 
 });
 
-describe("The WorkTimeService", function() {
-  test("should return true when now is work time", async function() {
-      let today = new Date()
-      let work = WorkTimeFactory.createWorkTimeFromStrings("00:01", "23:59", today.getDay(), true)
-      let idx = await WorkTimeRepository.addWorkTime(work)
-      const is_work_time = await WorkTimeService.isWorkingTime()
-      expect(is_work_time).toEqual(true)
+describe("The WorkTimeService", function () {
+  test("should return true when now is work time", async function () {
+    let today = new Date()
+    let work = WorkTimeFactory.createWorkTimeFromStrings("00:01", "23:59", today.getDay(), true)
+    let idx = await WorkTimeRepository.addWorkTime(work)
+    const is_work_time = await WorkTimeService.isWorkingTime(new Date())
+    expect(is_work_time).toEqual(true)
   }),
     test("should return false when now is not work time", async function () {
       let today = new Date()
@@ -39,6 +39,17 @@ describe("The WorkTimeService", function() {
       let work = WorkTimeFactory.createWorkTimeFromStrings("00:01", "23:59", today.getDay() - 1, true)
       let idx = await WorkTimeRepository.addWorkTime(work)
       const is_work_time = await WorkTimeService.isWorkingTime()
+      expect(is_work_time).toEqual(true)
+    }),
+    test("should return true when now is 21:00 and working time is from 18:00 to 23:00", async function () {
+      let today = new Date()
+      let work = WorkTimeFactory.createWorkTimeFromStrings("18:00", "23:00", today.getDay(), true)
+      let idx = await WorkTimeRepository.addWorkTime(work)
+
+      let testDate = new Date()
+      testDate.setHours(21)
+      testDate.setMinutes(17)
+      const is_work_time = await WorkTimeService.isWorkingTime(testDate)
       expect(is_work_time).toEqual(true)
     })
 })
@@ -79,13 +90,13 @@ describe("A WorkTimeRepository", function () {
     WorkTimeRepository._clear()
   }),
 
-  test("should store worktimes", async function () {
-    let work = WorkTimeFactory.createWorkTime(starttime, endtime, weekday, true)
-    let idx = await WorkTimeRepository.addWorkTime(work)
-    console.log(`the index of the work time is ${idx}`)
-    expect(idx).toBe(0)
+    test("should store worktimes", async function () {
+      let work = WorkTimeFactory.createWorkTime(starttime, endtime, weekday, true)
+      let idx = await WorkTimeRepository.addWorkTime(work)
+      console.log(`the index of the work time is ${idx}`)
+      expect(idx).toBe(0)
 
-  });
+    });
   test("should retrieve worktimes", async function () {
     let work1 = WorkTimeFactory.createWorkTime(starttime, endtime, weekday, true)
     let idx1 = await WorkTimeRepository.addWorkTime(work1)
