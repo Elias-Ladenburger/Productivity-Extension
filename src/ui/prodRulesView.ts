@@ -142,7 +142,7 @@ const ProdTable = {
 }
 
 const ProdRulesView = {
-  form: () => {return new RuleForm()},
+  form: () => { return new RuleForm() },
 
   addEntry: ProdTable.addEntry,
   clearEntries: ProdTable.clear,
@@ -165,11 +165,18 @@ const ProdRulesView = {
     ProdRulesView.applyTableFormat()
   },
 
-  setFormValues(formValues: ProdRule, ruleID: string) {
+  setFormValues(formValues: ProdRule, ruleID: string, showValueField: boolean) {
     const ruleForm = new RuleForm()
+    ruleForm.toStart()
     ruleForm.actionsource.value = formValues.source
     ruleForm.actiontype.value = formValues.action.type
-    ruleForm.targetVal.value = formValues.action.targetValue
+    if (showValueField) {
+      ruleForm.targetVal.classList.remove("hidden")
+      ruleForm.targetVal.value = formValues.action.targetValue
+    }
+    else {
+      ruleForm.targetVal.classList.add("hidden")
+    }
     ruleForm.condition.value = formValues.condition
     ruleForm.delay.value = formValues.delay.toString()
     ruleForm.ruleID.value = ruleID

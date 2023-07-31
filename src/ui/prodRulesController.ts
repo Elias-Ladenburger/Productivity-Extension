@@ -157,7 +157,9 @@ function addToProdTable(prodRule: ProdRule, ruleIndex: number) {
 
 function prepareToEdit(prodRule: ProdRule, ruleIndex: number) {
   const ruleID = IDHandler.getRowID(prodRule.source, ruleIndex)
-  ProdRulesView.setFormValues(prodRule, ruleID);
+  let showValueField = (prodRule.action.type == ActionType.REDIRECT)
+  ProdRulesView.setFormValues(prodRule, ruleID, showValueField);
+  
   ProdRulesView.setFormEditMode(true)
   ProdRulesView.highlightRow(ruleID, "edit")
 

@@ -42,9 +42,9 @@ export function getStringsForEnums(): { [key: string]: { [key: string]: string }
     },
 
     actiondelay: {
-      0: "immediately",
-      30000: "after 30 seconds",
       300000: "after 5 minutes",
+      30000: "after 30 seconds",
+      0: "immediately",
       1200000: "after 20 minutes",
     },
   };

@@ -49,6 +49,11 @@ export const WorkTimeService = {
         }
     },
 
+    currentWorkingTime: async (now: Date = new Date()) => {
+        const working_hours = await WorkTimeRepository.getAll()
+
+
+    }
 }
 
 export default WorkTimeService
