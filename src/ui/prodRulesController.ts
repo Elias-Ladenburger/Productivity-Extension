@@ -123,7 +123,7 @@ async function addOrUpdateEntry(ruleData: ProdRule, ruleID: string) {
       const id_elems = IDHandler.deconstructID(ruleID);
       await PersistanceHandler.updateRule(
         id_elems.collectionID,
-        id_elems.index,
+        Number(id_elems.index),
         ruleData
       );
     }

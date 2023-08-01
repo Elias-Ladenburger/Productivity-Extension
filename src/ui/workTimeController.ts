@@ -22,9 +22,12 @@ async function prepareWorkHourTable() {
   } else {
     let wtID: string
     for (let weekday in workTimes) {
-      for (let i = 0; i < workTimes[weekday].length; i++) {
-        wtID = `${weekday}-${i}`
-        addToWorkTimeTable(workTimes[weekday][i], wtID)
+      for (let timeID in workTimes[weekday]) {
+        wtID = `${weekday}-${timeID}`
+        let wt = workTimes[weekday][timeID]
+        console.log(wtID)
+        console.log(wt)
+        addToWorkTimeTable(wt, wtID)
       }
 
 
@@ -52,22 +55,23 @@ function prepareSaveWorkTimeButton() {
   saveWTButton.addEventListener("click", (e) => {
     e.preventDefault()
     addWTfromForm()
-    window.location.reload()
+    // window.location.reload()
   })
 }
 
 async function addWTfromForm() {
+  console.log("adding worktime!")
   let wtData = WorkTimeView.getFormData()
   const newWT = WorkTimeFactory.createWorkTimeFromStrings(wtData.starttime, wtData.endtime, wtData.weekday)
   let wtID = wtData.worktimeID
-  let idx: number
+  let idx: string
   if (wtID == IDHandler.STANDARD_ID) {
     idx = await WorkTimeRepository.addWorkTime(newWT)
     wtID = `${wtData.weekday}-${idx}`
   }
   else {
     const deconstructed = IDHandler.deconstructID(wtID)
-    idx = ("index" in deconstructed) ? deconstructed.index : 0
+    idx = ("index" in deconstructed) ? deconstructed.index : "NEW"
   }
   addToWorkTimeTable(newWT, wtID)
   WorkTimeView.clearForm()

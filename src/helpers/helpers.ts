@@ -22,7 +22,7 @@ export const IDHandler = {
     const id_array = entryID.split("-");
     return {
       collectionID: id_array[0],
-      index: +id_array[1],
+      index: id_array[1],
     };
   },
   STANDARD_ID: "NEW"

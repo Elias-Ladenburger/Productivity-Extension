@@ -1,3 +1,4 @@
+import { TimeHandler } from "../helpers/helpers"
 import PersistanceHandler from "../persistance/persistance"
 import WorkTime from "./workinghours"
 
@@ -5,14 +6,14 @@ import WorkTime from "./workinghours"
 const dbName = "workTimes"
 const persHandler = new PersistanceHandler(dbName)
 interface WTlist {
-    [key: number]: WorkTime[]
+    [key: number]: { [key: string]: WorkTime }
 }
 
 const WorkTimeRepository = {
 
     getAll: async (): Promise<WTlist> => {
         let workTimes = await persHandler.getAll()
-        if(typeof workTimes == "undefined" ){
+        if (typeof workTimes == "undefined") {
             console.log("could not load work times!")
             return {}
         }
@@ -26,23 +27,25 @@ const WorkTimeRepository = {
         persHandler.setAll(timelist)
     },
 
-    addWorkTime: async (workTime: WorkTime) => {
+    addWorkTime: async (wt: WorkTime) => {
         const timelist = await WorkTimeRepository.getAll();
-        const weekday = workTime.weekday
+        const weekday = wt.weekday
 
-        if (weekday in timelist) {
-            timelist[weekday].push(workTime);
-        } else {
-            timelist[weekday] = [workTime];
+        let insertStr = wt.startHour + "-" + wt.startMinutes
+        if(!(weekday in timelist)){
+            timelist[weekday] = {}
         }
+        timelist[weekday][insertStr] = wt;
+        console.log("Timelist now looks like: ")
+        console.log(timelist)
         WorkTimeRepository.setWorkTimes(timelist);
-        return (timelist[weekday].length - 1)
+        return insertStr
     },
 
-    deleteOne: async (weekday: number, index: number) => {
+    deleteOne: async (weekday: number, indexStr: string) => {
         let allWTs = await WorkTimeRepository.getAll()
-        allWTs[weekday].splice(index, 1);
-        if (allWTs[weekday].length == 0) {
+        delete allWTs[weekday][indexStr]
+        if (Object.keys(allWTs[weekday]).length == 0) {
             delete allWTs[weekday]
         }
         WorkTimeRepository.setWorkTimes(allWTs);

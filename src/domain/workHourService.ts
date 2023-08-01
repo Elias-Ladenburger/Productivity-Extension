@@ -19,7 +19,7 @@ export const WorkTimeService = {
 
         if (weekday in working_hours) {
 
-            for (let i = 0; i < working_hours[weekday].length; i++) {
+            for (let i = 0; i < Object.keys(working_hours[weekday]).length; i++) {
                 let wt: WorkTime = working_hours[weekday][i]
 
                 if (hasWTbegun(now, wt) && !hasWTended(now, wt)) {
@@ -40,16 +40,16 @@ export const WorkTimeService = {
             return WorkTimeService.currentWorkingTime()
         }
         if (today in allWT) {
-            for(let i = 0; i<allWT[today].length;i++){
+            for (let i = 0; i < Object.keys(allWT[today]).length; i++) {
                 let wt = allWT[today][i]
-                if (!hasWTended(now, wt)){
+                if (!hasWTended(now, wt)) {
 
                 }
             }
         }
 
         return null
-}
+    }
 }
 
 
