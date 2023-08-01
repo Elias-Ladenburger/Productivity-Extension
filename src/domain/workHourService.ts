@@ -36,14 +36,14 @@ export const WorkTimeService = {
         const allWT = await WorkTimeRepository.getAll()
         const today = now.getDay()
 
-        if (WorkTimeService.isWorkingTime()) {
+        if (await WorkTimeService.isWorkingTime()) {
             return WorkTimeService.currentWorkingTime()
         }
         if (today in allWT) {
             for(let i = 0; i<allWT[today].length;i++){
                 let wt = allWT[today][i]
                 if (!hasWTended(now, wt)){
-                    
+
                 }
             }
         }

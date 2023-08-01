@@ -3,6 +3,7 @@ import ProdRuleRepository from "../domain/prodRuleRepo"
 import { _formatString } from "../ui/common"
 import WorkTimeService from "../domain/workHourService"
 import { TimeHandler } from "../helpers/helpers"
+import WorkTime from "../domain/workinghours"
 
 /**
  * When the popup loads, inject a content script into the active tab,
@@ -81,7 +82,7 @@ async function showNextWT() {
 
   if (await WorkTimeService.isWorkingTime()) {
     wtStatus.innerHTML = "Currently working"
-    let currentWT = await WorkTimeService.currentWorkingTime()
+    let currentWT = await WorkTimeService.currentWorkingTime() as WorkTime
     let wtEnd = document.getElementById("wtEnd") as HTMLElement
     let innerString = `${TimeHandler.timeToStr(currentWT.endHour)}:${TimeHandler.timeToStr(currentWT.endMinutes)}`
     wtEnd.innerHTML = innerString
