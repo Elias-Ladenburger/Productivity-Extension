@@ -5,7 +5,7 @@ module.exports = {
   entry: {
     options: ['./src/ui/prodRulesController.ts', './src/ui/options.ts', './src/ui/workTimeController.ts'],
     content_scripts: ['./src/content-scripts/productivity.ts'],
-    popup: ['./src/popup/popup.js']
+    popup: ['./src/popup/popup.ts']
   },
   output: {
     filename: '[name].bundle.js',

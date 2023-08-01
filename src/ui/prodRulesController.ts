@@ -87,7 +87,7 @@ function prepareSaveRuleButton() {
     function (e) {
       e.preventDefault()
       addRuleFromForm();
-      // window.location.reload()
+      window.location.reload()
     },
     false
   );

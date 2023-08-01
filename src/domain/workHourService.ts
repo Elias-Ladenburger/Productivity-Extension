@@ -5,55 +5,77 @@ import WorkTime from "./workinghours"
 export const WorkTimeService = {
 
     isWorkingTime: async (now: Date = new Date()) => {
+
+        const is_work_time = await WorkTimeService.currentWorkingTime()
+        if (is_work_time == null || !is_work_time) {
+            return false
+        }
+        return true
+    },
+
+    currentWorkingTime: async (now: Date = new Date()): Promise<WorkTime | null> => {
         const working_hours = await WorkTimeRepository.getAll()
         const weekday = now.getDay()
 
-        console.log("now is: ")
-        console.log(`${now.getDay()} ${now.getHours()}:${now.getMinutes()}`)
-
         if (weekday in working_hours) {
+
             for (let i = 0; i < working_hours[weekday].length; i++) {
                 let wt: WorkTime = working_hours[weekday][i]
 
-                console.log("compare against: ")
-                console.log(`${wt.weekday} ${wt.startHour}:${wt.startMinutes} to ${wt.endHour}:${wt.endMinutes}`)
-
-                if (weekday == wt.weekday) {
-                    const currentHour: number = now.getHours();
-                    const currentMinute: number = now.getMinutes();
-
-                    console.log("is correct weekday!")
-                    console.log(`${currentHour} > ${wt.startHour}: ${currentHour > wt.startHour}`)
-                    console.log(`${wt.startMinutes} < ${currentMinute}: ${wt.startMinutes < currentMinute}`)
-
-                    if (
-                        (currentHour > wt.startHour ||
-                            (currentHour === wt.startHour &&
-                                currentMinute >= wt.startMinutes))) {
-
-                        console.log("Work time has begun!")
-
-                        if (currentHour < wt.endHour ||
-                            (currentHour === wt.endHour && currentMinute <= wt.endMinutes)) {
-                            console.log("Work time has not ended!")
-
-                            return true
-
-                        }
-                    }
+                if (hasWTbegun(now, wt) && !hasWTended(now, wt)) {
+                    return wt
                 }
-
-                return false;
             }
-
         }
+
+        return null
+
     },
 
-    currentWorkingTime: async (now: Date = new Date()) => {
-        const working_hours = await WorkTimeRepository.getAll()
+    nextWTtoday: async (now: Date = new Date()): Promise<WorkTime | null> => {
+        const allWT = await WorkTimeRepository.getAll()
+        const today = now.getDay()
 
+        if (WorkTimeService.isWorkingTime()) {
+            return WorkTimeService.currentWorkingTime()
+        }
+        if (today in allWT) {
+            for(let i = 0; i<allWT[today].length;i++){
+                let wt = allWT[today][i]
+                if (!hasWTended(now, wt)){
+                    
+                }
+            }
+        }
 
-    }
+        return null
 }
+}
+
+
+function hasWTbegun(now: Date, wt: WorkTime) {
+    const currentHour: number = now.getHours();
+    const currentMinute: number = now.getMinutes();
+
+    if (
+        (currentHour > wt.startHour ||
+            (currentHour === wt.startHour &&
+                currentMinute >= wt.startMinutes))) {
+        return true
+    }
+    return false
+}
+
+function hasWTended(now: Date, wt: WorkTime) {
+    const currentHour: number = now.getHours();
+    const currentMinute: number = now.getMinutes();
+
+    if (currentHour > wt.endHour ||
+        (currentHour === wt.endHour && currentMinute >= wt.endMinutes)) {
+        return true
+    }
+    return false
+}
+
 
 export default WorkTimeService
