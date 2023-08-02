@@ -44,6 +44,10 @@ const WorkTimeRepository = {
 
     deleteOne: async (weekday: number, indexStr: string) => {
         let allWTs = await WorkTimeRepository.getAll()
+
+        console.log(`deleting ${weekday}-${indexStr}`)
+        console.log(allWTs[weekday][indexStr])
+
         delete allWTs[weekday][indexStr]
         if (Object.keys(allWTs[weekday]).length == 0) {
             delete allWTs[weekday]

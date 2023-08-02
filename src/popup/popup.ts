@@ -79,17 +79,27 @@ async function getCurrentTab() {
 
 async function showNextWT() {
   let wtStatus = document.getElementById("wtStatus") as HTMLElement
+  let wtEnd = document.getElementById("wtEnd") as HTMLElement
+  let endText = document.getElementById("endTime") as HTMLElement
+  let innerString: string = "for today"
+
 
   if (await WorkTimeService.isWorkingTime()) {
     wtStatus.innerHTML = "Currently working"
     let currentWT = await WorkTimeService.currentWorkingTime() as WorkTime
-    let wtEnd = document.getElementById("wtEnd") as HTMLElement
-    let innerString = `${TimeHandler.timeToStr(currentWT.endHour)}:${TimeHandler.timeToStr(currentWT.endMinutes)}`
-    wtEnd.innerHTML = innerString
+    innerString = `${TimeHandler.timeToStr(currentWT.endHour)}:${TimeHandler.timeToStr(currentWT.endMinutes)}`
+
   }
   else {
     wtStatus.innerHTML = "On a break"
-    let endText = document.getElementById("endTime") as HTMLElement
-    endText.classList.add("hidden")
+    let nextWT = await WorkTimeService.nextWTtoday()
+    if (nextWT != null) {
+      innerString = `${TimeHandler.timeToStr(nextWT.startHour)}:${TimeHandler.timeToStr(nextWT.startMinutes)}`
+    }
+    else {
+      innerString = "the rest of today"
+    }
   }
+
+  wtEnd.innerHTML = innerString
 }

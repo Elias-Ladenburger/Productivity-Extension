@@ -23,6 +23,7 @@ export const IDHandler = {
     return {
       collectionID: id_array[0],
       index: id_array[1],
+      whole_array: id_array
     };
   },
   STANDARD_ID: "NEW"

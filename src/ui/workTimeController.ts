@@ -55,7 +55,7 @@ function prepareSaveWorkTimeButton() {
   saveWTButton.addEventListener("click", (e) => {
     e.preventDefault()
     addWTfromForm()
-    // window.location.reload()
+    window.location.reload()
   })
 }
 
@@ -80,7 +80,7 @@ async function addWTfromForm() {
 function deleteEntry(wtID: string) {
   const decID = IDHandler.deconstructID(wtID)
   const weekday = Number(decID.collectionID)
-  const index = decID.index
+  const index = decID.index + "-" + decID.whole_array[2]
   WorkTimeRepository.deleteOne(weekday, index)
   WorkTimeView.removeEntry(wtID)
   window.location.reload()
