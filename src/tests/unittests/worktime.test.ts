@@ -1,6 +1,7 @@
 import WorkTimeRepository from "../../domain/workTimeRepo";
 import { WorkTime, WorkTimeFactory } from "../../domain/workinghours"
 import WorkTimeService from "../../domain/workHourService"
+import { TimeHandler } from "../../helpers/helpers";
 
 describe("A Working Time on Thursday from 09:00 to 12:00", function () {
   let starttime = new Date("2020-01-03T09:00:00");
@@ -115,7 +116,7 @@ describe("A WorkTimeRepository", function () {
   test("should set worktimes", async function () {
     let work1 = WorkTimeFactory.createWorkTime(starttime, endtime, weekday, true)
     let work2 = WorkTimeFactory.createWorkTime(starttime, endtime, weekday, true)
-    WorkTimeRepository.setWorkTimes({ 1: [work1, work2, work2], 2: [work1, work2] })
+    WorkTimeRepository.setWorkTimes({ 1: { "work1": work1, "work2": work2, "work3": work2 }, 2: { "work1": work1, "work2": work2 } })
 
     let workList = await WorkTimeRepository.getAll()
     console.log(workList)
@@ -134,3 +135,69 @@ describe("A WorkTimeRepository", function () {
 
 });
 
+describe("TimeHandler", function () {
+  test(".isEarlierByString(timeA, timeB) should return true for '11:00' and '21:00'", () => {
+    let isEarlier = TimeHandler.isEarlierByString("11:00", "22:00")
+    expect(isEarlier).toBe(true)
+  }),
+    test(".isEarlierByString(timeA, timeB, sameAllowed) should return true for '11:00', '11:00', true", () => {
+      let isEarlier = TimeHandler.isEarlierByString("11:00", "11:00", true)
+      expect(isEarlier).toBe(true)
+    }),
+    test(".isEarlierByString(timeA, timeB, sameAllowed) should return false for '21:00', '11:00'", () => {
+      let isEarlier = TimeHandler.isEarlierByString("21:00", "11:00")
+      expect(isEarlier).toBe(true)
+    }),
+    test(".isEarlierByString(timeA, timeB, sameAllowed) should return false for '11:00', '11:00', false", () => {
+      let isEarlier = TimeHandler.isEarlierByString("11:00", "11:00", false)
+      expect(isEarlier).toBe(true)
+    }),
+    test(".isEarlierByDate(timeA, timeB) should return true for '11:00' and '21:00'", () => {
+      const early = new Date()
+      early.setHours(11)
+      early.setMinutes(0)
+
+      const late = new Date()
+      late.setHours(21)
+      late.setMinutes(0)
+
+      let isEarlier = TimeHandler.isEarlierByDate(early, late)
+      expect(isEarlier).toBe(true)
+    }),
+    test(".isEarlierByDate(timeA, timeB, sameAllowed) should return true for '11:00', '11:00', true", () => {
+      const early = new Date()
+      early.setHours(11)
+      early.setMinutes(0)
+
+      const late = new Date()
+      late.setHours(11)
+      late.setMinutes(0)
+
+      let isEarlier = TimeHandler.isEarlierByDate(early, late)
+      expect(isEarlier).toBe(true)
+    }),
+    test(".isEarlierByDate(timeA, timeB, sameAllowed) should return false for '21:00', '11:00'", () => {
+      const early = new Date()
+      early.setHours(21)
+      early.setMinutes(0)
+
+      const late = new Date()
+      late.setHours(11)
+      late.setMinutes(0)
+
+      let isEarlier = TimeHandler.isEarlierByDate(early, late)
+      expect(isEarlier).toBe(true)
+    }),
+    test(".isEarlierByDate(timeA, timeB, sameAllowed) should return false for '11:00', '11:00', false", () => {
+      const early = new Date()
+      early.setHours(11)
+      early.setMinutes(0)
+
+      const late = new Date()
+      late.setHours(11)
+      late.setMinutes(0)
+
+      let isEarlier = TimeHandler.isEarlierByDate(early, late, false)
+      expect(isEarlier).toBe(true)
+    })
+})

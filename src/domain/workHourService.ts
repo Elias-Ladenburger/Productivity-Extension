@@ -1,4 +1,4 @@
-import PersistanceHandler from "../persistance/persistance"
+import { TimeHandler } from "../helpers/helpers"
 import WorkTimeRepository from "./workTimeRepo"
 import WorkTime from "./workinghours"
 
@@ -22,7 +22,7 @@ export const WorkTimeService = {
             for (let startime in working_hours[weekday]) {
                 let wt: WorkTime = working_hours[weekday][startime]
 
-                if (hasWTbegun(now, wt) && !hasWTended(now, wt)) {
+                if (TimeHandler.isEarlierByDate(wt.startTime, now) && TimeHandler.isEarlierByDate(now, wt.endTime)) {
                     return wt
                 }
             }
@@ -42,8 +42,9 @@ export const WorkTimeService = {
         if (today in allWT) {
             for (let starttime in allWT[today]) {
                 let wt = allWT[today][starttime]
-                if (!hasWTbegun(now, wt)) {
-                    if (!hasWTended(now, wt)) {
+
+                if (TimeHandler.isEarlierByDate(now, wt.startTime)) {
+                    if (TimeHandler.isEarlierByDate(now, wt.endTime)) {
                         return wt
                     }
                 }
@@ -51,31 +52,6 @@ export const WorkTimeService = {
         }
         return null
     }
-}
-
-
-function hasWTbegun(now: Date, wt: WorkTime) {
-    const currentHour: number = now.getHours();
-    const currentMinute: number = now.getMinutes();
-
-    if (
-        (currentHour > wt.startHour ||
-            (currentHour === wt.startHour &&
-                currentMinute >= wt.startMinutes))) {
-        return true
-    }
-    return false
-}
-
-function hasWTended(now: Date, wt: WorkTime) {
-    const currentHour: number = now.getHours();
-    const currentMinute: number = now.getMinutes();
-
-    if (currentHour > wt.endHour ||
-        (currentHour === wt.endHour && currentMinute >= wt.endMinutes)) {
-        return true
-    }
-    return false
 }
 
 

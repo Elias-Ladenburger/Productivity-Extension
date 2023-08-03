@@ -104,7 +104,7 @@ async function addRuleFromForm() {
   const ruleID: string = formData.ruleID as string;
 
   let newAction = ActionFactory.createAction(actionType, targetVal)
-  let newEntry = ProdRuleFactory.createRule(actionsource, newAction, actionCondition, actionDelay)
+  let newEntry = ProdRuleFactory.createRule(actionsource, newAction, actionCondition, actionDelay) as ProdRule
 
   addOrUpdateEntry(newEntry, ruleID)
   resetSite()
@@ -141,6 +141,7 @@ function addToProdTable(prodRule: ProdRule, ruleIndex: number) {
   const actionButtons = ProdRulesView.addEntry(prodRule, ruleID);
   const editButton = actionButtons["edit"] as HTMLButtonElement
   const deleteButton = actionButtons["delete"] as HTMLButtonElement
+  
   editButton.addEventListener("click", function (e) {
     e.preventDefault()
     prepareToEdit(prodRule, ruleIndex);

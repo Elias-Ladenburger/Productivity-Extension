@@ -34,7 +34,7 @@ class ProdRule {
 
 
 const ProdRuleFactory = {
-  createRule(badWebsite: string, action: Action, condition: string = "ALWAYS", delay: number = 0): ProdRule {
+  createRule(badWebsite: string, action: Action, condition: string = "ALWAYS", delay: number = 0): ProdRule | undefined {
     try {
       condition = condition.toUpperCase()
       if(Object.keys(RuleCondition).includes(condition)){

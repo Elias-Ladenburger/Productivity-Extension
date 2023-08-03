@@ -1,11 +1,25 @@
-abstract class Action {
+import { doc } from "prettier";
+
+class Action {
   targetValue: string;
   type: ActionType = ActionType.LOG
   constructor(targetValue: string = "") {
     this.targetValue = targetValue;
   }
 
-  abstract performAction(): void
+  performAction() {
+    let prodID = "prodbooster-alert"
+    let prodElem = document.getElementById(prodID)
+    if (prodElem == null || typeof prodElem == "undefined") {
+      let newNode = document.createElement("p")
+      newNode.style.color = "red"
+      newNode.style.fontSize = "36px"
+      newNode.style.textAlign = "center"
+      newNode.innerHTML = "This site is unproductive"
+      newNode.id = "prodbooster-alert"
+      document.body.insertBefore(newNode, document.body.firstChild)
+    }
+  }
 }
 
 class FrameAction extends Action {
@@ -16,10 +30,8 @@ class FrameAction extends Action {
   }
 
   performAction() {
-    alert(
-      `This site is unproductive! Framing this site in red.`
-    );
-    document.body.style.border = `10px solid red`;
+    super.performAction()
+    document.body.style.border = `20px solid red`;
   }
 
   toString() {
@@ -27,7 +39,7 @@ class FrameAction extends Action {
   }
 }
 
-class PopupAction extends Action {
+class PopupAction extends FrameAction {
   type: ActionType;
   constructor(popupText: string = "") {
     super(popupText);
@@ -35,6 +47,7 @@ class PopupAction extends Action {
   }
 
   performAction() {
+    super.performAction()
     if (!this.targetValue) {
       this.targetValue = "Do you truly want to spend more time on this site?";
     }

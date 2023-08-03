@@ -66,6 +66,42 @@ export const TimeHandler = {
       0: "Sunday"
     }
     return weekdays[wd]
+  },
+
+  isEarlierByString(timeA: string, timeB: String, isSameAllowed = true) {
+    const hoursA = Number(timeA.split(":")[0])
+    const minsA = Number(timeA.split(":")[1])
+    const hoursB = Number(timeB.split(":")[0])
+    const minsB = Number(timeB.split(":")[1])
+
+    return TimeHandler.isEarlierByHoursMinutes(hoursA, minsA, hoursB, minsB, isSameAllowed)
+
+  },
+
+  isEarlierByDate(timeA: Date, timeB: Date, isSameAllowed = true) {
+    const hoursA = timeA.getHours()
+    const minsA = timeA.getMinutes()
+
+    const hoursB = timeB.getHours()
+    const minsB = timeB.getMinutes()
+
+    return TimeHandler.isEarlierByHoursMinutes(hoursA, minsA, hoursB, minsB, isSameAllowed)
+  },
+
+  isEarlierByHoursMinutes(hoursA: number, minsA: number, hoursB: number, minsB: number, isSameAllowed = true) {
+    if (hoursA > hoursB) {
+      return false
+    }
+    if (hoursA == hoursB) {
+      if (minsA > minsB) {
+        return false
+      }
+      if (minsA == minsB) {
+        return isSameAllowed
+      }
+    }
+
+    return true
   }
 
 }
