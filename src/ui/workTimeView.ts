@@ -40,7 +40,6 @@ const WTtable = {
     removeEntry: (wtID: string) => {
         let toDelete = document.getElementById(wtID) as HTMLTableElement;
         toDelete.remove();
-        console.log(`Removing rule for ${wtID}!`);
     },
     clear: () => { }
 }

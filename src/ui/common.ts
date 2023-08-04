@@ -40,7 +40,6 @@ export const Validator = {
     validateTime: (timeString: string, minTime = "00:00", maxTime = "24:00") => {
         if (Validator.validateInput(timeString)) {
             const timeRegex = new RegExp("^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$")
-            console.log(`validating time: ${timeString.trim()}`)
             const isFormatValid = timeRegex.test(timeString.trim())
             if (isFormatValid) {
                 if (TimeHandler.isEarlierByString(minTime, timeString) && TimeHandler.isEarlierByString(timeString, maxTime)) {

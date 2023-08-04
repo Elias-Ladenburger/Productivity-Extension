@@ -26,8 +26,6 @@ async function prepareWorkHourTable() {
       for (let timeID in workTimes[weekday]) {
         wtID = `${weekday}-${timeID}`
         let wt = workTimes[weekday][timeID]
-        console.log(wtID)
-        console.log(wt)
         addToWorkTimeTable(wt, wtID)
       }
     }
@@ -68,13 +66,9 @@ function prepareSaveWorkTimeButton() {
 
 function validateFormInput() {
   const formData = WorkTimeView.getFormData()
-  console.log("starting validation")
   Validator.validateTime(formData.starttime)
-  console.log("start time validated")
   Validator.validateTime(formData.endtime)
-  console.log("end time validated")
   Validator.validateTime(formData.starttime, "00:00", formData.endtime)
-  console.log("start time before end time")
 }
 
 async function addWTfromForm() {

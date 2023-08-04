@@ -32,8 +32,6 @@ function loadOptionsPage() {
 function initializeButtons() {
   let button: HTMLButtonElement
   for (let blockElem in blockElements) {
-    console.log(blockElem)
-    console.log(blockElements[blockElem])
     button = blockElements[blockElem]["nav"]
     button.addEventListener("click", (e) => {
       window.location.hash = `#${blockElem}`
