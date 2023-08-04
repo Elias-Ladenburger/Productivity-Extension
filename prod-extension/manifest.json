@@ -20,7 +20,7 @@
   ],
   "content_scripts": [
     {
-      "matches": ["<all_urls>"],
+      "matches": ["https://*/*", "http://*/*"],
       "run_at": "document_end",
       "js": ["js/runtime.bundle.js", "js/content_scripts.bundle.js"]
     }
