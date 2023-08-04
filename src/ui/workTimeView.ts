@@ -50,6 +50,7 @@ class WorkTimeForm {
     weekday: HTMLSelectElement;
     starttime: HTMLInputElement;
     worktimeID: HTMLInputElement;
+    _errorMessage: HTMLElement;
     _title: HTMLTitleElement;
     _button: HTMLButtonElement
 
@@ -59,6 +60,7 @@ class WorkTimeForm {
         this.starttime = document.getElementById("starttime") as HTMLInputElement
         this.endtime = document.getElementById("endtime") as HTMLInputElement
         this.worktimeID = document.getElementById("wtID") as HTMLInputElement
+        this._errorMessage = document.getElementById("wtFormErrors") as HTMLElement
         this._button = document.getElementById("saveWTButton") as HTMLButtonElement
         this._title = document.getElementById("wtFormTitle") as HTMLTitleElement
     }
@@ -80,6 +82,11 @@ class WorkTimeForm {
             worktimeID: this.worktimeID.value
         }
     }
+
+    showErrors(error: string) {
+        this._errorMessage.innerHTML = error
+
+    }
 }
 
 const WorkTimeView = {
@@ -95,6 +102,11 @@ const WorkTimeView = {
     clearForm: () => {
         const form = new WorkTimeForm()
         form.toStart()
+    },
+
+    showFormErrors: (errMessage: string) => {
+        const form = new WorkTimeForm()
+        form.showErrors(errMessage)
     },
 
     setFormValues(formValues: WorkTime, wtID: string) {

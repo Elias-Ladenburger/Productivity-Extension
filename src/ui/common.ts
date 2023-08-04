@@ -15,9 +15,9 @@ export function _formatString(prodRule: ProdRule) {
 }
 
 export const Validator = {
-    NO_VALUE: "No value",
+    NO_VALUE: "Incorrect or missing value",
     OUT_OF_RANGE: "Out of range",
-    INCORRECT_VALUE: "incorrect format",
+    INCORRECT_VALUE: "Incorrect format",
 
     validateSelect: (selectField: HTMLSelectElement, lowerBound = 0, upperBound = 0) => {
         if (upperBound == 0) {
@@ -27,31 +27,34 @@ export const Validator = {
         if (selectField.selectedIndex >= lowerBound && selectField.selectedIndex <= upperBound) {
             return true
         }
-        return false
+        throw new Error(Validator.OUT_OF_RANGE)
     },
 
     validateInput: (stringInput: string, required = true) => {
         if (required && (typeof stringInput == "undefined" || stringInput == "")) {
-            return new Error(Validator.NO_VALUE)
+            throw new Error(Validator.NO_VALUE)
         }
         return true
     },
 
     validateTime: (timeString: string, minTime = "00:00", maxTime = "24:00") => {
         if (Validator.validateInput(timeString)) {
-            if (!timeString.includes(":")) {
-                return new Error(Validator.INCORRECT_VALUE)
+            const timeRegex = new RegExp("^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$")
+            console.log(`validating time: ${timeString.trim()}`)
+            const isFormatValid = timeRegex.test(timeString.trim())
+            if (isFormatValid) {
+                if (TimeHandler.isEarlierByString(minTime, timeString) && TimeHandler.isEarlierByString(timeString, maxTime)) {
+                    return true
+                }
+                else {
+                    throw new Error("Start time must be before end time")
+                }
             }
 
-            let times = timeString.split(":")
-            if (!(times.length = 2)) {
-                return new Error(Validator.INCORRECT_VALUE)
+            else {
+                throw new Error("Time is not in correct format")
             }
-
-            if (TimeHandler.isEarlierByString(minTime, timeString) && TimeHandler.isEarlierByString(timeString, maxTime)) {
-                return true
-            }
-
         }
+        return Validator.validateInput(timeString)
     }
 }

@@ -22,7 +22,10 @@ export const WorkTimeService = {
             for (let startime in working_hours[weekday]) {
                 let wt: WorkTime = working_hours[weekday][startime]
 
-                if (TimeHandler.isEarlierByDate(wt.startTime, now) && TimeHandler.isEarlierByDate(now, wt.endTime)) {
+                const hasBegun = TimeHandler.isEarlierByHoursMinutes(wt.startHour, wt.endMinutes, now.getHours(), now.getMinutes())
+                const hasNotEnded = TimeHandler.isEarlierByHoursMinutes(now.getHours(), now.getMinutes(), wt.endHour, wt.endMinutes)
+
+                if (hasBegun && hasNotEnded) {
                     return wt
                 }
             }
@@ -42,9 +45,11 @@ export const WorkTimeService = {
         if (today in allWT) {
             for (let starttime in allWT[today]) {
                 let wt = allWT[today][starttime]
+                const hasBegun = TimeHandler.isEarlierByHoursMinutes(wt.startHour, wt.endMinutes, now.getHours(), now.getMinutes())
+                const hasNotEnded = TimeHandler.isEarlierByHoursMinutes(now.getHours(), now.getMinutes(), wt.endHour, wt.endMinutes)
 
-                if (TimeHandler.isEarlierByDate(now, wt.startTime)) {
-                    if (TimeHandler.isEarlierByDate(now, wt.endTime)) {
+                if (!hasBegun) {
+                    if (hasNotEnded) {
                         return wt
                     }
                 }

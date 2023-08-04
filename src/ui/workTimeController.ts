@@ -2,6 +2,7 @@ import { WorkTimeFactory, WorkTime } from "../domain/workinghours"
 import WorkTimeView from "./workTimeView"
 import WorkTimeRepository from "../domain/workTimeRepo"
 import { IDHandler } from "../helpers/helpers";
+import { Validator } from "./common";
 
 prepareWorkTimes();
 
@@ -29,8 +30,6 @@ async function prepareWorkHourTable() {
         console.log(wt)
         addToWorkTimeTable(wt, wtID)
       }
-
-
     }
   }
 }
@@ -54,13 +53,31 @@ function prepareSaveWorkTimeButton() {
   const saveWTButton = document.getElementById("saveWTButton") as HTMLButtonElement
   saveWTButton.addEventListener("click", (e) => {
     e.preventDefault()
-    addWTfromForm()
-    window.location.reload()
+    try {
+      validateFormInput()
+      addWTfromForm()
+      window.location.reload()
+    }
+    catch (err) {
+      const errorMessage = (err as Error).message
+      WorkTimeView.showFormErrors(errorMessage)
+    }
+
   })
 }
 
+function validateFormInput() {
+  const formData = WorkTimeView.getFormData()
+  console.log("starting validation")
+  Validator.validateTime(formData.starttime)
+  console.log("start time validated")
+  Validator.validateTime(formData.endtime)
+  console.log("end time validated")
+  Validator.validateTime(formData.starttime, "00:00", formData.endtime)
+  console.log("start time before end time")
+}
+
 async function addWTfromForm() {
-  console.log("adding worktime!")
   let wtData = WorkTimeView.getFormData()
   const newWT = WorkTimeFactory.createWorkTimeFromStrings(wtData.starttime, wtData.endtime, wtData.weekday)
   let wtID = wtData.worktimeID
