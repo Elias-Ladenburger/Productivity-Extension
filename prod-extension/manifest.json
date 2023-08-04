@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
-  "name": "ProdBoost",
-  "description": "An extension for Firefox (potentially Chromium-based browsers as well) to enhance productivity ",
+  "name": "ProdBoost | Your Productivity Booster",
+  "description": "Blacklist sites and enhance your productivity on the internet!",
   "version": "1.0",
   "author": "prodboost@eliasladenburger.com",
   "homepage_url": "https://github.com/Elias-Ladenburger/Productivity-Extension",
@@ -16,12 +16,7 @@
 
   "permissions": [
     "activeTab",
-    "storage",
-    "unlimitedStorage",
-    "tabs",
-    "contextMenus",
-    "webNavigation",
-    "webRequest"
+    "storage"
   ],
   "content_scripts": [
     {
