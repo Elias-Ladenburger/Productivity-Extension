@@ -7,12 +7,18 @@
   "homepage_url": "https://github.com/Elias-Ladenburger/Productivity-Extension",
 
   "icons": {
-    "16": "assets/icons/Productivity-Logo.png",
-    "48": "assets/icons/Productivity-Logo.png",
-    "96": "assets/icons/Productivity-Logo.png",
-    "128": "assets/icons/Productivity-Logo.png"
+    "16": "assets/icons/Productivity-Logo square.png",
+    "48": "assets/icons/Productivity-Logo square.png",
+    "96": "assets/icons/Productivity-Logo square.png",
+    "128": "assets/icons/Productivity-Logo square.png"
   },
 
+"browser_specific_settings": {
+  "gecko": {
+    "id": "prodbooster@eliasladenburger.com",
+    "strict_min_version": "42.0"
+  }
+},
 
   "permissions": [
     "activeTab",
