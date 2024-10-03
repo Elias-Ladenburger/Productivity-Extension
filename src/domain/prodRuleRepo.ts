@@ -19,7 +19,7 @@ const ProdRuleRepository = {
       let rulesForThisSite = storedRules[badSite]
       ruleList[badSite] = []
       rulesForThisSite.forEach((ruleData: any) => {
-        let newRule = ProdRuleFactory.createRule(badSite, ruleData.action, ruleData.condition, ruleData.delay)
+        let newRule = ProdRuleFactory.createRule(badSite, ruleData.action, ruleData.condition, ruleData.delay) as ProdRule
         ruleList[badSite].push(newRule)
       })
     })
@@ -60,16 +60,20 @@ const ProdRuleRepository = {
 
   updateRule: async (badSite: string, index: number, updatedRule: ProdRule) => {
     // let ruleList = await getAllRules();
-    await ProdRuleRepository.deleteRule(badSite, index);
-    return ProdRuleRepository.addRule(updatedRule);
+    return ProdRuleRepository.deleteRule(badSite, index).then(()=>{
+      ProdRuleRepository.addRule(updatedRule)}
+  )
+     
   },
 
   deleteRule: async (badSite: string, index: number) => {
     let ruleList = await ProdRuleRepository.getAllRules();
+
     ruleList[badSite].splice(index, 1);
     if (ruleList[badSite].length == 0) {
       delete ruleList[badSite]
     }
+    
     ProdRuleRepository.setRuleList(ruleList);
   },
 

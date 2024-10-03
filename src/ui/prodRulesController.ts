@@ -82,6 +82,7 @@ async function prepareProdRuleTable() {
 
 function prepareSaveRuleButton() {
   const saveButton = document.getElementById("saveRuleButton") as HTMLButtonElement;
+  
   saveButton.addEventListener(
     "click",
     function (e) {
